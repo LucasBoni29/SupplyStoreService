@@ -10,4 +10,18 @@
         <maven.compiler.target>17</maven.compiler.target>
         <exec.mainClass>com.mycompany.supplystoreservice.SupplyStoreService</exec.mainClass>
     </properties>
+    <dependencies>
+        <!--Dependência para designs mais profissionais para o Java Swing-->
+        <dependency>
+            <groupId>com.formdev</groupId>
+            <artifactId>flatlaf</artifactId>
+            <version>3.1</version>
+        </dependency>
+        <!--Dependência para temas mais bonitos do Java Swing-->
+        <dependency>
+            <groupId>com.formdev</groupId>
+            <artifactId>flatlaf-intellij-themes</artifactId>
+            <version>3.1</version>
+        </dependency>
+    </dependencies>
 </project>

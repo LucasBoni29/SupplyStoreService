@@ -22,11 +22,11 @@ public class Validador {
     public static void ValidarCamposPesquisa(JTextField txtNome, JTextField txtCpf) throws Exception{
         
         if(txtNome.getText().isEmpty() && txtCpf.getText().isEmpty()){
-            logs.add("Preencha pelo menos um dos campos");
+            logs.add("Preencha pelo menos um dos campos!");
         }
         
         if(txtCpf.getText().length() < 11){
-            logs.add("Preencha todo o cpf!");
+            logs.add("CPF: Preencha o campo!");
         }
         
     }

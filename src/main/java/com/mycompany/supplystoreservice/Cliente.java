@@ -19,7 +19,7 @@ public class Cliente {
     private String dataNascimento;
     
     public Cliente(){
-        
+        // TODO document why this constructor is empty
     }
 
     public String getNome() {

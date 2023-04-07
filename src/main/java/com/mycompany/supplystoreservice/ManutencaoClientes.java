@@ -4,6 +4,11 @@
  */
 package com.mycompany.supplystoreservice;
 
+import com.formdev.flatlaf.FlatLightLaf;
+import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatMaterialLighterIJTheme;
+
+import javax.swing.*;
+
 /**
  *
  * @author lucas.bsantos59
@@ -15,6 +20,11 @@ public class ManutencaoClientes extends javax.swing.JFrame {
      */
     public ManutencaoClientes() {
         initComponents();
+        initStylesComponents();
+    }
+
+    private void initStylesComponents() {
+        UIManager.put("Buttom.arc", 999);
     }
 
     /**
@@ -216,11 +226,11 @@ public class ManutencaoClientes extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+        /**
+         * Coloca o tema Material Lighter
          */
+        FlatMaterialLighterIJTheme.setup();
+        /* Set the Nimbus look and feel */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
