@@ -5,6 +5,8 @@
 
 package com.mycompany.supplystoreservice;
 
+import com.mycompany.supplystoreservice.customerregistration.CadastroClientes;
+
 /**
  *
  * @author lucas.bsantos59
@@ -12,7 +14,7 @@ package com.mycompany.supplystoreservice;
 public class SupplyStoreService {
 
     public static void main(String[] args) {
-       ManutencaoClientes manutencaoClientes = new ManutencaoClientes();
-       manutencaoClientes.setVisible(true);
+        CadastroClientes frmCadastroClientes = new CadastroClientes();
+        frmCadastroClientes.setVisible(true);
     }
 }
