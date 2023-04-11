@@ -2,23 +2,27 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package com.mycompany.supplystoreservice.customerregistration;
+package com.mycompany.supplystoreservice.menu;
 
 import com.formdev.flatlaf.intellijthemes.FlatMaterialDesignDarkIJTheme;
 import java.awt.Color;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 /**
  *
  * @author lucas.boni
  */
-public class CadastroClientes extends javax.swing.JFrame {
+public class Menu extends javax.swing.JFrame {
 
     /**
      * Creates new form CadastroClientes
      */
-    public CadastroClientes() {
+    public Menu() {
         initComponents();
         initSystelesComponents();
+        setDate();
     }
     
     private void initSystelesComponents() {
@@ -30,6 +34,12 @@ public class CadastroClientes extends javax.swing.JFrame {
         lblData.setForeground(Color.white);
         lblNomeLoja.putClientProperty("FlatLaf.style", "fonte: 24 $h1.regular.font");
         lblNomeLoja.setForeground(Color.white);
+    }
+    
+    private void setDate() {
+        LocalDate hoje = LocalDate.now();
+        Locale localidadeBrasileira = new  Locale("pt", "BR");
+        lblData.setText(hoje.format(DateTimeFormatter.ofPattern("'Data de hoje: ' EEEE dd 'de' MMMM 'de' yyyy", localidadeBrasileira)));
     }
 
     /**
@@ -54,7 +64,6 @@ public class CadastroClientes extends javax.swing.JFrame {
         lblMensagem = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1020, 640));
 
         panBackground.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -65,7 +74,7 @@ public class CadastroClientes extends javax.swing.JFrame {
         lblNomeLoja.setText("Loja de Suprimentos");
 
         btnHome.setBackground(new java.awt.Color(255, 215, 0));
-        btnHome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/supplystoreservice/customerregistration/images/house-icon.png"))); // NOI18N
+        btnHome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/supplystoreservice/menu/images/house-icon.png"))); // NOI18N
         btnHome.setText("Home");
         btnHome.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 13, 1, 1, new java.awt.Color(0, 0, 0)));
         btnHome.setBorderPainted(false);
@@ -79,7 +88,7 @@ public class CadastroClientes extends javax.swing.JFrame {
         });
 
         btnCadastroClientes.setBackground(new java.awt.Color(255, 215, 0));
-        btnCadastroClientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/supplystoreservice/customerregistration/images/house-icon.png"))); // NOI18N
+        btnCadastroClientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/supplystoreservice/menu/images/house-icon.png"))); // NOI18N
         btnCadastroClientes.setText("Cadastro de clientes");
         btnCadastroClientes.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 13, 1, 1, new java.awt.Color(0, 0, 0)));
         btnCadastroClientes.setBorderPainted(false);
@@ -162,7 +171,7 @@ public class CadastroClientes extends javax.swing.JFrame {
         );
 
         lblMensagem.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lblMensagem.setText("Serviço de Suplementos! 💪");
+        lblMensagem.setText("Loja de Suprimentos! 💪");
 
         javax.swing.GroupLayout panBackgroundLayout = new javax.swing.GroupLayout(panBackground);
         panBackground.setLayout(panBackgroundLayout);
@@ -231,7 +240,7 @@ public class CadastroClientes extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CadastroClientes().setVisible(true);
+                new Menu().setVisible(true);
             }
         });
     }
@@ -250,5 +259,5 @@ public class CadastroClientes extends javax.swing.JFrame {
     private javax.swing.JSeparator spLinha;
     // End of variables declaration//GEN-END:variables
 
-    
+   
 }

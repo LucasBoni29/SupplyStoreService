@@ -5,7 +5,7 @@
 
 package com.mycompany.supplystoreservice;
 
-import com.mycompany.supplystoreservice.customerregistration.CadastroClientes;
+import com.mycompany.supplystoreservice.menu.Menu;
 
 /**
  *
@@ -14,7 +14,7 @@ import com.mycompany.supplystoreservice.customerregistration.CadastroClientes;
 public class SupplyStoreService {
 
     public static void main(String[] args) {
-        CadastroClientes frmCadastroClientes = new CadastroClientes();
+        Menu frmCadastroClientes = new Menu();
         frmCadastroClientes.setVisible(true);
     }
 }
