@@ -5,10 +5,13 @@
 package com.mycompany.supplystoreservice.menu;
 
 import com.formdev.flatlaf.intellijthemes.FlatMaterialDesignDarkIJTheme;
+import com.myacompany.views.ManutencaoClientes;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
+import javax.swing.JPanel;
 
 /**
  *
@@ -23,12 +26,13 @@ public class Menu extends javax.swing.JFrame {
         initComponents();
         initSystelesComponents();
         setDate();
+        initHome();
     }
     
     private void initSystelesComponents() {
         lblMensagem.putClientProperty( "FlatLaf.style" , "fonte: 14 $light.font" );
         lblMensagem.setForeground(Color.black);
-        lblTituloMenu.putClientProperty("FlatLaf.style", "fonte: 14 $h3.regular.font");
+        lblTituloMenu.putClientProperty("FlatLaf.style", "fonte: 24 $h3.regular.font");
         lblTituloMenu.setForeground(Color.white);
         lblData.putClientProperty("FlatLaf.style", "fonte: 24 $h3.regular.font");
         lblData.setForeground(Color.white);
@@ -41,7 +45,21 @@ public class Menu extends javax.swing.JFrame {
         Locale localidadeBrasileira = new  Locale("pt", "BR");
         lblData.setText(hoje.format(DateTimeFormatter.ofPattern("'Data de hoje: ' EEEE dd 'de' MMMM 'de' yyyy", localidadeBrasileira)));
     }
-
+    
+    private void initHome(){
+        //TODO: Fazer aparecer a tela principal ao abrir a tela, aqui!
+    }
+    
+    private void showJPanel(JPanel panManutencaoClientes){
+        panManutencaoClientes.setSize(773, 434);
+        panManutencaoClientes.setLocation(0,0);
+        
+        panConteudoMenu.removeAll();
+        panConteudoMenu.add(panManutencaoClientes, BorderLayout.CENTER);
+        panConteudoMenu.revalidate();
+        panConteudoMenu.repaint();
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -74,7 +92,7 @@ public class Menu extends javax.swing.JFrame {
         lblNomeLoja.setText("Loja de Suprimentos");
 
         btnHome.setBackground(new java.awt.Color(255, 215, 0));
-        btnHome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/supplystoreservice/menu/images/house-icon.png"))); // NOI18N
+        btnHome.setIcon(new javax.swing.ImageIcon("D:\\SupplyStoreService\\src\\main\\java\\com\\mycompany\\supplystoreservice\\menu\\images\\house-icon.png")); // NOI18N
         btnHome.setText("Home");
         btnHome.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 13, 1, 1, new java.awt.Color(0, 0, 0)));
         btnHome.setBorderPainted(false);
@@ -88,8 +106,8 @@ public class Menu extends javax.swing.JFrame {
         });
 
         btnCadastroClientes.setBackground(new java.awt.Color(255, 215, 0));
-        btnCadastroClientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/supplystoreservice/menu/images/house-icon.png"))); // NOI18N
-        btnCadastroClientes.setText("Cadastro de clientes");
+        btnCadastroClientes.setIcon(new javax.swing.ImageIcon("D:\\SupplyStoreService\\src\\main\\java\\com\\mycompany\\supplystoreservice\\menu\\images\\house-icon.png")); // NOI18N
+        btnCadastroClientes.setText("Manutenção de clientes");
         btnCadastroClientes.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 13, 1, 1, new java.awt.Color(0, 0, 0)));
         btnCadastroClientes.setBorderPainted(false);
         btnCadastroClientes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -132,7 +150,7 @@ public class Menu extends javax.swing.JFrame {
         panTituloMenu.setBackground(new java.awt.Color(169, 169, 169));
         panTituloMenu.setPreferredSize(new java.awt.Dimension(750, 150));
 
-        lblTituloMenu.setText("Cadastro de clientes!");
+        lblTituloMenu.setText("Manutenção de clientes");
 
         lblData.setText("Data de hoje: {dayname} {daytime} de {month} de {year}");
 
@@ -154,7 +172,7 @@ public class Menu extends javax.swing.JFrame {
                 .addComponent(lblTituloMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(lblData, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         panConteudoMenu.setBackground(new java.awt.Color(255, 255, 255));
@@ -184,13 +202,13 @@ public class Menu extends javax.swing.JFrame {
                 .addComponent(panMenus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(panBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panBackgroundLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(panConteudoMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
-                    .addGroup(panBackgroundLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblMensagem, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panBackgroundLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(panConteudoMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
         panBackgroundLayout.setVerticalGroup(
             panBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -226,6 +244,7 @@ public class Menu extends javax.swing.JFrame {
 
     private void btnCadastroClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastroClientesActionPerformed
         // TODO add your handling code here:
+        showJPanel(new ManutencaoClientes());
     }//GEN-LAST:event_btnCadastroClientesActionPerformed
 
     /**

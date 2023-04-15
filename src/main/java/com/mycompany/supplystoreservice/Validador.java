@@ -4,7 +4,11 @@
  */
 package com.mycompany.supplystoreservice;
 
+import java.awt.Color;
 import java.util.ArrayList;
+import javax.swing.BorderFactory;
+import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
 import javax.swing.JTextField;
 
 /**
@@ -19,14 +23,38 @@ public class Validador {
         return logs;
     }
     
-    public static void ValidarCamposPesquisa(JTextField txtNome, JTextField txtCpf) throws Exception{
+    public static void proValidarCamposObrigatorios(ArrayList<JTextField> txtFields, 
+        ArrayList<JComboBox> cbxFields, ArrayList<JFormattedTextField> ftfFields){
         
-        if(txtNome.getText().isEmpty() && txtCpf.getText().isEmpty()){
-            logs.add("Preencha pelo menos um dos campos!");
+        for(JTextField obj : txtFields){
+            if(obj.getText().equals("")){
+                logs.add(obj.getName()+": Preencha o campo!");
+                obj.setBorder(BorderFactory.createLineBorder(Color.RED));
+            }
         }
         
-        if(txtCpf.getText().length() < 11){
-            logs.add("CPF: Preencha o campo!");
+        for(JComboBox obj : cbxFields){
+            if(obj.getSelectedIndex() == -1){
+                logs.add(obj.getName()+": Preencha o campo!");
+                obj.setBorder(BorderFactory.createLineBorder(Color.RED));
+            }
+        }
+        
+        for(JFormattedTextField obj : ftfFields){
+            if(obj.getText().equals("")){
+                logs.add(obj.getName()+": Preencha o campo!");
+                obj.setBorder(BorderFactory.createLineBorder(Color.RED));
+            }
+        }
+        
+    }
+    
+    public static void proValidarCamposNomeCpfAoBuscar(JTextField txtNome, JTextField txtCpf){
+        
+        if(txtNome.getText().equals("") && txtCpf.getText().equals("")){
+            logs.add("Preencha pelo menos um dos campos!");
+            txtNome.setBorder(BorderFactory.createLineBorder(Color.RED));
+            txtCpf.setBorder(BorderFactory.createLineBorder(Color.RED));
         }
         
     }
