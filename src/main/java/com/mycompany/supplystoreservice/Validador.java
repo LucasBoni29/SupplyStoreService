@@ -65,6 +65,7 @@ public class Validador {
             }
         }
     }
+    
     public void preechendoArrayList(JFrame frmFrame){
         
         for (Component component : frmFrame.getComponents()) {
