@@ -101,8 +101,9 @@
                       <EmptySpace min="33" pref="33" max="-2" attributes="0"/>
                       <Component id="spLinha" min="-2" pref="206" max="-2" attributes="0"/>
                   </Group>
+                  <Component id="btnCliente" min="-2" pref="270" max="-2" attributes="0"/>
+                  <Component id="btnHome" min="-2" pref="270" max="-2" attributes="0"/>
                   <Component id="btnProduto" min="-2" pref="270" max="-2" attributes="0"/>
-                  <Component id="btnClientes" min="-2" pref="270" max="-2" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
@@ -116,9 +117,13 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <EmptySpace min="46" pref="46" max="-2" attributes="0"/>
+                              <Component id="btnCliente" min="-2" pref="52" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="btnHome" min="-2" pref="52" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="96" pref="96" max="-2" attributes="0"/>
                               <Component id="btnProduto" min="-2" pref="52" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="btnClientes" min="-2" pref="52" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -133,7 +138,29 @@
             </Component>
             <Component class="javax.swing.JSeparator" name="spLinha">
             </Component>
-            <Component class="javax.swing.JButton" name="btnClientes">
+            <Component class="javax.swing.JButton" name="btnHome">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="0" green="d7" red="ff" type="rgb"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Home"/>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="org.netbeans.modules.form.compat2.border.MatteColorBorderInfo">
+                    <MatteColorBorder bottom="1" left="13" right="1" top="1"/>
+                  </Border>
+                </Property>
+                <Property name="borderPainted" type="boolean" value="false"/>
+                <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                  <Color id="Cursor em Forma de M&#xe3;o"/>
+                </Property>
+                <Property name="horizontalAlignment" type="int" value="2"/>
+                <Property name="iconTextGap" type="int" value="13"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnHomeActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="btnCliente">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="0" green="d7" red="ff" type="rgb"/>
@@ -152,7 +179,7 @@
                 <Property name="iconTextGap" type="int" value="13"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnClientesActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnClienteActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnProduto">
@@ -209,7 +236,7 @@
                       <Component id="lblTituloMenu" min="-2" pref="31" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="lblData" min="-2" pref="37" max="-2" attributes="0"/>
-                      <EmptySpace pref="31" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -217,7 +244,7 @@
           <SubComponents>
             <Component class="javax.swing.JLabel" name="lblTituloMenu">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Manuten&#xe7;&#xe3;o de clientes"/>
+                <Property name="text" type="java.lang.String" value="Tela Principal"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lblData">
