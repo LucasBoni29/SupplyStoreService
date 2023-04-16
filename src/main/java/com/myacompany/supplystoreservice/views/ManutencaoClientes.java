@@ -353,7 +353,7 @@ public final class ManutencaoClientes extends javax.swing.JPanel {
         validador.preechendoArrayList(panBackground);
         validador.proValidarCamposObrigatorios();
         validador.proValidarEmail(txtEmail);
-        validador.proValidarData(ftfDataNascimento);
+//        validador.proValidarData(ftfDataNascimento);
         
         if(validador.fncTemMensagem()){
             validador.proMostrarLog();
