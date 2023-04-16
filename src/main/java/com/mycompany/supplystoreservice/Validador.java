@@ -6,7 +6,13 @@ package com.mycompany.supplystoreservice;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.BorderFactory;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
@@ -79,7 +85,7 @@ public class Validador {
         if(!txtFields.isEmpty()){
             for(JTextField obj : txtFields){
                 if(obj.getText().equals("")){
-                    logs.add(obj.getName()+": Preencha o campo!");
+                    logs.add(obj.getName()+": Preencha o campo corretamente!");
                     obj.setBorder(BorderFactory.createLineBorder(Color.RED));
                 }else{
                     obj.setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -90,7 +96,7 @@ public class Validador {
         if(!cbxFields.isEmpty()){
             for(JComboBox obj : cbxFields){
                 if(obj.getSelectedIndex() == -1){
-                    logs.add(obj.getName()+": Preencha o campo!");
+                    logs.add(obj.getName()+": Preencha o campo corretamente!");
                     obj.setBorder(BorderFactory.createLineBorder(Color.RED));
                 }else{
                     obj.setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -101,7 +107,7 @@ public class Validador {
         if(!ftfFields.isEmpty()){
             for(JFormattedTextField obj : ftfFields){
                 if(obj.getValue() == null || obj.getValue().equals("")){
-                    logs.add(obj.getName()+": Preencha o campo!");
+                    logs.add(obj.getName()+": Preencha o campo corretamente!");
                     obj.setBorder(BorderFactory.createLineBorder(Color.RED));
                 }else{
                     obj.setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -112,7 +118,7 @@ public class Validador {
         if(!pinFields.isEmpty()){
             for(JSpinner obj : pinFields){
                 if(obj.getValue().equals(0)){
-                    logs.add(obj.getName()+": Preencha o campo!");
+                    logs.add(obj.getName()+": Preencha o campo corretamente!");
                     obj.setBorder(BorderFactory.createLineBorder(Color.RED));
                 }else{
                     obj.setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -121,31 +127,72 @@ public class Validador {
         }
     }
     
-    public void proValidarCamposPreenchidosIncorretamente(){
-        
-        if(!ftfFields.isEmpty()){
-            for(JFormattedTextField obj : ftfFields){
-                if(obj.getValue() == null || obj.getValue().equals("")){
-                    logs.add(obj.getName()+": Preencha o campo!");
-                    obj.setBorder(BorderFactory.createLineBorder(Color.RED));
-                }else{
-                    obj.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-                }
+    public void proValidarEmail(JTextField txtEmail){
+        String regex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
+        Pattern pattern = Pattern.compile(regex);
+        if(!txtEmail.getText().isEmpty()){
+            Matcher matcher = pattern.matcher(txtEmail.getText());
+            
+            if(!matcher.matches()){
+                logs.add("E-mail inválido! Não corresponde a expressão regular "
+                        + "'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$'");
+                txtEmail.setBorder(BorderFactory.createLineBorder(Color.RED));
+            }else{
+                txtEmail.setBorder(BorderFactory.createLineBorder(Color.BLACK));
             }
         }
     }
     
-    public static void proValidarCamposNomeCpfAoBuscar(JTextField txtNome, JTextField txtCpf){
-        
-        if(txtNome.getText().equals("") && txtCpf.getText().equals("")){
-            logs.add("Preencha pelo menos um dos campos!");
+    public static void proValidarCamposNomeCpfAoBuscar(JTextField txtNome, JFormattedTextField ftfCpf){
+        if(txtNome.getText().equals("") && ftfCpf.getValue().equals("")){
+            logs.add("Preencha pelo menos um dos campos para efetuar a devida busca!");
             txtNome.setBorder(BorderFactory.createLineBorder(Color.RED));
-            txtCpf.setBorder(BorderFactory.createLineBorder(Color.RED));
+            ftfCpf.setBorder(BorderFactory.createLineBorder(Color.RED));
         }else{
             txtNome.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-            txtCpf.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+            ftfCpf.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         }
+    }
+    
+    public void proValidarData(JFormattedTextField data) {
+        SimpleDateFormat sdfData = new SimpleDateFormat("dd/MM/yyyy");
+        sdfData.setLenient(false); // não permite datas inválidas como 31/02/2023
+        boolean errado = false;
         
+        try {
+            Date dataNascimento = sdfData.parse(data.getText());
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(dataNascimento);
+
+            int ano = cal.get(Calendar.YEAR);
+            int mes = cal.get(Calendar.MONTH) + 1;
+            int dia = cal.get(Calendar.DAY_OF_MONTH);
+
+            // Verifica se o ano é válido
+            Calendar anoAtual = Calendar.getInstance();
+            int anoMaximo = anoAtual.get(Calendar.YEAR);
+            if (ano > anoMaximo || ano < 1900) {
+                errado = true;
+            }
+
+            // Verifica se o mês está entre 1 e 12
+            if (mes < 1 || mes > 12) {
+                errado = true;
+            }
+
+            // Verifica se o dia está dentro do intervalo válido para o mês e ano especificados
+            int diasNoMes = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+            if(dia < 1 || dia > diasNoMes){
+                errado = true;
+            }
+        } catch (ParseException e) {
+            if(errado){
+                logs.add("Data inválida!");
+                data.setBorder(BorderFactory.createLineBorder(Color.RED));
+            }else{
+                data.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+            }
+        }
     }
     
     public boolean fncTemMensagem(){
@@ -159,7 +206,7 @@ public class Validador {
             mensagemFinal.append("\n");
         }
         
-        JOptionPane.showMessageDialog(null, mensagemFinal, "Campos obrigatórios", JOptionPane.WARNING_MESSAGE);
+        JOptionPane.showMessageDialog(null, mensagemFinal, "Validações", JOptionPane.WARNING_MESSAGE);
     }
    
 }

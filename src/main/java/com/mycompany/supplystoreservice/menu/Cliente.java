@@ -9,17 +9,27 @@ package com.mycompany.supplystoreservice.menu;
  * @author lucas.bsantos59
  */
 public class Cliente {
+    
+    private Integer id;
     private String nome;
     private String cpf;
     private String endereco;
-    private Integer telefone;
+    private String telefone;
     private String email;
     private String sexo;
     private String estadoCivil;
     private String dataNascimento;
     
     public Cliente(){
-        // TODO document why this constructor is empty
+        
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getNome() {
@@ -46,11 +56,11 @@ public class Cliente {
         this.endereco = endereco;
     }
 
-    public Integer getTelefone() {
+    public String getTelefone() {
         return telefone;
     }
 
-    public void setTelefone(Integer telefone) {
+    public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
 

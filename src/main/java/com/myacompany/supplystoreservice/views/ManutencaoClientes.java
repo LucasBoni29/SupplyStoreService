@@ -2,10 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package com.myacompany.views;
+package com.myacompany.supplystoreservice.views;
 
 import com.mycompany.supplystoreservice.Validador;
-import java.text.SimpleDateFormat;
+import com.mycompany.supplystoreservice.menu.Cliente;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -18,6 +19,42 @@ public final class ManutencaoClientes extends javax.swing.JPanel {
      */
     public ManutencaoClientes() {
         initComponents();
+    }
+    
+    private void cadastrar() {
+        Cliente cliente = new Cliente();
+        
+        cliente.setNome(txtNome.getText());
+        cliente.setCpf(ftfCpf.getText());
+        cliente.setEndereco(txtEndereco.getText());
+        cliente.setTelefone(String.valueOf(ftfTelefone.getValue()));
+        cliente.setEmail(txtEmail.getText());
+        cliente.setSexo(String.valueOf(cbxSexo.getSelectedItem()));
+        cliente.setEstadoCivil(String.valueOf(cbxEstadoCivil.getSelectedItem()));
+        cliente.setDataNascimento(String.valueOf(ftfDataNascimento.getValue()));
+        
+        DefaultTableModel dtmClientes = new DefaultTableModel();
+        
+        dtmClientes.addColumn("Nome");
+        dtmClientes.addColumn("CPF");
+        dtmClientes.addColumn("Endereço");
+        dtmClientes.addColumn("Telefone");
+        dtmClientes.addColumn("E-mail");
+        dtmClientes.addColumn("Sexo");
+        dtmClientes.addColumn("Estado civil");
+        dtmClientes.addColumn("Nascimento");
+        
+        //Defina sua estrutura com a estrutura tmClientes;
+        tblClientes.setModel(dtmClientes);
+
+        //Limpo a tabela, excluindo todas as linhas para depois mostrar os dados novamente
+        dtmClientes.setRowCount(0);
+        
+        
+        dtmClientes.addRow(new Object[]{cliente.getNome(), cliente.getCpf(), 
+            cliente.getEndereco(), cliente.getTelefone(), cliente.getEmail(), cliente.getSexo(), 
+            cliente.getEstadoCivil(), cliente.getDataNascimento()});
+        
     }
 
     /**
@@ -35,7 +72,6 @@ public final class ManutencaoClientes extends javax.swing.JPanel {
         lblNome = new javax.swing.JLabel();
         txtNome = new javax.swing.JTextField();
         lblCpf = new javax.swing.JLabel();
-        txtCpf = new javax.swing.JTextField();
         lblEndereco = new javax.swing.JLabel();
         txtEndereco = new javax.swing.JTextField();
         lblTelefone = new javax.swing.JLabel();
@@ -52,6 +88,7 @@ public final class ManutencaoClientes extends javax.swing.JPanel {
         btnExcluir = new javax.swing.JButton();
         btnAtualizar = new javax.swing.JButton();
         ftfTelefone = new javax.swing.JFormattedTextField();
+        ftfCpf = new javax.swing.JFormattedTextField();
 
         setPreferredSize(new java.awt.Dimension(773, 434));
 
@@ -80,8 +117,6 @@ public final class ManutencaoClientes extends javax.swing.JPanel {
         txtNome.setName("Nome"); // NOI18N
 
         lblCpf.setText("CPF");
-
-        txtCpf.setName("CPF"); // NOI18N
 
         lblEndereco.setText("Endereço");
 
@@ -145,7 +180,7 @@ public final class ManutencaoClientes extends javax.swing.JPanel {
         btnAtualizar.setText("Atualizar");
 
         try {
-            ftfTelefone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##) ####-####")));
+            ftfTelefone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##) #####-####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
@@ -153,6 +188,18 @@ public final class ManutencaoClientes extends javax.swing.JPanel {
         ftfTelefone.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ftfTelefoneActionPerformed(evt);
+            }
+        });
+
+        try {
+            ftfCpf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        ftfCpf.setName("CPF"); // NOI18N
+        ftfCpf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ftfCpfActionPerformed(evt);
             }
         });
 
@@ -198,8 +245,8 @@ public final class ManutencaoClientes extends javax.swing.JPanel {
                                 .addComponent(lblCpf, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGap(139, 139, 139))
                             .addGroup(panBackgroundLayout.createSequentialGroup()
-                                .addComponent(txtCpf)
-                                .addGap(57, 57, 57)))
+                                .addComponent(ftfCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGroup(panBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panBackgroundLayout.createSequentialGroup()
                                 .addComponent(lblEndereco, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -242,14 +289,14 @@ public final class ManutencaoClientes extends javax.swing.JPanel {
                             .addComponent(lblNome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(lblCpf, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(panBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtNome)
-                            .addComponent(txtCpf)))
+                        .addComponent(txtNome))
                     .addGroup(panBackgroundLayout.createSequentialGroup()
                         .addGap(8, 8, 8)
                         .addComponent(lblEndereco, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtEndereco)
+                        .addGroup(panBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtEndereco)
+                            .addComponent(ftfCpf))
                         .addGap(1, 1, 1)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -264,9 +311,9 @@ public final class ManutencaoClientes extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panBackgroundLayout.createSequentialGroup()
-                        .addComponent(lblEstadoCivil, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)
+                        .addComponent(lblEstadoCivil, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
-                        .addComponent(cbxEstadoCivil, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE))
+                        .addComponent(cbxEstadoCivil, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE))
                     .addGroup(panBackgroundLayout.createSequentialGroup()
                         .addComponent(lblSexo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -277,7 +324,7 @@ public final class ManutencaoClientes extends javax.swing.JPanel {
                             .addComponent(btnAtualizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnExcluir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(28, 28, 28)
-                .addComponent(scpTableClientes, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
+                .addComponent(scpTableClientes, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE)
                 .addGap(20, 20, 20))
         );
 
@@ -285,7 +332,7 @@ public final class ManutencaoClientes extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panBackground, javax.swing.GroupLayout.DEFAULT_SIZE, 746, Short.MAX_VALUE)
+            .addComponent(panBackground, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -305,19 +352,27 @@ public final class ManutencaoClientes extends javax.swing.JPanel {
         Validador validador = new Validador();
         validador.preechendoArrayList(panBackground);
         validador.proValidarCamposObrigatorios();
+        validador.proValidarEmail(txtEmail);
+        validador.proValidarData(ftfDataNascimento);
         
         if(validador.fncTemMensagem()){
             validador.proMostrarLog();
+        }else{
+            cadastrar();
         }
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        Validador.proValidarCamposNomeCpfAoBuscar(txtNome, txtCpf);
+        Validador.proValidarCamposNomeCpfAoBuscar(txtNome, ftfCpf);
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void ftfTelefoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ftfTelefoneActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ftfTelefoneActionPerformed
+
+    private void ftfCpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ftfCpfActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ftfCpfActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -327,6 +382,7 @@ public final class ManutencaoClientes extends javax.swing.JPanel {
     private javax.swing.JButton btnExcluir;
     private javax.swing.JComboBox<String> cbxEstadoCivil;
     private javax.swing.JComboBox<String> cbxSexo;
+    private javax.swing.JFormattedTextField ftfCpf;
     private javax.swing.JFormattedTextField ftfDataNascimento;
     private javax.swing.JFormattedTextField ftfTelefone;
     private javax.swing.JLabel lblCpf;
@@ -340,7 +396,6 @@ public final class ManutencaoClientes extends javax.swing.JPanel {
     private javax.swing.JPanel panBackground;
     private javax.swing.JScrollPane scpTableClientes;
     private javax.swing.JTable tblClientes;
-    private javax.swing.JTextField txtCpf;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtEndereco;
     private javax.swing.JTextField txtNome;
