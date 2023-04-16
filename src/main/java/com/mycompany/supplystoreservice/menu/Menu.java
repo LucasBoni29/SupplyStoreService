@@ -73,8 +73,8 @@ public class Menu extends javax.swing.JFrame {
         panMenus = new javax.swing.JPanel();
         lblNomeLoja = new javax.swing.JLabel();
         spLinha = new javax.swing.JSeparator();
-        btnHome = new javax.swing.JButton();
-        btnCadastroClientes = new javax.swing.JButton();
+        btnClientes = new javax.swing.JButton();
+        btnProduto = new javax.swing.JButton();
         panTituloMenu = new javax.swing.JPanel();
         lblTituloMenu = new javax.swing.JLabel();
         lblData = new javax.swing.JLabel();
@@ -91,31 +91,29 @@ public class Menu extends javax.swing.JFrame {
         lblNomeLoja.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblNomeLoja.setText("Loja de Suprimentos");
 
-        btnHome.setBackground(new java.awt.Color(255, 215, 0));
-        btnHome.setIcon(new javax.swing.ImageIcon("D:\\SupplyStoreService\\src\\main\\java\\com\\mycompany\\supplystoreservice\\menu\\images\\house-icon.png")); // NOI18N
-        btnHome.setText("Home");
-        btnHome.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 13, 1, 1, new java.awt.Color(0, 0, 0)));
-        btnHome.setBorderPainted(false);
-        btnHome.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnHome.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnHome.setIconTextGap(13);
-        btnHome.addActionListener(new java.awt.event.ActionListener() {
+        btnClientes.setBackground(new java.awt.Color(255, 215, 0));
+        btnClientes.setText("Manutenção de clientes");
+        btnClientes.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 13, 1, 1, new java.awt.Color(0, 0, 0)));
+        btnClientes.setBorderPainted(false);
+        btnClientes.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnClientes.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnClientes.setIconTextGap(13);
+        btnClientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnHomeActionPerformed(evt);
+                btnClientesActionPerformed(evt);
             }
         });
 
-        btnCadastroClientes.setBackground(new java.awt.Color(255, 215, 0));
-        btnCadastroClientes.setIcon(new javax.swing.ImageIcon("D:\\SupplyStoreService\\src\\main\\java\\com\\mycompany\\supplystoreservice\\menu\\images\\house-icon.png")); // NOI18N
-        btnCadastroClientes.setText("Manutenção de clientes");
-        btnCadastroClientes.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 13, 1, 1, new java.awt.Color(0, 0, 0)));
-        btnCadastroClientes.setBorderPainted(false);
-        btnCadastroClientes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnCadastroClientes.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnCadastroClientes.setIconTextGap(13);
-        btnCadastroClientes.addActionListener(new java.awt.event.ActionListener() {
+        btnProduto.setBackground(new java.awt.Color(255, 215, 0));
+        btnProduto.setText("Manutenção de produtos");
+        btnProduto.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 13, 1, 1, new java.awt.Color(0, 0, 0)));
+        btnProduto.setBorderPainted(false);
+        btnProduto.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnProduto.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnProduto.setIconTextGap(13);
+        btnProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCadastroClientesActionPerformed(evt);
+                btnProdutoActionPerformed(evt);
             }
         });
 
@@ -129,8 +127,8 @@ public class Menu extends javax.swing.JFrame {
             .addGroup(panMenusLayout.createSequentialGroup()
                 .addGap(33, 33, 33)
                 .addComponent(spLinha, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addComponent(btnCadastroClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(btnHome, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(btnProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(btnClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         panMenusLayout.setVerticalGroup(
             panMenusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -143,8 +141,8 @@ public class Menu extends javax.swing.JFrame {
                 .addGroup(panMenusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panMenusLayout.createSequentialGroup()
                         .addGap(46, 46, 46)
-                        .addComponent(btnCadastroClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btnHome, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         panTituloMenu.setBackground(new java.awt.Color(169, 169, 169));
@@ -238,14 +236,15 @@ public class Menu extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnHomeActionPerformed
-
-    private void btnCadastroClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastroClientesActionPerformed
+    private void btnClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClientesActionPerformed
         // TODO add your handling code here:
         showJPanel(new ManutencaoClientes());
-    }//GEN-LAST:event_btnCadastroClientesActionPerformed
+    }//GEN-LAST:event_btnClientesActionPerformed
+
+    private void btnProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProdutoActionPerformed
+        // TODO add your handling code here:
+        showJPanel(new ManutencaoProdutos());
+    }//GEN-LAST:event_btnProdutoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -265,8 +264,8 @@ public class Menu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCadastroClientes;
-    private javax.swing.JButton btnHome;
+    private javax.swing.JButton btnClientes;
+    private javax.swing.JButton btnProduto;
     private javax.swing.JLabel lblData;
     private javax.swing.JLabel lblMensagem;
     private javax.swing.JLabel lblNomeLoja;
