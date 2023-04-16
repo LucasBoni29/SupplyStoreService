@@ -95,7 +95,7 @@ public class Menu extends javax.swing.JFrame {
         btnClientes.setText("Manutenção de clientes");
         btnClientes.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 13, 1, 1, new java.awt.Color(0, 0, 0)));
         btnClientes.setBorderPainted(false);
-        btnClientes.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnClientes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnClientes.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnClientes.setIconTextGap(13);
         btnClientes.addActionListener(new java.awt.event.ActionListener() {
@@ -108,7 +108,7 @@ public class Menu extends javax.swing.JFrame {
         btnProduto.setText("Manutenção de produtos");
         btnProduto.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 13, 1, 1, new java.awt.Color(0, 0, 0)));
         btnProduto.setBorderPainted(false);
-        btnProduto.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnProduto.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnProduto.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnProduto.setIconTextGap(13);
         btnProduto.addActionListener(new java.awt.event.ActionListener() {

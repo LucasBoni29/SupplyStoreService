@@ -159,6 +159,7 @@ public final class ManutencaoClientes extends javax.swing.JPanel {
 
         btnBuscar.setBackground(new java.awt.Color(255, 215, 0));
         btnBuscar.setText("Buscar");
+        btnBuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBuscarActionPerformed(evt);
@@ -167,6 +168,7 @@ public final class ManutencaoClientes extends javax.swing.JPanel {
 
         btnCadastrar.setBackground(new java.awt.Color(255, 215, 0));
         btnCadastrar.setText("Cadastrar");
+        btnCadastrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCadastrarActionPerformed(evt);
@@ -175,9 +177,11 @@ public final class ManutencaoClientes extends javax.swing.JPanel {
 
         btnExcluir.setBackground(new java.awt.Color(255, 215, 0));
         btnExcluir.setText("Excluir");
+        btnExcluir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         btnAtualizar.setBackground(new java.awt.Color(255, 215, 0));
         btnAtualizar.setText("Atualizar");
+        btnAtualizar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         try {
             ftfTelefone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##) #####-####")));
