@@ -5,37 +5,19 @@
 package com.myacompany.views;
 
 import com.mycompany.supplystoreservice.Validador;
-import java.util.ArrayList;
-import javax.swing.JComboBox;
-import javax.swing.JFormattedTextField;
-import javax.swing.JTextField;
+import java.text.SimpleDateFormat;
 
 /**
  *
  * @author lucas.boni
  */
-public class ManutencaoClientes extends javax.swing.JPanel {
-    private ArrayList<JTextField> txtFields = new ArrayList<>(); 
-    private ArrayList<JComboBox> cbxFields = new ArrayList<>();
-    private ArrayList<JFormattedTextField> ftfFields = new ArrayList<>();
+public final class ManutencaoClientes extends javax.swing.JPanel {
 
     /**
      * Creates new form ManutencaoClientes
      */
     public ManutencaoClientes() {
         initComponents();
-        preechendoArrayList();
-    }
-    
-    private void preechendoArrayList(){
-        txtFields.add(txtNome);
-        txtFields.add(txtCpf);
-        txtFields.add(txtEndereco);
-        txtFields.add(txtEmail);
-        ftfFields.add(ftfDataNascimento);
-        ftfFields.add(ftfTelefone);
-        cbxFields.add(cbxSexo);
-        cbxFields.add(cbxEstadoCivil);
     }
 
     /**
@@ -95,10 +77,15 @@ public class ManutencaoClientes extends javax.swing.JPanel {
 
         lblNome.setText("Nome");
 
+        txtNome.setName("Nome"); // NOI18N
+
         lblCpf.setText("CPF");
+
+        txtCpf.setName("CPF"); // NOI18N
 
         lblEndereco.setText("Endereço");
 
+        txtEndereco.setName("Endereço"); // NOI18N
         txtEndereco.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtEnderecoActionPerformed(evt);
@@ -109,6 +96,8 @@ public class ManutencaoClientes extends javax.swing.JPanel {
 
         lblEmail.setText("E-mail");
 
+        txtEmail.setName("E-mail"); // NOI18N
+
         lblDataNascimento.setText("Data de nascimento");
 
         try {
@@ -116,6 +105,7 @@ public class ManutencaoClientes extends javax.swing.JPanel {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        ftfDataNascimento.setName("Data de nascimento"); // NOI18N
         ftfDataNascimento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ftfDataNascimentoActionPerformed(evt);
@@ -123,12 +113,14 @@ public class ManutencaoClientes extends javax.swing.JPanel {
         });
 
         cbxSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Masculino", "Feminino" }));
+        cbxSexo.setName("Sexo"); // NOI18N
 
         lblSexo.setText("Sexo");
 
         lblEstadoCivil.setText("Estado Civil");
 
         cbxEstadoCivil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Solteiro", "Casado", "Separado", "Divorciado", "Viúvo" }));
+        cbxEstadoCivil.setName("Estado civil"); // NOI18N
 
         btnBuscar.setBackground(new java.awt.Color(255, 215, 0));
         btnBuscar.setText("Buscar");
@@ -157,6 +149,7 @@ public class ManutencaoClientes extends javax.swing.JPanel {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        ftfTelefone.setName("Telefone"); // NOI18N
         ftfTelefone.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ftfTelefoneActionPerformed(evt);
@@ -292,7 +285,7 @@ public class ManutencaoClientes extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panBackground, javax.swing.GroupLayout.PREFERRED_SIZE, 746, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(panBackground, javax.swing.GroupLayout.DEFAULT_SIZE, 746, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -309,8 +302,13 @@ public class ManutencaoClientes extends javax.swing.JPanel {
     }//GEN-LAST:event_ftfDataNascimentoActionPerformed
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
-        // TODO add your handling code here:
-        Validador.proValidarCamposObrigatorios(txtFields, cbxFields, ftfFields);
+        Validador validador = new Validador();
+        validador.preechendoArrayList(panBackground);
+        validador.proValidarCamposObrigatorios();
+        
+        if(validador.fncTemMensagem()){
+            validador.proMostrarLog();
+        }
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
