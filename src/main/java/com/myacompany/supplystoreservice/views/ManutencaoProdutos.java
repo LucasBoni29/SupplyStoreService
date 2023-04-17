@@ -2,9 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package com.mycompany.supplystoreservice.menu;
+package com.myacompany.supplystoreservice.views;
 
+import com.mycompany.supplystoreservice.Validador;
+import com.mycompany.supplystoreservice.menu.Produto;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
@@ -25,17 +28,7 @@ public class ManutencaoProdutos extends javax.swing.JPanel {
 
         Produto produtos = new Produto();
 
-        DefaultTableModel dtmCarrinho = new DefaultTableModel();
-        dtmCarrinho.addColumn("Id");
-        dtmCarrinho.addColumn("Nome");
-        dtmCarrinho.addColumn("Quantidade");
-        dtmCarrinho.addColumn("Valor");
-
-        //Defina sua estrutura com a estrutura tmClientes;
-        tblCarrinho.setModel(dtmCarrinho );
-
-        //Limpo a tabela, excluindo todas as linhas para depois mostrar os dados novamente
-        dtmCarrinho .setRowCount(0);
+        DefaultTableModel dtmCarrinho = (DefaultTableModel) tblCarrinho.getModel();
         
         produtos.setId(cbxProduto.getSelectedIndex());
         produtos.setNome(String.valueOf(cbxProduto.getSelectedItem()));
@@ -56,9 +49,9 @@ public class ManutencaoProdutos extends javax.swing.JPanel {
             }
         }
 
+        Object[] dados = {produtos.getId(), produtos.getNome(), produtos.getQuantidade()};
         
-        
-        //dtmCarrinho.addRow(new Object[]{getId(), getNome(), getCPF()});
+        dtmCarrinho.addRow(dados);
 
 
         //Defino o tamanho para cada coluna
@@ -101,6 +94,7 @@ public class ManutencaoProdutos extends javax.swing.JPanel {
         lblCarrinho.setText("Carrinho");
 
         btnExcluir.setText("Excluir");
+        btnExcluir.setName("Excluir"); // NOI18N
 
         tblCarrinho.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -126,6 +120,7 @@ public class ManutencaoProdutos extends javax.swing.JPanel {
         lblProduto.setText("Produto:");
 
         cbxProduto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "100% Whey Refil 900 g", "Creatina 300 g", "Coqueteleira 700 ml", "Power Protein Bar 90 g" }));
+        cbxProduto.setName("Produto"); // NOI18N
         cbxProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbxProdutoActionPerformed(evt);
@@ -134,7 +129,10 @@ public class ManutencaoProdutos extends javax.swing.JPanel {
 
         lblQuantidade.setText("Quantidade:");
 
+        pinQuantidade.setName("Quantidade"); // NOI18N
+
         btnComprar.setText("Comprar");
+        btnComprar.setName("Comprar"); // NOI18N
         btnComprar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnComprarActionPerformed(evt);
@@ -142,6 +140,7 @@ public class ManutencaoProdutos extends javax.swing.JPanel {
         });
 
         btnCancelar.setText("Cancelar");
+        btnCancelar.setName("Cancelar"); // NOI18N
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarActionPerformed(evt);
@@ -194,6 +193,7 @@ public class ManutencaoProdutos extends javax.swing.JPanel {
         scpEstoque.setViewportView(tblEstoque);
 
         btnAlterar.setText("Alterar");
+        btnAlterar.setName("Alterar"); // NOI18N
 
         javax.swing.GroupLayout panBackgroundLayout = new javax.swing.GroupLayout(panBackground);
         panBackground.setLayout(panBackgroundLayout);
@@ -277,8 +277,15 @@ public class ManutencaoProdutos extends javax.swing.JPanel {
     }//GEN-LAST:event_cbxProdutoActionPerformed
 
     private void btnComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprarActionPerformed
-        // TODO add your handling code here:
-        comprar();
+        Validador validador = new Validador();
+        validador.preechendoArrayList(panBackground);
+        validador.proValidarCamposObrigatorios();
+        
+        if(validador.fncTemMensagem()){
+            validador.proMostrarLog();
+        }else{
+            comprar();
+        }
     }//GEN-LAST:event_btnComprarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed

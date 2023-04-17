@@ -6,7 +6,6 @@ package com.mycompany.supplystoreservice.utils;
 
 import java.awt.Component;
 import java.util.ArrayList;
-import java.util.Arrays;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;

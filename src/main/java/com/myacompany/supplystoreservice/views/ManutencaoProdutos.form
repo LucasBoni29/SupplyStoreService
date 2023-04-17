@@ -127,6 +127,7 @@
         <Component class="javax.swing.JButton" name="btnExcluir">
           <Properties>
             <Property name="text" type="java.lang.String" value="Excluir"/>
+            <Property name="name" type="java.lang.String" value="Excluir" noResource="true"/>
           </Properties>
         </Component>
         <Container class="javax.swing.JScrollPane" name="scpCarrinho">
@@ -168,6 +169,7 @@
                 <StringItem index="3" value="Power Protein Bar 90 g"/>
               </StringArray>
             </Property>
+            <Property name="name" type="java.lang.String" value="Produto" noResource="true"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbxProdutoActionPerformed"/>
@@ -182,10 +184,14 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JSpinner" name="pinQuantidade">
+          <Properties>
+            <Property name="name" type="java.lang.String" value="Quantidade" noResource="true"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="btnComprar">
           <Properties>
             <Property name="text" type="java.lang.String" value="Comprar"/>
+            <Property name="name" type="java.lang.String" value="Comprar" noResource="true"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnComprarActionPerformed"/>
@@ -194,6 +200,7 @@
         <Component class="javax.swing.JButton" name="btnCancelar">
           <Properties>
             <Property name="text" type="java.lang.String" value="Cancelar"/>
+            <Property name="name" type="java.lang.String" value="Cancelar" noResource="true"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCancelarActionPerformed"/>
@@ -273,6 +280,7 @@
         <Component class="javax.swing.JButton" name="btnAlterar">
           <Properties>
             <Property name="text" type="java.lang.String" value="Alterar"/>
+            <Property name="name" type="java.lang.String" value="Alterar" noResource="true"/>
           </Properties>
         </Component>
       </SubComponents>

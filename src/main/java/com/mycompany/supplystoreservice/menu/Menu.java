@@ -4,6 +4,7 @@
  */
 package com.mycompany.supplystoreservice.menu;
 
+import com.myacompany.supplystoreservice.views.ManutencaoProdutos;
 import com.formdev.flatlaf.intellijthemes.FlatMaterialDesignDarkIJTheme;
 import com.myacompany.supplystoreservice.views.ManutencaoClientes;
 import java.awt.BorderLayout;

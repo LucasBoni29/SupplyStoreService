@@ -4,8 +4,6 @@
  */
 package com.mycompany.supplystoreservice.menu;
 
-import java.util.ArrayList;
-
 /**
  *
  * @author gusta
