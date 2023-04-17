@@ -28,7 +28,22 @@ public class ManutencaoProdutos extends javax.swing.JPanel {
 
         Produto produtos = new Produto();
 
+<<<<<<< Updated upstream:src/main/java/com/myacompany/supplystoreservice/views/ManutencaoProdutos.java
         DefaultTableModel dtmCarrinho = (DefaultTableModel) tblCarrinho.getModel();
+=======
+        DefaultTableModel dtmCarrinho = new DefaultTableModel();
+        dtmCarrinho.addColumn("Id");
+        dtmCarrinho.addColumn("Nome");
+        dtmCarrinho.addColumn("Quantidade");
+        dtmCarrinho.addColumn("Valor");
+
+        //Defina sua estrutura com a estrutura tmClientes;
+        tblCarrinho.setModel(dtmCarrinho );
+
+        //Limpo a tabela, excluindo todas as linhas para depois mostrar os dados novamente
+        //dtmCarrinho .setRowCount(0);
+        
+>>>>>>> Stashed changes:src/main/java/com/mycompany/supplystoreservice/menu/ManutencaoProdutos.java
         
         produtos.setId(cbxProduto.getSelectedIndex());
         produtos.setNome(String.valueOf(cbxProduto.getSelectedItem()));
@@ -42,12 +57,17 @@ public class ManutencaoProdutos extends javax.swing.JPanel {
         int columnCount = model.getColumnCount();
         for (int row = 0; row < rowCount; row++) {
             Object value = model.getValueAt(row, searchColumn);
+            if (cbxProduto.getSelectedIndex() == row) {
+                double valor = (double) model.getValueAt(row, searchColumn);
+                break;
+                }
             if (searchTerm.equals(value.toString())) {
                 // Valor encontrado na linha row, coluna searchColumn
                 // Faça o que precisar aqui
                 break;
             }
         }
+        
 
         Object[] dados = {produtos.getId(), produtos.getNome(), produtos.getQuantidade()};
         
