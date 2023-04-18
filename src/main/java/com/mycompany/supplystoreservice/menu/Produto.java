@@ -4,8 +4,6 @@
  */
 package com.mycompany.supplystoreservice.menu;
 
-import java.util.ArrayList;
-
 /**
  *
  * @author gusta
@@ -28,7 +26,7 @@ public class Produto {
         this.valor = valor;
     }
      
-    public float getId() {
+    public int getId() {
         return id;
     }
 
@@ -44,7 +42,7 @@ public class Produto {
         this.nome = nome;
     }
     
-    public float getQuantidade() {
+    public int getQuantidade() {
         return quantidade;
     }
 

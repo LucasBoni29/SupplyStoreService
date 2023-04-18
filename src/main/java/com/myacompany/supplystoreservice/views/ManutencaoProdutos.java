@@ -2,9 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package com.mycompany.supplystoreservice.menu;
+package com.myacompany.supplystoreservice.views;
 
+import com.mycompany.supplystoreservice.Validador;
+import com.mycompany.supplystoreservice.menu.Produto;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
@@ -25,40 +28,37 @@ public class ManutencaoProdutos extends javax.swing.JPanel {
 
         Produto produtos = new Produto();
 
-        DefaultTableModel dtmCarrinho = new DefaultTableModel();
-        dtmCarrinho.addColumn("Id");
-        dtmCarrinho.addColumn("Nome");
-        dtmCarrinho.addColumn("Quantidade");
-        dtmCarrinho.addColumn("Valor");
-
-        //Defina sua estrutura com a estrutura tmClientes;
-        tblCarrinho.setModel(dtmCarrinho );
-
-        //Limpo a tabela, excluindo todas as linhas para depois mostrar os dados novamente
-        dtmCarrinho .setRowCount(0);
+        DefaultTableModel dtmCarrinho = (DefaultTableModel) tblCarrinho.getModel();
         
         produtos.setId(cbxProduto.getSelectedIndex());
         produtos.setNome(String.valueOf(cbxProduto.getSelectedItem()));
-        produtos.setQuantidade(pinQuantidade.getComponentCount());
+        produtos.setQuantidade(Integer.parseInt(pinQuantidade.getValue().toString()));
         
         String searchTerm = "valorProcurado";
-        int searchColumn = 3; // Coluna onde o valor deve ser procurado
+        int searchColumn = 3;
 
         TableModel model = tblEstoque.getModel();
         int rowCount = model.getRowCount();
         int columnCount = model.getColumnCount();
         for (int row = 0; row < rowCount; row++) {
             Object value = model.getValueAt(row, searchColumn);
+            if (cbxProduto.getSelectedIndex() == row) {
+                double valor = (double) model.getValueAt(row, searchColumn);
+                valor = (valor*produtos.getQuantidade());
+                produtos.setValor(valor);
+                break;
+                }
             if (searchTerm.equals(value.toString())) {
                 // Valor encontrado na linha row, coluna searchColumn
                 // Faça o que precisar aqui
                 break;
             }
         }
+        
 
+        Object[] dados = {produtos.getId()+1, produtos.getNome(), produtos.getQuantidade(), produtos.getValor()};
         
-        
-        //dtmCarrinho.addRow(new Object[]{getId(), getNome(), getCPF()});
+        dtmCarrinho.addRow(dados);
 
 
         //Defino o tamanho para cada coluna
@@ -66,6 +66,36 @@ public class ManutencaoProdutos extends javax.swing.JPanel {
         //tblClientes.getColumnModel().getColumn(1).setPreferredWidth(300); // Nome
         //tblClientes.getColumnModel().getColumn(2).setPreferredWidth(100); //CPF
     }
+    
+    public void finalizarCompra(){
+        
+       Produto produtos = new Produto();
+
+        DefaultTableModel dtmCarrinho = (DefaultTableModel) tblCarrinho.getModel();
+        
+        produtos.setId(cbxProduto.getSelectedIndex());
+        produtos.setNome(String.valueOf(cbxProduto.getSelectedItem()));
+        produtos.setQuantidade(Integer.parseInt(pinQuantidade.getValue().toString()));
+        
+        String searchTerm = "valorProcurado";
+        int searchColumn = 3;
+        
+        TableModel model = tblEstoque.getModel();
+        int rowCount = model.getRowCount();
+        int columnCount = model.getColumnCount();
+        for (int row = 0; row < rowCount; row++) {
+            Object value = model.getValueAt(row, searchColumn);
+            
+            if (searchTerm.equals(value.toString())) {
+                
+                
+                
+            }
+        }
+       
+
+    }
+    
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -93,6 +123,7 @@ public class ManutencaoProdutos extends javax.swing.JPanel {
         scpEstoque = new javax.swing.JScrollPane();
         tblEstoque = new javax.swing.JTable();
         btnAlterar = new javax.swing.JButton();
+        btnSalvar = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(773, 434));
 
@@ -101,20 +132,18 @@ public class ManutencaoProdutos extends javax.swing.JPanel {
         lblCarrinho.setText("Carrinho");
 
         btnExcluir.setText("Excluir");
+        btnExcluir.setName("Excluir"); // NOI18N
 
         tblCarrinho.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Id", "Nome", "Quantidade", "Valor"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Float.class, java.lang.Float.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.Double.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -126,6 +155,7 @@ public class ManutencaoProdutos extends javax.swing.JPanel {
         lblProduto.setText("Produto:");
 
         cbxProduto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "100% Whey Refil 900 g", "Creatina 300 g", "Coqueteleira 700 ml", "Power Protein Bar 90 g" }));
+        cbxProduto.setName("Produto"); // NOI18N
         cbxProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbxProdutoActionPerformed(evt);
@@ -134,7 +164,10 @@ public class ManutencaoProdutos extends javax.swing.JPanel {
 
         lblQuantidade.setText("Quantidade:");
 
+        pinQuantidade.setName("Quantidade"); // NOI18N
+
         btnComprar.setText("Comprar");
+        btnComprar.setName("Comprar"); // NOI18N
         btnComprar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnComprarActionPerformed(evt);
@@ -142,6 +175,7 @@ public class ManutencaoProdutos extends javax.swing.JPanel {
         });
 
         btnCancelar.setText("Cancelar");
+        btnCancelar.setName("Cancelar"); // NOI18N
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarActionPerformed(evt);
@@ -152,10 +186,7 @@ public class ManutencaoProdutos extends javax.swing.JPanel {
 
         tblValorTotal.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null},
-                {null},
-                {null},
-                {null}
+
             },
             new String [] {
                 "Valor Total"
@@ -194,6 +225,19 @@ public class ManutencaoProdutos extends javax.swing.JPanel {
         scpEstoque.setViewportView(tblEstoque);
 
         btnAlterar.setText("Alterar");
+        btnAlterar.setName("Alterar"); // NOI18N
+        btnAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlterarActionPerformed(evt);
+            }
+        });
+
+        btnSalvar.setText("Salvar");
+        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panBackgroundLayout = new javax.swing.GroupLayout(panBackground);
         panBackground.setLayout(panBackgroundLayout);
@@ -219,18 +263,22 @@ public class ManutencaoProdutos extends javax.swing.JPanel {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panBackgroundLayout.createSequentialGroup()
                         .addGroup(panBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panBackgroundLayout.createSequentialGroup()
-                                .addComponent(scpCarrinho, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                .addComponent(scpCarrinho, javax.swing.GroupLayout.DEFAULT_SIZE, 293, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
                             .addGroup(panBackgroundLayout.createSequentialGroup()
                                 .addComponent(lblCarrinho)
-                                .addGap(258, 258, 258)))
-                        .addGroup(panBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGap(252, 252, 252)))
+                        .addGroup(panBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panBackgroundLayout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(scpValor, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panBackgroundLayout.createSequentialGroup()
-                                .addComponent(btnAlterar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnSalvar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(scpValor, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(btnAlterar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnExcluir)))))
+                .addContainerGap(257, Short.MAX_VALUE))
         );
         panBackgroundLayout.setVerticalGroup(
             panBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -247,17 +295,18 @@ public class ManutencaoProdutos extends javax.swing.JPanel {
                 .addComponent(lblEstoque)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(scpEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
                 .addGroup(panBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnAlterar)
-                        .addComponent(btnExcluir))
+                        .addComponent(btnExcluir)
+                        .addComponent(btnSalvar))
                     .addComponent(lblCarrinho, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(scpCarrinho, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(scpValor, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -277,13 +326,28 @@ public class ManutencaoProdutos extends javax.swing.JPanel {
     }//GEN-LAST:event_cbxProdutoActionPerformed
 
     private void btnComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprarActionPerformed
-        // TODO add your handling code here:
-        comprar();
+        Validador validador = new Validador();
+        validador.preechendoArrayList(panBackground);
+        validador.proValidarCamposObrigatorios();
+        
+        if(validador.fncTemMensagem()){
+            validador.proMostrarLog();
+        }else{
+            comprar();
+        }
     }//GEN-LAST:event_btnComprarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAlterarActionPerformed
+
+    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSalvarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -291,6 +355,7 @@ public class ManutencaoProdutos extends javax.swing.JPanel {
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnComprar;
     private javax.swing.JButton btnExcluir;
+    private javax.swing.JButton btnSalvar;
     private javax.swing.JComboBox<String> cbxProduto;
     private javax.swing.JLabel lblCarrinho;
     private javax.swing.JLabel lblEstoque;

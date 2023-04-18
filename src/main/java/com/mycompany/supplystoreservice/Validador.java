@@ -65,6 +65,7 @@ public class Validador {
             }
         }
     }
+    
     public void preechendoArrayList(JFrame frmFrame){
         
         for (Component component : frmFrame.getComponents()) {
@@ -157,11 +158,13 @@ public class Validador {
     public void proValidarData(JFormattedTextField data) {
         SimpleDateFormat sdfData = new SimpleDateFormat("dd/MM/yyyy");
         sdfData.setLenient(false); // não permite datas inválidas como 31/02/2023
-        boolean errado = false;
+        boolean dataInvalida = false;
         
         try {
-            Date dataNascimento = sdfData.parse(data.getText());
-            Calendar cal = Calendar.getInstance();
+            Date dataNascimento;
+            dataNascimento = sdfData.parse(data.getText());
+            Calendar cal;
+            cal = Calendar.getInstance();
             cal.setTime(dataNascimento);
 
             int ano = cal.get(Calendar.YEAR);
@@ -172,26 +175,29 @@ public class Validador {
             Calendar anoAtual = Calendar.getInstance();
             int anoMaximo = anoAtual.get(Calendar.YEAR);
             if (ano > anoMaximo || ano < 1900) {
-                errado = true;
+                dataInvalida = true;
             }
 
             // Verifica se o mês está entre 1 e 12
             if (mes < 1 || mes > 12) {
-                errado = true;
+                dataInvalida = true;
             }
 
             // Verifica se o dia está dentro do intervalo válido para o mês e ano especificados
             int diasNoMes = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
             if(dia < 1 || dia > diasNoMes){
-                errado = true;
+                dataInvalida = true;
             }
-        } catch (ParseException e) {
-            if(errado){
+            
+            if(!dataInvalida){
+                data.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+            }else{
                 logs.add("Data inválida!");
                 data.setBorder(BorderFactory.createLineBorder(Color.RED));
-            }else{
-                data.setBorder(BorderFactory.createLineBorder(Color.BLACK));
             }
+        } catch (ParseException e) {
+            logs.add("Data inválida!");
+            data.setBorder(BorderFactory.createLineBorder(Color.RED));
         }
     }
     
