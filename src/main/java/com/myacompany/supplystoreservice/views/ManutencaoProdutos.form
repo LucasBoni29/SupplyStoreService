@@ -61,10 +61,7 @@
                       <Component id="scpEstoque" alignment="0" max="32767" attributes="0"/>
                       <Group type="102" alignment="1" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="scpCarrinho" pref="293" max="32767" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="scpCarrinho" alignment="0" pref="0" max="32767" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="lblCarrinho" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="252" max="-2" attributes="0"/>
@@ -135,6 +132,9 @@
             <Property name="text" type="java.lang.String" value="Excluir"/>
             <Property name="name" type="java.lang.String" value="Excluir" noResource="true"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnExcluirActionPerformed"/>
+          </Events>
         </Component>
         <Container class="javax.swing.JScrollPane" name="scpCarrinho">
           <AuxValues>

@@ -7,6 +7,7 @@ package com.mycompany.supplystoreservice.menu;
 import com.myacompany.supplystoreservice.views.ManutencaoProdutos;
 import com.formdev.flatlaf.intellijthemes.FlatMaterialDesignDarkIJTheme;
 import com.myacompany.supplystoreservice.views.ManutencaoClientes;
+import com.myacompany.supplystoreservice.views.MenuSobreNos;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.time.LocalDate;
@@ -91,13 +92,13 @@ public class Menu extends javax.swing.JFrame {
         panMenus.setPreferredSize(new java.awt.Dimension(270, 640));
 
         lblNomeLoja.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblNomeLoja.setText("Loja de Suprimentos");
+        lblNomeLoja.setText("SupplyStored");
 
         btnHome.setBackground(new java.awt.Color(255, 215, 0));
         btnHome.setText("Home");
         btnHome.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 13, 1, 1, new java.awt.Color(0, 0, 0)));
         btnHome.setBorderPainted(false);
-        btnHome.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnHome.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnHome.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnHome.setIconTextGap(13);
         btnHome.addActionListener(new java.awt.event.ActionListener() {
@@ -110,7 +111,7 @@ public class Menu extends javax.swing.JFrame {
         btnCliente.setText("Manutenção de clientes");
         btnCliente.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 13, 1, 1, new java.awt.Color(0, 0, 0)));
         btnCliente.setBorderPainted(false);
-        btnCliente.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCliente.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnCliente.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnCliente.setIconTextGap(13);
         btnCliente.addActionListener(new java.awt.event.ActionListener() {
@@ -123,7 +124,7 @@ public class Menu extends javax.swing.JFrame {
         btnProduto.setText("Manutenção de produtos");
         btnProduto.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 13, 1, 1, new java.awt.Color(0, 0, 0)));
         btnProduto.setBorderPainted(false);
-        btnProduto.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnProduto.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnProduto.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnProduto.setIconTextGap(13);
         btnProduto.addActionListener(new java.awt.event.ActionListener() {
@@ -206,7 +207,7 @@ public class Menu extends javax.swing.JFrame {
         );
 
         lblMensagem.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lblMensagem.setText("Loja de Suprimentos! 💪");
+        lblMensagem.setText("SupplyStored");
 
         javax.swing.GroupLayout panBackgroundLayout = new javax.swing.GroupLayout(panBackground);
         panBackground.setLayout(panBackgroundLayout);
@@ -214,7 +215,7 @@ public class Menu extends javax.swing.JFrame {
             panBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panBackgroundLayout.createSequentialGroup()
                 .addGap(264, 264, 264)
-                .addComponent(panTituloMenu, javax.swing.GroupLayout.DEFAULT_SIZE, 791, Short.MAX_VALUE))
+                .addComponent(panTituloMenu, javax.swing.GroupLayout.DEFAULT_SIZE, 795, Short.MAX_VALUE))
             .addGroup(panBackgroundLayout.createSequentialGroup()
                 .addComponent(panMenus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(panBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -233,11 +234,11 @@ public class Menu extends javax.swing.JFrame {
                 .addGap(12, 12, 12)
                 .addComponent(lblMensagem, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panTituloMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(panTituloMenu, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panConteudoMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
-            .addComponent(panMenus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panMenus, javax.swing.GroupLayout.DEFAULT_SIZE, 645, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -257,8 +258,8 @@ public class Menu extends javax.swing.JFrame {
 
     private void btnHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeActionPerformed
         // TODO add your handling code here:
-//        showJPanel(new Home());
-    lblTituloMenu.setText("Tela Principal");
+        showJPanel(new MenuSobreNos());
+        lblTituloMenu.setText("Tela Principal");
     }//GEN-LAST:event_btnHomeActionPerformed
 
     private void btnClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClienteActionPerformed

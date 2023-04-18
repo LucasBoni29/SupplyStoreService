@@ -4,8 +4,9 @@
  */
 package com.myacompany.supplystoreservice.views;
 
-import com.mycompany.supplystoreservice.Validador;
+import com.mycompany.supplystoreservice.utils.Validador;
 import com.mycompany.supplystoreservice.menu.Produto;
+import com.mycompany.supplystoreservice.utils.ToolTables;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -133,6 +134,11 @@ public class ManutencaoProdutos extends javax.swing.JPanel {
 
         btnExcluir.setText("Excluir");
         btnExcluir.setName("Excluir"); // NOI18N
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
 
         tblCarrinho.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -262,9 +268,7 @@ public class ManutencaoProdutos extends javax.swing.JPanel {
                     .addComponent(scpEstoque)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panBackgroundLayout.createSequentialGroup()
                         .addGroup(panBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panBackgroundLayout.createSequentialGroup()
-                                .addComponent(scpCarrinho, javax.swing.GroupLayout.DEFAULT_SIZE, 293, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                            .addComponent(scpCarrinho, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                             .addGroup(panBackgroundLayout.createSequentialGroup()
                                 .addComponent(lblCarrinho)
                                 .addGap(252, 252, 252)))
@@ -348,6 +352,13 @@ public class ManutencaoProdutos extends javax.swing.JPanel {
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnSalvarActionPerformed
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        // TODO add your handling code here:
+        ToolTables toolTables = new ToolTables();
+        
+        toolTables.proExcluirRegistro(tblCarrinho);
+    }//GEN-LAST:event_btnExcluirActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

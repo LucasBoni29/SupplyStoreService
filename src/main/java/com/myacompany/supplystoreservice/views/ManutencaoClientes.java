@@ -4,7 +4,7 @@
  */
 package com.myacompany.supplystoreservice.views;
 
-import com.mycompany.supplystoreservice.Validador;
+import com.mycompany.supplystoreservice.utils.Validador;
 import com.mycompany.supplystoreservice.menu.Cliente;
 import com.mycompany.supplystoreservice.utils.ToolTables;
 import java.util.ArrayList;
