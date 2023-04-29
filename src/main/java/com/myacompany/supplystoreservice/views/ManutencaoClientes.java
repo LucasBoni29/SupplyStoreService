@@ -4,14 +4,14 @@
  */
 package com.myacompany.supplystoreservice.views;
 
-import com.mycompany.supplystoreservice.Validador;
-import com.mycompany.supplystoreservice.menu.Cliente;
+import com.mycompany.supplystoreservice.dao.ManutencaoClientesDAO;
+import com.mycompany.supplystoreservice.utils.Validador;
+import com.mycompany.supplystoreservice.model.Cliente;
 import com.mycompany.supplystoreservice.utils.ToolTables;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -32,22 +32,22 @@ public final class ManutencaoClientes extends javax.swing.JPanel {
         cliente.setNome(txtNome.getText());
         cliente.setCpf(ftfCpf.getText());
         cliente.setEndereco(txtEndereco.getText());
-        cliente.setTelefone(String.valueOf(ftfTelefone.getValue()));
+        cliente.setTelefone(Integer.parseInt(ftfTelefone.getValue().toString()));
         cliente.setEmail(txtEmail.getText());
         cliente.setSexo(String.valueOf(cbxSexo.getSelectedItem()));
         cliente.setEstadoCivil(String.valueOf(cbxEstadoCivil.getSelectedItem()));
         cliente.setDataNascimento(String.valueOf(ftfDataNascimento.getValue()));
         
-        DefaultTableModel dtmClientes = (DefaultTableModel) tabela.getModel();
-        
-        Object[] dados = {cliente.getNome(), cliente.getCpf(), cliente.getEndereco(),
-                          cliente.getTelefone(), cliente.getEmail(), cliente.getSexo(),
-                          cliente.getEstadoCivil(), cliente.getDataNascimento()};
-        
-        dtmClientes.addRow(dados);
-        
-        JOptionPane.showMessageDialog(null, "Registro cadastrado com sucesso!", 
-                "Registro cadastrado", JOptionPane.INFORMATION_MESSAGE);
+        boolean retorno = ManutencaoClientesDAO.salvar(cliente);
+            if(retorno){
+                JOptionPane.showMessageDialog(null, 
+                    "Cliente cadastrado com sucesso", 
+                    "Cadastro de Cliente", JOptionPane.INFORMATION_MESSAGE);
+            }else{
+                JOptionPane.showMessageDialog(null, 
+                    "Não foi possível cadastrar o cliente!", 
+                    "Cadastro de Cliente", JOptionPane.ERROR_MESSAGE);
+            }
     }
     
     public void carregarTabela(JTable tabela, String nome, String cpf, int coluna){

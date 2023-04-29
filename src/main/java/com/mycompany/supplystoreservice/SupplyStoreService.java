@@ -5,7 +5,7 @@
 
 package com.mycompany.supplystoreservice;
 
-import com.mycompany.supplystoreservice.menu.Menu;
+import com.myacompany.supplystoreservice.views.Menu;
 
 /**
  *
