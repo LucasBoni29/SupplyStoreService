@@ -144,9 +144,9 @@ public class Validador {
         }
     }
     
-    public static void proValidarCamposNomeCpfAoBuscar(JTextField txtNome, JFormattedTextField ftfCpf){
-        if(txtNome.getText().equals("") && ftfCpf.getValue().equals("")){
-            logs.add("Preencha pelo menos um dos campos para efetuar a devida busca!");
+    public void proValidarCamposNomeCpfAoBuscar(JTextField txtNome, JFormattedTextField ftfCpf){
+        if(txtNome.getText().equals("") && ftfCpf.getValue() == null){
+            logs.add("Preencha corretamente os campos Nome ou Cpf para a devida busca!");
             txtNome.setBorder(BorderFactory.createLineBorder(Color.RED));
             ftfCpf.setBorder(BorderFactory.createLineBorder(Color.RED));
         }else{

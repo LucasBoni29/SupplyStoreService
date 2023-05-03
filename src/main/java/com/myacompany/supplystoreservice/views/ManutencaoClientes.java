@@ -8,8 +8,6 @@ import com.mycompany.supplystoreservice.dao.ManutencaoClientesDAO;
 import com.mycompany.supplystoreservice.utils.Validador;
 import com.mycompany.supplystoreservice.model.Cliente;
 import com.mycompany.supplystoreservice.utils.ToolTables;
-import java.util.ArrayList;
-import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
@@ -36,7 +34,7 @@ public final class ManutencaoClientes extends javax.swing.JPanel {
         cliente.setEmail(txtEmail.getText());
         cliente.setSexo(String.valueOf(cbxSexo.getSelectedItem()));
         cliente.setEstadoCivil(String.valueOf(cbxEstadoCivil.getSelectedItem()));
-        cliente.setDataNascimento(String.valueOf(ftfDataNascimento.getValue()));
+        cliente.setDataNascimento(Integer.valueOf(ftfDataNascimento.getValue().toString()));
         
         boolean retorno = ManutencaoClientesDAO.salvar(cliente);
             if(retorno){
@@ -50,19 +48,19 @@ public final class ManutencaoClientes extends javax.swing.JPanel {
             }
     }
     
-    public void carregarTabela(JTable tabela, String nome, String cpf, int coluna){
-        //TODO Finalizar a busca dos registros depois
-        List<Cliente> lista = new ArrayList<>();
+    private Cliente passarValores(){
+        Cliente cliente = new Cliente();
         
-        if(nome != null && nome.equals("") && cpf != null && cpf.equals("")){
-            for (int i = 0; i < tabela.getRowCount(); i++) {
-                if (tabela.getValueAt(i, 0).equals(nome)) {
-
-                }
-            }
-        }
+        cliente.setNome(txtNome.getText());
+        cliente.setCpf(String.valueOf(ftfCpf.getValue()));
+        cliente.setEndereco(txtEndereco.getText());
+        cliente.setTelefone(Integer.parseInt(ftfTelefone.getValue().toString()));
+        cliente.setEmail(txtEmail.getText());
+        cliente.setSexo(String.valueOf(cbxSexo.getSelectedItem()));
+        cliente.setEstadoCivil(String.valueOf(cbxEstadoCivil.getSelectedItem()));
+        cliente.setDataNascimento(Integer.valueOf(ftfDataNascimento.getValue().toString()));
         
-//        return -1; // retorna -1 se não encontrou nenhum registro
+        return cliente;
     }
 
     /**
@@ -387,15 +385,34 @@ public final class ManutencaoClientes extends javax.swing.JPanel {
         validador.proValidarEmail(txtEmail);
         validador.proValidarData(ftfDataNascimento);
         
+        
         if(validador.fncTemMensagem()){
             validador.proMostrarLog();
         }else{
-            cadastrar(tblClientes);
+            Cliente entidade = passarValores();
+            
+            boolean retorno = ManutencaoClientesDAO.salvar(entidade);
+            if(retorno){
+                JOptionPane.showMessageDialog(null, 
+                    "Cadastro realizado com sucesso!", 
+                    "Cadastro", JOptionPane.INFORMATION_MESSAGE);
+            }else{
+                JOptionPane.showMessageDialog(null, 
+                    "Não foi possível cadastrar o registro!!", 
+                    "Cadastro", JOptionPane.INFORMATION_MESSAGE);
+            }
         }
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        Validador.proValidarCamposNomeCpfAoBuscar(txtNome, ftfCpf);
+        Validador validador = new Validador();
+        validador.proValidarCamposNomeCpfAoBuscar(txtNome, ftfCpf);
+        
+        if(validador.fncTemMensagem()){
+            validador.proMostrarLog();
+        }else{
+            ManutencaoClientesDAO.findAllByNomeAndCpf(txtNome.getText(), ftfCpf.getValue(), tblClientes);   
+        }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void ftfTelefoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ftfTelefoneActionPerformed
