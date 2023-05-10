@@ -18,7 +18,7 @@ public class Cliente {
     private String email;
     private String sexo;
     private String estadoCivil;
-    private String dataNascimento;
+    private Integer dataNascimento;
     
     public Cliente(){
         
@@ -88,11 +88,11 @@ public class Cliente {
         this.estadoCivil = estadoCivil;
     }
 
-    public String getDataNascimento() {
+    public Integer getDataNascimento() {
         return dataNascimento;
     }
 
-    public void setDataNascimento(String dataNascimento) {
+    public void setDataNascimento(Integer dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
     

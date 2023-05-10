@@ -96,7 +96,6 @@ public class Menu extends javax.swing.JFrame {
         btnHome.setBorderPainted(false);
         btnHome.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnHome.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnHome.setIconTextGap(13);
         btnHome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnHomeActionPerformed(evt);
