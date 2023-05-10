@@ -93,7 +93,6 @@ public class Menu extends javax.swing.JFrame {
 
         btnHome.setBackground(new java.awt.Color(255, 215, 0));
         btnHome.setText("Home");
-        btnHome.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 13, 1, 1, null));
         btnHome.setBorderPainted(false);
         btnHome.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnHome.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -106,7 +105,6 @@ public class Menu extends javax.swing.JFrame {
 
         btnCliente.setBackground(new java.awt.Color(255, 215, 0));
         btnCliente.setText("Manutenção de clientes");
-        btnCliente.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 13, 1, 1, null));
         btnCliente.setBorderPainted(false);
         btnCliente.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnCliente.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -119,7 +117,6 @@ public class Menu extends javax.swing.JFrame {
 
         btnProduto.setBackground(new java.awt.Color(255, 215, 0));
         btnProduto.setText("Manutenção de produtos");
-        btnProduto.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 13, 1, 1, null));
         btnProduto.setBorderPainted(false);
         btnProduto.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnProduto.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
