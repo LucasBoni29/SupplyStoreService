@@ -7,9 +7,9 @@ package com.myacompany.supplystoreservice.views;
 import com.mycompany.supplystoreservice.dao.ManutencaoClientesDAO;
 import com.mycompany.supplystoreservice.utils.Validador;
 import com.mycompany.supplystoreservice.model.Cliente;
+import com.mycompany.supplystoreservice.utils.ToolCrud;
 import com.mycompany.supplystoreservice.utils.ToolTables;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
 
 /**
  *
@@ -24,8 +24,9 @@ public final class ManutencaoClientes extends javax.swing.JPanel {
         initComponents();
     }
     
-    private void cadastrar(JTable tabela) {
+    private void cadastrar() {
         Cliente cliente = new Cliente();
+        ToolCrud toolCrud = new ToolCrud();
         
         cliente.setNome(txtNome.getText());
         cliente.setCpf(ftfCpf.getText());
@@ -36,6 +37,8 @@ public final class ManutencaoClientes extends javax.swing.JPanel {
         cliente.setEstadoCivil(String.valueOf(cbxEstadoCivil.getSelectedItem()));
         cliente.setDataNascimento(Integer.valueOf(ftfDataNascimento.getValue().toString()));
         
+        cliente = toolCrud.removerMascarasCliente(cliente);
+        
         boolean retorno = ManutencaoClientesDAO.salvar(cliente);
             if(retorno){
                 JOptionPane.showMessageDialog(null, 
@@ -44,7 +47,7 @@ public final class ManutencaoClientes extends javax.swing.JPanel {
             }else{
                 JOptionPane.showMessageDialog(null, 
                     "Não foi possível cadastrar o cliente!", 
-                    "Cadastro de Cliente", JOptionPane.ERROR_MESSAGE);
+                    "Cadastro de Cliente", JOptionPane.INFORMATION_MESSAGE);
             }
     }
     

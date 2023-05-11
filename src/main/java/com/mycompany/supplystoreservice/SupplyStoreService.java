@@ -8,7 +8,7 @@ package com.mycompany.supplystoreservice;
 import com.myacompany.supplystoreservice.views.Menu;
 
 /**
- *
+ * Classe main
  * @author lucas.bsantos59
  */
 public class SupplyStoreService {

@@ -4,10 +4,23 @@
  */
 package com.mycompany.supplystoreservice.utils;
 
+import com.mycompany.supplystoreservice.model.Cliente;
+
 /**
  *
  * @author lucas.bsantos59
  */
 public class ToolCrud {
     
+    public Cliente removerMascarasCliente(Cliente entidade){
+        String regex = "[\\W\\s]";
+        
+        entidade.setCpf(entidade.getCpf().replaceAll(regex, ""));
+        entidade.setTelefone(Integer.parseInt(String.valueOf(
+                entidade.getTelefone()).replaceAll(regex, "")));
+        entidade.setDataNascimento(entidade.getDataNascimento().replaceAll(regex, ""));
+        
+        return entidade;
+    }
+   
 }
