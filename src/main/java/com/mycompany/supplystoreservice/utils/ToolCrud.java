@@ -18,7 +18,7 @@ public class ToolCrud {
         entidade.setCpf(entidade.getCpf().replaceAll(regex, ""));
         entidade.setTelefone(Integer.parseInt(String.valueOf(
                 entidade.getTelefone()).replaceAll(regex, "")));
-        entidade.setDataNascimento(entidade.getDataNascimento().replaceAll(regex, ""));
+        entidade.setDataNascimento(Integer.parseInt(String.valueOf(entidade.getDataNascimento()).replaceAll(regex, "")));
         
         return entidade;
     }

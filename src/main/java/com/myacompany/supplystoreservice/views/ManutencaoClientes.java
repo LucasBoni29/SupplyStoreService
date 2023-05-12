@@ -9,7 +9,9 @@ import com.mycompany.supplystoreservice.utils.Validador;
 import com.mycompany.supplystoreservice.model.Cliente;
 import com.mycompany.supplystoreservice.utils.ToolCrud;
 import com.mycompany.supplystoreservice.utils.ToolTables;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -31,7 +33,7 @@ public final class ManutencaoClientes extends javax.swing.JPanel {
         cliente.setNome(txtNome.getText());
         cliente.setCpf(ftfCpf.getText());
         cliente.setEndereco(txtEndereco.getText());
-        cliente.setTelefone(Integer.parseInt(ftfTelefone.getValue().toString()));
+        cliente.setTelefone(Integer.valueOf(ftfTelefone.getValue().toString()));
         cliente.setEmail(txtEmail.getText());
         cliente.setSexo(String.valueOf(cbxSexo.getSelectedItem()));
         cliente.setEstadoCivil(String.valueOf(cbxEstadoCivil.getSelectedItem()));
@@ -39,31 +41,7 @@ public final class ManutencaoClientes extends javax.swing.JPanel {
         
         cliente = toolCrud.removerMascarasCliente(cliente);
         
-        boolean retorno = ManutencaoClientesDAO.salvar(cliente);
-            if(retorno){
-                JOptionPane.showMessageDialog(null, 
-                    "Cliente cadastrado com sucesso", 
-                    "Cadastro de Cliente", JOptionPane.INFORMATION_MESSAGE);
-            }else{
-                JOptionPane.showMessageDialog(null, 
-                    "Não foi possível cadastrar o cliente!", 
-                    "Cadastro de Cliente", JOptionPane.INFORMATION_MESSAGE);
-            }
-    }
-    
-    private Cliente passarValores(){
-        Cliente cliente = new Cliente();
-        
-        cliente.setNome(txtNome.getText());
-        cliente.setCpf(String.valueOf(ftfCpf.getValue()));
-        cliente.setEndereco(txtEndereco.getText());
-        cliente.setTelefone(Integer.parseInt(ftfTelefone.getValue().toString()));
-        cliente.setEmail(txtEmail.getText());
-        cliente.setSexo(String.valueOf(cbxSexo.getSelectedItem()));
-        cliente.setEstadoCivil(String.valueOf(cbxEstadoCivil.getSelectedItem()));
-        cliente.setDataNascimento(Integer.valueOf(ftfDataNascimento.getValue().toString()));
-        
-        return cliente;
+        ManutencaoClientesDAO.salvar(cliente);
     }
 
     /**
@@ -178,7 +156,7 @@ public final class ManutencaoClientes extends javax.swing.JPanel {
 
         btnBuscar.setBackground(new java.awt.Color(255, 215, 0));
         btnBuscar.setText("Buscar");
-        btnBuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnBuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBuscarActionPerformed(evt);
@@ -187,7 +165,7 @@ public final class ManutencaoClientes extends javax.swing.JPanel {
 
         btnCadastrar.setBackground(new java.awt.Color(255, 215, 0));
         btnCadastrar.setText("Cadastrar");
-        btnCadastrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCadastrar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCadastrarActionPerformed(evt);
@@ -196,7 +174,7 @@ public final class ManutencaoClientes extends javax.swing.JPanel {
 
         btnExcluir.setBackground(new java.awt.Color(255, 215, 0));
         btnExcluir.setText("Excluir");
-        btnExcluir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnExcluir.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnExcluirActionPerformed(evt);
@@ -205,7 +183,7 @@ public final class ManutencaoClientes extends javax.swing.JPanel {
 
         btnAtualizar.setBackground(new java.awt.Color(255, 215, 0));
         btnAtualizar.setText("Atualizar");
-        btnAtualizar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAtualizar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnAtualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAtualizarActionPerformed(evt);
@@ -392,48 +370,34 @@ public final class ManutencaoClientes extends javax.swing.JPanel {
         if(validador.fncTemMensagem()){
             validador.proMostrarLog();
         }else{
-            Cliente entidade = passarValores();
-            
-            boolean retorno = ManutencaoClientesDAO.salvar(entidade);
-            if(retorno){
-                JOptionPane.showMessageDialog(null, 
-                    "Cadastro realizado com sucesso!", 
-                    "Cadastro", JOptionPane.INFORMATION_MESSAGE);
-            }else{
-                JOptionPane.showMessageDialog(null, 
-                    "Não foi possível cadastrar o registro!!", 
-                    "Cadastro", JOptionPane.INFORMATION_MESSAGE);
-            }
+            cadastrar();
         }
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        Validador validador = new Validador();
-        validador.proValidarCamposNomeCpfAoBuscar(txtNome, ftfCpf);
-        
-        if(validador.fncTemMensagem()){
-            validador.proMostrarLog();
-        }else{
-            ManutencaoClientesDAO.findAllByNomeAndCpf(txtNome.getText(), ftfCpf.getValue(), tblClientes);   
+        ArrayList<Cliente> listaClientes = ManutencaoClientesDAO.consultar();
+        DefaultTableModel modelo = (DefaultTableModel) tblClientes.getModel();
+        modelo.setRowCount(0);
+        for (Cliente item : listaClientes) {
+            modelo.addRow(new String[]{String.valueOf(item.getNome()),
+                item.getCpf(), item.getEndereco(),
+                String.valueOf(item.getTelefone()), item.getEmail(), item.getSexo(),
+                item.getEstadoCivil(), String.valueOf(item.getDataNascimento())});
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
-    private void ftfTelefoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ftfTelefoneActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ftfTelefoneActionPerformed
-
-    private void ftfCpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ftfCpfActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ftfCpfActionPerformed
-
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        ToolTables toolTables = new ToolTables();
-        
-        toolTables.proExcluirRegistro(tblClientes);
+        if (tblClientes.getSelectedRow() != -1) {
+            ManutencaoClientesDAO.excluir(tblClientes);
+        }else{
+            JOptionPane.showMessageDialog(null, 
+                   "Selecione uma linha para efetuar a exclusão!", 
+                    "Exclusão de registro", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
-        // TODO add your handling code here:
+        // TODO ALTERAR O MÉTODO DE ATUALIZAR PARA ATUALIZAR VIA OS CAMPOS PREENCHIDOS
         ToolTables toolTables = new ToolTables();
         
         toolTables.preechendoArrayList(panBackground);
@@ -453,6 +417,14 @@ public final class ManutencaoClientes extends javax.swing.JPanel {
         toolTables.preechendoArrayList(panBackground);
         toolTables.proSelecionarItensTabelaCliente(tblClientes);
     }//GEN-LAST:event_tblClientesMouseClicked
+
+    private void ftfTelefoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ftfTelefoneActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ftfTelefoneActionPerformed
+
+    private void ftfCpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ftfCpfActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ftfCpfActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
