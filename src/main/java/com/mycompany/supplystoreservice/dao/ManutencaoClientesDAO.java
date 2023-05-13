@@ -89,8 +89,8 @@ public class ManutencaoClientesDAO {
             Class.forName("com.mysql.cj.jdbc.Driver");
             
             //Passo 2 - Abrir a conexão
-            String url = "jdbc:mysql://localhost:3306/supplystoredservice";
-            conexao = DriverManager.getConnection(url,"root","");
+            String url = "jdbc:mysql://localhost:4306/supplyStore";
+            conexao = DriverManager.getConnection(url,"root","P@$$w0rd");
             
             //Passo 3 - Preparar o comando SQL
             
@@ -98,16 +98,16 @@ public class ManutencaoClientesDAO {
             
             if(entidade.getNome() == null && entidade.getCpf() != null){
                 comandoSQL = 
-                conexao.prepareStatement("SELECT * FROM cliente WHERE nrCpf = ?");
+                conexao.prepareStatement("SELECT * FROM clientes WHERE cpf = ?");
                 comandoSQL.setString(1, entidade.getCpf());
             }else if(entidade.getNome() != null && entidade.getCpf() == null){
                 comandoSQL = 
-                conexao.prepareStatement("SELECT * FROM cliente WHERE dsNome = ?");
+                conexao.prepareStatement("SELECT * FROM clientes WHERE nome_cli = ?");
                 comandoSQL.setString(1, entidade.getNome());
             }else{
                 comandoSQL = 
-                conexao.prepareStatement("SELECT * FROM cliente "
-                        + "WHERE nrCpf = ? AND dsNome = ?");
+                conexao.prepareStatement("SELECT * FROM clientes "
+                        + "WHERE cpf = ? AND nome_cli = ?");
                 comandoSQL.setString(1, entidade.getCpf());
                 comandoSQL.setString(2, entidade.getNome());
             }
@@ -120,15 +120,14 @@ public class ManutencaoClientesDAO {
                 //e passo os valores a um objeto
                 while(rs.next()){
                     Cliente obj = new Cliente();
-                    obj.setId(rs.getInt("nrId"));
-                    obj.setNome(rs.getString("dsNome"));
-                    obj.setCpf(rs.getString("nrCpf"));
-                    obj.setEndereco(rs.getString("dsEndereco"));
-                    obj.setTelefone(rs.getInt("nrTelefone"));
-                    obj.setEmail(rs.getString("dsEmail"));
-                    obj.setSexo(rs.getString("dsSexo"));
-                    obj.setEstadoCivil(rs.getString("dsEstadoCivil"));
-                    obj.setDataNascimento(rs.getInt("dtNascimento"));
+                    obj.setNome(rs.getString("nome_cli"));
+                    obj.setCpf(rs.getString("cpf"));
+                    obj.setEndereco(rs.getString("endereco"));
+                    obj.setTelefone(rs.getInt("telefone"));
+                    obj.setEmail(rs.getString("email"));
+                    obj.setSexo(rs.getString("sexo"));
+                    obj.setEstadoCivil(rs.getString("estado_civil"));
+                    obj.setDataNascimento(rs.getInt("data_nascimento"));
                     
                     listCliente.add(obj);
                     achouRegistro = true;
@@ -180,13 +179,13 @@ public class ManutencaoClientesDAO {
             // passo 1 carregar o driver
             Class.forName("com.mysql.cj.jdbc.Driver");
             //passso 2 abrir a conexao 
-            String url = "jdbc:mysql://localhost:3306/supplystoredservice";
+            String url = "jdbc:mysql://localhost:4306/supplyStore";
             
-            conexao = DriverManager.getConnection(url, "root", "");
+            conexao = DriverManager.getConnection(url, "root", "P@$$w0rd");
             
             PreparedStatement comandoSQL = conexao.prepareStatement(
-                    "SELECT dsNome, nrCpf, dsEndereco, nrTelefone, dsEmail, "
-                  + "dsSexo, dsEstadoCivil, dtNascimento FROM cliente");
+                    "SELECT nome_cli, cpf, endereco, telefone, email, "
+                  + "sexo, estado_civil, data_nascimento FROM clientes");
 
             //passo 4 executar o comando SQL 
             ResultSet listCliente = comandoSQL.executeQuery();
@@ -231,12 +230,12 @@ public class ManutencaoClientesDAO {
         try {
             // passo 1 - carregar o driver
             Class.forName("com.mysql.cj.jdbc.Driver");
-            String url = "jdbc:mysql://localhost:3306/supplystoredservice";
+            String url = "jdbc:mysql://localhost:4306/supplyStore";
 
-            conexao = DriverManager.getConnection(url, "root", "");
+            conexao = DriverManager.getConnection(url, "root", "P@$$w0rd");
             //PASSO 3  prepara o comando SQL
             PreparedStatement comandoSQL = conexao.prepareStatement(
-                    "DELETE FROM cliente WHERE cpf = ?");
+                    "DELETE FROM clientes WHERE cpf = ?");
 
             comandoSQL.setInt(1, 
                     Integer.parseInt(tabela.getValueAt(
@@ -272,16 +271,16 @@ public class ManutencaoClientesDAO {
         try {
             //Passo 1 - Carregaro o Driver
             Class.forName("com.mysql.cj.jdbc.Driver");
-            String url = "jdbc:mysql://localhost:3306/supplystoredservice";
+            String url = "jdbc:mysql://localhost:4306/supplyStore";
 
             //Passo 2 - Abrir a conexao
-            conexao = DriverManager.getConnection(url, "root", "");
+            conexao = DriverManager.getConnection(url, "root", "P@$$w0rd");
             
             PreparedStatement comandoSQL = null;
             
             comandoSQL = conexao.prepareStatement(
-                "UPDATE cliente SET dsNome = ?, nrCpf = ?, dsEndereco = ?, nrTelefone = ?, dsEmail = ?, "
-                  + "dsSexo = ?, dsEstadoCivil = ?, dtNascimento = ? WHERE nrCpf = ?"); 
+                "UPDATE clientes SET nome_cli = ?, cpf = ?, endereco = ?, telefone = ?, email = ?, "
+                  + " sexo = ?, estado_civil = ?, data_nascimento = ? WHERE cpf = ?"); 
             comandoSQL.setString(1, entidade.getNome());
             comandoSQL.setString(2, entidade.getCpf());
             comandoSQL.setString(3, entidade.getEndereco());

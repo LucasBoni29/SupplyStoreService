@@ -4,7 +4,8 @@
  */
 package com.mycompany.supplystoreservice.utils;
 
-import com.mycompany.supplystoreservice.model.Cliente;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -12,15 +13,15 @@ import com.mycompany.supplystoreservice.model.Cliente;
  */
 public class ToolCrud {
     
-    public Cliente removerMascarasCliente(Cliente entidade){
+    public List<String> removerMascarasCliente(List<String> camposMascara){
         String regex = "[\\W\\s]";
+        List<String> dadosFormatados = new ArrayList<>();
         
-        entidade.setCpf(entidade.getCpf().replaceAll(regex, ""));
-        entidade.setTelefone(Integer.parseInt(String.valueOf(
-                entidade.getTelefone()).replaceAll(regex, "")));
-        entidade.setDataNascimento(Integer.parseInt(String.valueOf(entidade.getDataNascimento()).replaceAll(regex, "")));
+        dadosFormatados.add(camposMascara.get(0).replaceAll(regex, ""));
+        dadosFormatados.add(camposMascara.get(1).replaceAll(regex, ""));
+        dadosFormatados.add(camposMascara.get(2).replaceAll(regex, ""));
         
-        return entidade;
+        return dadosFormatados;
     }
    
 }

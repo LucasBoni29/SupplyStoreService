@@ -10,6 +10,7 @@ import com.mycompany.supplystoreservice.model.Cliente;
 import com.mycompany.supplystoreservice.utils.ToolCrud;
 import com.mycompany.supplystoreservice.utils.ToolTables;
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -29,17 +30,24 @@ public final class ManutencaoClientes extends javax.swing.JPanel {
     private void cadastrar() {
         Cliente cliente = new Cliente();
         ToolCrud toolCrud = new ToolCrud();
+        List<String> camposMascara = new ArrayList<>();
         
         cliente.setNome(txtNome.getText());
-        cliente.setCpf(ftfCpf.getText());
+        camposMascara.add(ftfCpf.getText());
         cliente.setEndereco(txtEndereco.getText());
-        cliente.setTelefone(Integer.valueOf(ftfTelefone.getValue().toString()));
+        camposMascara.add(ftfTelefone.getText());
         cliente.setEmail(txtEmail.getText());
         cliente.setSexo(String.valueOf(cbxSexo.getSelectedItem()));
         cliente.setEstadoCivil(String.valueOf(cbxEstadoCivil.getSelectedItem()));
-        cliente.setDataNascimento(Integer.valueOf(ftfDataNascimento.getValue().toString()));
+        camposMascara.add(ftfDataNascimento.getText());
         
-        cliente = toolCrud.removerMascarasCliente(cliente);
+        camposMascara = toolCrud.removerMascarasCliente(camposMascara);
+        cliente.setCpf(camposMascara.get(0));
+        cliente.setTelefone(Integer.valueOf(camposMascara.get(1)));
+        cliente.setDataNascimento(Integer.valueOf(camposMascara.get(2)));
+        
+        cliente.setCpf(camposMascara.get(0));
+        cliente.setTelefone(Integer.valueOf(camposMascara.get(1)));
         
         ManutencaoClientesDAO.salvar(cliente);
     }
@@ -191,7 +199,7 @@ public final class ManutencaoClientes extends javax.swing.JPanel {
         });
 
         try {
-            ftfTelefone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##) #####-####")));
+            ftfTelefone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##) ## #####-####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
