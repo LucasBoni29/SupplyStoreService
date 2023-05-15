@@ -22,6 +22,8 @@ import javax.swing.table.DefaultTableModel;
  */
 public class ManutencaoClientesDAO {
     
+    //TODO TESTAR TODAS AS FUNÇÕES COM A BASE DE DADOS!
+    
     public static void salvar(Cliente entidade){
         
         boolean retorno = false;
@@ -32,13 +34,13 @@ public class ManutencaoClientesDAO {
             String url = "jdbc:mysql://localhost:3306/supplystoredservice";
             
             //Passo 2 - Abrir a conexao
-            conexao = DriverManager.getConnection(url, "root", "");
+            conexao = DriverManager.getConnection(url, "root", "P@$$w0rd");
             
              //Passo 3 - Prepara o comando SQL
             PreparedStatement comandoSQL = conexao.prepareStatement(
                     "INSERT INTO \r\n"
-                  + "cliente(dsNome, nrCpf, dsEndereco, nrTelefone, dsEmail, "
-                  + "dsSexo, dsEstadoCivil, dtNascimento) \r\n"
+                  + "cliente(nome_cli, cpf, endereco, telefone, email, "
+                  + "sexo, estado_civil, data_nascimento) \r\n"
                   + "VALUES(?, ?, ?, ?, ?, ?, ?, ?)"); 
             
             comandoSQL.setString(1, entidade.getNome());
@@ -102,7 +104,7 @@ public class ManutencaoClientesDAO {
                 comandoSQL.setString(1, entidade.getCpf());
             }else if(entidade.getNome() != null && entidade.getCpf() == null){
                 comandoSQL = 
-                conexao.prepareStatement("SELECT * FROM clientes WHERE nome_cli = ?");
+                conexao.prepareStatement("SELECT * FROM clientes WHERE nome_cli LIKE '%?'");
                 comandoSQL.setString(1, entidade.getNome());
             }else{
                 comandoSQL = 

@@ -15,13 +15,12 @@ public class ToolCrud {
     
     public List<String> removerMascarasCliente(List<String> camposMascara){
         String regex = "[\\W\\s]";
-        List<String> dadosFormatados = new ArrayList<>();
+        List<String> camposFormatados = new ArrayList<>();
         
-        dadosFormatados.add(camposMascara.get(0).replaceAll(regex, ""));
-        dadosFormatados.add(camposMascara.get(1).replaceAll(regex, ""));
-        dadosFormatados.add(camposMascara.get(2).replaceAll(regex, ""));
+        camposMascara.forEach(obj -> camposFormatados.add(obj.replaceAll(regex, "")));
+        camposMascara.forEach(obj -> camposFormatados.add(obj.replaceAll(" ", "")));
         
-        return dadosFormatados;
+        return camposFormatados;
     }
    
 }
