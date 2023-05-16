@@ -5,10 +5,10 @@
 
 package com.mycompany.supplystoreservice;
 
-import com.mycompany.supplystoreservice.menu.Menu;
+import com.myacompany.supplystoreservice.views.Menu;
 
 /**
- *
+ * Classe main
  * @author lucas.bsantos59
  */
 public class SupplyStoreService {
