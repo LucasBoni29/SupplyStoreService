@@ -31,7 +31,7 @@ public class ManutencaoClientesDAO {
         
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
-            String url = "jdbc:mysql://localhost:3306/supplystoredservice";
+            String url = "jdbc:mysql://localhost:3306/supplyStore";
             
             //Passo 2 - Abrir a conexao
             conexao = DriverManager.getConnection(url, "root", "P@$$w0rd");
@@ -39,7 +39,7 @@ public class ManutencaoClientesDAO {
              //Passo 3 - Prepara o comando SQL
             PreparedStatement comandoSQL = conexao.prepareStatement(
                     "INSERT INTO \r\n"
-                  + "cliente(nome_cli, cpf, endereco, telefone, email, "
+                  + "clientes(nome_cli, cpf, endereco, telefone, email, "
                   + "sexo, estado_civil, data_nascimento) \r\n"
                   + "VALUES(?, ?, ?, ?, ?, ?, ?, ?)"); 
             
@@ -91,7 +91,7 @@ public class ManutencaoClientesDAO {
             Class.forName("com.mysql.cj.jdbc.Driver");
             
             //Passo 2 - Abrir a conexão
-            String url = "jdbc:mysql://localhost:4306/supplyStore";
+            String url = "jdbc:mysql://localhost:3306/supplyStore";
             conexao = DriverManager.getConnection(url,"root","P@$$w0rd");
             
             //Passo 3 - Preparar o comando SQL
@@ -104,8 +104,8 @@ public class ManutencaoClientesDAO {
                 comandoSQL.setString(1, entidade.getCpf());
             }else if(entidade.getNome() != null && entidade.getCpf() == null){
                 comandoSQL = 
-                conexao.prepareStatement("SELECT * FROM clientes WHERE nome_cli LIKE '%?'");
-                comandoSQL.setString(1, entidade.getNome());
+                conexao.prepareStatement("SELECT * FROM clientes WHERE nome_cli LIKE ?");
+                comandoSQL.setString(1, "%" +entidade.getNome());
             }else{
                 comandoSQL = 
                 conexao.prepareStatement("SELECT * FROM clientes "
@@ -153,7 +153,7 @@ public class ManutencaoClientesDAO {
                 
                 if(achouRegistro){
                     JOptionPane.showMessageDialog(null, 
-                    "Consulta realizada com sucesso!", 
+                    "Filtro realizado com sucesso!", 
                     "Filtro", JOptionPane.INFORMATION_MESSAGE);
                 }else{
                     JOptionPane.showMessageDialog(null, 
@@ -181,7 +181,7 @@ public class ManutencaoClientesDAO {
             // passo 1 carregar o driver
             Class.forName("com.mysql.cj.jdbc.Driver");
             //passso 2 abrir a conexao 
-            String url = "jdbc:mysql://localhost:4306/supplyStore";
+            String url = "jdbc:mysql://localhost:3306/supplyStore";
             
             conexao = DriverManager.getConnection(url, "root", "P@$$w0rd");
             
@@ -196,14 +196,14 @@ public class ManutencaoClientesDAO {
                 while (listCliente.next()) {
                     Cliente entidade = new Cliente();
 
-                    entidade.setNome(listCliente.getString("Nome"));
-                    entidade.setCpf(listCliente.getString("CPF"));
-                    entidade.setEndereco(listCliente.getString("Endereço"));
-                    entidade.setTelefone(listCliente.getInt("Telefone"));
-                    entidade.setEmail(listCliente.getString("E-mail"));
-                    entidade.setSexo(listCliente.getString("Sexo"));
-                    entidade.setEstadoCivil(listCliente.getString("Estado civil"));
-                    entidade.setDataNascimento(listCliente.getInt("Nascimento"));
+                    entidade.setNome(listCliente.getString("nome_cli"));
+                    entidade.setCpf(listCliente.getString("cpf"));
+                    entidade.setEndereco(listCliente.getString("endereco"));
+                    entidade.setTelefone(listCliente.getInt("telefone"));
+                    entidade.setEmail(listCliente.getString("email"));
+                    entidade.setSexo(listCliente.getString("sexo"));
+                    entidade.setEstadoCivil(listCliente.getString("estado_civil"));
+                    entidade.setDataNascimento(listCliente.getInt("data_nascimento"));
                     listFinal.add(entidade);
                 }
             }
@@ -223,6 +223,10 @@ public class ManutencaoClientesDAO {
                     "Erro ao abrir conexão", 
                     "Conexão com a base", JOptionPane.ERROR_MESSAGE);
         }
+        JOptionPane.showMessageDialog(null, 
+                "Consulta realizada com sucesso!", 
+                "Consulta", 
+                JOptionPane.INFORMATION_MESSAGE);
         return listFinal;
     }
     
@@ -232,16 +236,14 @@ public class ManutencaoClientesDAO {
         try {
             // passo 1 - carregar o driver
             Class.forName("com.mysql.cj.jdbc.Driver");
-            String url = "jdbc:mysql://localhost:4306/supplyStore";
+            String url = "jdbc:mysql://localhost:3306/supplyStore";
 
             conexao = DriverManager.getConnection(url, "root", "P@$$w0rd");
             //PASSO 3  prepara o comando SQL
             PreparedStatement comandoSQL = conexao.prepareStatement(
                     "DELETE FROM clientes WHERE cpf = ?");
 
-            comandoSQL.setInt(1, 
-                    Integer.parseInt(tabela.getValueAt(
-                            tabela.getSelectedRow(), 1).toString()));
+            comandoSQL.setString(1, tabela.getValueAt(tabela.getSelectedRow(), 1).toString());
             
             int linhasAfetadas = comandoSQL.executeUpdate();
 
@@ -273,7 +275,7 @@ public class ManutencaoClientesDAO {
         try {
             //Passo 1 - Carregaro o Driver
             Class.forName("com.mysql.cj.jdbc.Driver");
-            String url = "jdbc:mysql://localhost:4306/supplyStore";
+            String url = "jdbc:mysql://localhost:3306/supplyStore";
 
             //Passo 2 - Abrir a conexao
             conexao = DriverManager.getConnection(url, "root", "P@$$w0rd");
@@ -291,6 +293,8 @@ public class ManutencaoClientesDAO {
             comandoSQL.setString(6, entidade.getSexo());
             comandoSQL.setString(7, entidade.getEstadoCivil());
             comandoSQL.setInt(8, entidade.getDataNascimento());
+            comandoSQL.setString(9, entidade.getCpf());
+            
 
             //Passo 4 - Executar comando SQL
             int linhasAfetadas = comandoSQL.executeUpdate();

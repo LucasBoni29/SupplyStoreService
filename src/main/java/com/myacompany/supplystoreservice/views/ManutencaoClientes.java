@@ -46,11 +46,44 @@ public final class ManutencaoClientes extends javax.swing.JPanel {
         camposMascara = toolCrud.removerMascarasCliente(camposMascara);
         
         cliente.setCpf(camposMascara.get(0));
-        int number = 212121212;
         cliente.setTelefone(Integer.valueOf(camposMascara.get(1)));
         cliente.setDataNascimento(Integer.valueOf(camposMascara.get(2)));
         
         ManutencaoClientesDAO.salvar(cliente);
+    }
+    
+    private Cliente passarValores(Cliente entidade, DefaultTableModel model, int linhaSelecionada) {
+        ToolCrud toolCrud = new ToolCrud();
+        List<String> camposMascara = new ArrayList<>();
+        
+        // Passando valores da linha selecionada!
+        entidade.setNome(model.getValueAt(linhaSelecionada, 0).toString());
+        entidade.setCpf(model.getValueAt(linhaSelecionada, 1).toString());
+        entidade.setEndereco(model.getValueAt(linhaSelecionada, 2).toString());
+        entidade.setTelefone(Integer.valueOf(model.getValueAt(linhaSelecionada, 3).toString()));
+        entidade.setEmail(model.getValueAt(linhaSelecionada, 4).toString());
+        entidade.setSexo(model.getValueAt(linhaSelecionada, 5).toString());
+        entidade.setEstadoCivil(model.getValueAt(linhaSelecionada, 6).toString());
+        entidade.setDataNascimento(Integer.valueOf(model.getValueAt(linhaSelecionada, 7).toString()));
+        
+        // Colocando os valores alterados!
+        entidade.setNome(txtNome.getText());
+        camposMascara.add(ftfCpf.getText());
+        entidade.setEndereco(txtEndereco.getText());
+        camposMascara.add(ftfTelefone.getText());
+        entidade.setEmail(txtEmail.getText());
+        entidade.setSexo(String.valueOf(cbxSexo.getSelectedItem()));
+        entidade.setEstadoCivil(String.valueOf(cbxEstadoCivil.getSelectedItem()));
+        camposMascara.add(ftfDataNascimento.getText());
+        
+        //Removendo máscaras
+        camposMascara = toolCrud.removerMascarasCliente(camposMascara);
+
+        entidade.setCpf(camposMascara.get(0));
+        entidade.setTelefone(Integer.valueOf(camposMascara.get(1)));
+        entidade.setDataNascimento(Integer.valueOf(camposMascara.get(2)));
+        
+        return entidade;
     }
 
     /**
@@ -102,9 +135,16 @@ public final class ManutencaoClientes extends javax.swing.JPanel {
             Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false
+            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         tblClientes.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -434,14 +474,7 @@ public final class ManutencaoClientes extends javax.swing.JPanel {
                 int linhaSelecionada = tblClientes.getSelectedRow();
                 DefaultTableModel model = (DefaultTableModel) tblClientes.getModel();
                 
-                entidade.setNome(model.getValueAt(linhaSelecionada, 0).toString());
-                entidade.setCpf(model.getValueAt(linhaSelecionada, 1).toString());
-                entidade.setEndereco(model.getValueAt(linhaSelecionada, 2).toString());
-                entidade.setTelefone(Integer.valueOf(model.getValueAt(linhaSelecionada, 2).toString()));
-                entidade.setEmail(model.getValueAt(linhaSelecionada, 2).toString());
-                entidade.setSexo(model.getValueAt(linhaSelecionada, 2).toString());
-                entidade.setEstadoCivil(model.getValueAt(linhaSelecionada, 2).toString());
-                entidade.setDataNascimento(Integer.valueOf(model.getValueAt(linhaSelecionada, 2).toString()));
+                entidade = passarValores(entidade, model, linhaSelecionada);
                 
                 ManutencaoClientesDAO.alterar(entidade, tblClientes);
             }
@@ -545,4 +578,5 @@ public final class ManutencaoClientes extends javax.swing.JPanel {
     private javax.swing.JTextField txtEndereco;
     private javax.swing.JTextField txtNome;
     // End of variables declaration//GEN-END:variables
+    
 }
