@@ -89,7 +89,7 @@ public class Menu extends javax.swing.JFrame {
         panMenus.setPreferredSize(new java.awt.Dimension(270, 640));
 
         lblNomeLoja.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblNomeLoja.setText("Loja de Suprimentos");
+        lblNomeLoja.setText("SupplyStored");
 
         btnHome.setBackground(new java.awt.Color(255, 215, 0));
         btnHome.setText("Home");
@@ -200,7 +200,7 @@ public class Menu extends javax.swing.JFrame {
         );
 
         lblMensagem.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lblMensagem.setText("Loja de Suprimentos! 💪");
+        lblMensagem.setText("SupplyStored");
 
         javax.swing.GroupLayout panBackgroundLayout = new javax.swing.GroupLayout(panBackground);
         panBackground.setLayout(panBackgroundLayout);
@@ -251,8 +251,8 @@ public class Menu extends javax.swing.JFrame {
 
     private void btnHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeActionPerformed
         // TODO add your handling code here:
-//        showJPanel(new Home());
-    lblTituloMenu.setText("Tela Principal");
+        showJPanel(new MenuSobreNos());
+        lblTituloMenu.setText("Tela Principal");
     }//GEN-LAST:event_btnHomeActionPerformed
 
     private void btnClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClienteActionPerformed
