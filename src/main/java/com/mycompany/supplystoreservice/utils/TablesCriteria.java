@@ -5,6 +5,7 @@
 package com.mycompany.supplystoreservice.utils;
 
 import java.awt.Component;
+import java.text.ParseException;
 import java.util.ArrayList;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
@@ -16,23 +17,38 @@ import javax.swing.JSpinner;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.MaskFormatter;
 
 /**
  *
  * @author lucas.boni
  */
-public class ToolTables {
+public class TablesCriteria {
     
     private final ArrayList<JTextField> txtFields;
     private final ArrayList<JComboBox> cbxFields;
     private final ArrayList<JFormattedTextField> ftfFields;
     private final ArrayList<JSpinner> pinFields;
     
-    public ToolTables(){
+    public TablesCriteria(){
         this.txtFields = new ArrayList<>();
         this.cbxFields = new ArrayList<>();
         this.ftfFields = new ArrayList<>();
         this.pinFields = new ArrayList<>();
+    }
+    
+    private MaskFormatter getMascara(String mascara){
+        MaskFormatter mascaraRetornada = new MaskFormatter();
+        try{
+            mascaraRetornada.setMask(mascara); //Atribui a mascara
+            mascaraRetornada.setPlaceholderCharacter(' '); //Caracter para preencimento
+        }catch(ParseException e){
+            JOptionPane.showMessageDialog(null,
+                    "Não foi possível criar as máscaras!", 
+                    "Criar máscara", 
+                    JOptionPane.INFORMATION_MESSAGE);
+        }
+        return mascaraRetornada;
     }
     
     public void preechendoArrayList(JPanel panPanel){
@@ -184,12 +200,18 @@ public class ToolTables {
                     switch (obj.getName()) {
                         case "CPF":
                             obj.setText(tabela.getValueAt(tabela.getSelectedRow(), 1).toString());
+                            String valorCpfComMascara = obj.getText();
+                            obj.setValue(valorCpfComMascara);
                             break;
                         case "Telefone":
                             obj.setText(tabela.getValueAt(tabela.getSelectedRow(), 3).toString());
+                            String valorTelefoneComMascara = obj.getText();
+                            obj.setValue(valorTelefoneComMascara);
                             break;
                         case "Data de nascimento":
                             obj.setText(tabela.getValueAt(tabela.getSelectedRow(), 7).toString());
+                            String valorDataNascimentoComMascara = obj.getText();
+                            obj.setValue(valorDataNascimentoComMascara);
                             break;
                         default:
                             break;
@@ -216,5 +238,56 @@ public class ToolTables {
                     "Não foi possível capturar a seleção do registro na tabela!",
                 "Selecionar registro na tabela", JOptionPane.ERROR_MESSAGE);
         }
+    }
+    
+    public void limparCampos(JTable tabela){
+        if(!txtFields.isEmpty()){
+                for(JTextField obj : txtFields){
+                    switch (obj.getName()) {
+                        case "Nome":
+                            obj.setText("");
+                            break;
+                        case "Endereço":
+                            obj.setText("");
+                            break;
+                        case "E-mail":
+                            obj.setText("");
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+            
+            if(!ftfFields.isEmpty()){
+                for(JFormattedTextField obj : ftfFields){
+                    switch (obj.getName()) {
+                        case "CPF":
+                            obj.setText("");
+                            break;
+                        case "Telefone":
+                            obj.setText("");
+                            break;
+                        case "Data de nascimento":
+                            obj.setText("");
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+            
+            if(!cbxFields.isEmpty()){
+                for(JComboBox obj : cbxFields){
+                    switch (obj.getName()){
+                        case "Estado civil":
+                            obj.setSelectedItem(0);
+                            break;
+                        case "Sexo":
+                            obj.setSelectedItem(0);
+                            break;
+                    }
+                }
+            }
     }
 }

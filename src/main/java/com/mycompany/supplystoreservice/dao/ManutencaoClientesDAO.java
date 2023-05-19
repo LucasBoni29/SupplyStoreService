@@ -31,10 +31,10 @@ public class ManutencaoClientesDAO {
         
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
-            String url = "jdbc:mysql://localhost:3306/supplyStore";
+            String url = "jdbc:mysql://localhost:3308/supplyStore";
             
             //Passo 2 - Abrir a conexao
-            conexao = DriverManager.getConnection(url, "root", "P@$$w0rd");
+            conexao = DriverManager.getConnection(url, "root", "");
             
              //Passo 3 - Prepara o comando SQL
             PreparedStatement comandoSQL = conexao.prepareStatement(
@@ -91,8 +91,8 @@ public class ManutencaoClientesDAO {
             Class.forName("com.mysql.cj.jdbc.Driver");
             
             //Passo 2 - Abrir a conexão
-            String url = "jdbc:mysql://localhost:3306/supplyStore";
-            conexao = DriverManager.getConnection(url,"root","P@$$w0rd");
+            String url = "jdbc:mysql://localhost:3308/supplyStore";
+            conexao = DriverManager.getConnection(url,"root","");
             
             //Passo 3 - Preparar o comando SQL
             
@@ -105,7 +105,7 @@ public class ManutencaoClientesDAO {
             }else if(entidade.getNome() != null && entidade.getCpf() == null){
                 comandoSQL = 
                 conexao.prepareStatement("SELECT * FROM clientes WHERE nome_cli LIKE ?");
-                comandoSQL.setString(1, "%" +entidade.getNome());
+                comandoSQL.setString(1, "%" +entidade.getNome() + "%");
             }else{
                 comandoSQL = 
                 conexao.prepareStatement("SELECT * FROM clientes "
@@ -181,9 +181,9 @@ public class ManutencaoClientesDAO {
             // passo 1 carregar o driver
             Class.forName("com.mysql.cj.jdbc.Driver");
             //passso 2 abrir a conexao 
-            String url = "jdbc:mysql://localhost:3306/supplyStore";
+            String url = "jdbc:mysql://localhost:3308/supplyStore";
             
-            conexao = DriverManager.getConnection(url, "root", "P@$$w0rd");
+            conexao = DriverManager.getConnection(url, "root", "");
             
             PreparedStatement comandoSQL = conexao.prepareStatement(
                     "SELECT nome_cli, cpf, endereco, telefone, email, "
@@ -236,9 +236,9 @@ public class ManutencaoClientesDAO {
         try {
             // passo 1 - carregar o driver
             Class.forName("com.mysql.cj.jdbc.Driver");
-            String url = "jdbc:mysql://localhost:3306/supplyStore";
+            String url = "jdbc:mysql://localhost:3308/supplyStore";
 
-            conexao = DriverManager.getConnection(url, "root", "P@$$w0rd");
+            conexao = DriverManager.getConnection(url, "root", "");
             //PASSO 3  prepara o comando SQL
             PreparedStatement comandoSQL = conexao.prepareStatement(
                     "DELETE FROM clientes WHERE cpf = ?");
@@ -275,10 +275,10 @@ public class ManutencaoClientesDAO {
         try {
             //Passo 1 - Carregaro o Driver
             Class.forName("com.mysql.cj.jdbc.Driver");
-            String url = "jdbc:mysql://localhost:3306/supplyStore";
+            String url = "jdbc:mysql://localhost:3308/supplyStore";
 
             //Passo 2 - Abrir a conexao
-            conexao = DriverManager.getConnection(url, "root", "P@$$w0rd");
+            conexao = DriverManager.getConnection(url, "root", "");
             
             PreparedStatement comandoSQL = null;
             
