@@ -59,11 +59,7 @@ public class ManutencaoClientesDAO {
                 retorno = true;
             }
             
-            if(retorno){
-                JOptionPane.showMessageDialog(null, 
-                    "Registro cadastrado com sucesso!", 
-                    "Cadastrar registro", JOptionPane.INFORMATION_MESSAGE);
-            }else{
+            if(!retorno){
                 JOptionPane.showMessageDialog(null, 
                     "Não foi possível cadastrar o registro!", 
                     "Cadastrar registro", JOptionPane.INFORMATION_MESSAGE);
@@ -80,11 +76,10 @@ public class ManutencaoClientesDAO {
         }
     }
     
-    public static void filtrar(Cliente entidade, JTable tabela){
+    public static List<Cliente> filtrar(Cliente entidade){
         //TODO FAZER ESSA CONSULTA RETORNA RUMA LISTA PARA ATUALIZAR A COLUNA NA CLASSE 'ManutençãoClientes'
         List<Cliente> listCliente = new ArrayList<>();
         Connection conexao;
-        boolean achouRegistro = false;
         
         try {
             //Passo 1 Carregar o Driver
@@ -132,33 +127,6 @@ public class ManutencaoClientesDAO {
                     obj.setDataNascimento(rs.getInt("data_nascimento"));
                     
                     listCliente.add(obj);
-                    achouRegistro = true;
-                }
-                
-                DefaultTableModel modelo = (DefaultTableModel)tabela.getModel();
-                //Limpo a tabela
-                modelo.setRowCount(0);
-                //Percorrer a lista e adicionar à tabela
-                for (Cliente item : listCliente) {
-                    modelo.addRow(new String[]{String.valueOf(item.getNome()),
-                                               String.valueOf(item.getCpf()),
-                                               String.valueOf(item.getEndereco()),
-                                               String.valueOf(item.getTelefone()),
-                                               String.valueOf(item.getEmail()),
-                                               String.valueOf(item.getSexo()),
-                                               String.valueOf(item.getEstadoCivil()),
-                                               String.valueOf(item.getDataNascimento())
-                                            });
-                }
-                
-                if(achouRegistro){
-                    JOptionPane.showMessageDialog(null, 
-                    "Filtro realizado com sucesso!", 
-                    "Filtro", JOptionPane.INFORMATION_MESSAGE);
-                }else{
-                    JOptionPane.showMessageDialog(null, 
-                    "Não foram encontrados registros!", 
-                    "Filtro", JOptionPane.WARNING_MESSAGE);
                 }
             }
             
@@ -171,6 +139,7 @@ public class ManutencaoClientesDAO {
                     "Erro ao abrir a conexão!", 
                     "Conexão com a base", JOptionPane.ERROR_MESSAGE);
         }
+        return listCliente;
     }
     
     public static ArrayList<Cliente> consultar() {
@@ -207,13 +176,6 @@ public class ManutencaoClientesDAO {
                     listFinal.add(entidade);
                 }
             }
-            
-            if(listFinal.isEmpty()){
-                JOptionPane.showMessageDialog(null, 
-                    "Não foi encontrado nenhum registro", 
-                    "Consultar registro", JOptionPane.INFORMATION_MESSAGE);
-                return listFinal;
-            }
         } catch (ClassNotFoundException ex) {
             JOptionPane.showMessageDialog(null, 
                     "Erro ao carregar o Driver", 
@@ -223,10 +185,6 @@ public class ManutencaoClientesDAO {
                     "Erro ao abrir conexão", 
                     "Conexão com a base", JOptionPane.ERROR_MESSAGE);
         }
-        JOptionPane.showMessageDialog(null, 
-                "Consulta realizada com sucesso!", 
-                "Consulta", 
-                JOptionPane.INFORMATION_MESSAGE);
         return listFinal;
     }
     
@@ -322,5 +280,58 @@ public class ManutencaoClientesDAO {
                     "Erro ao abrir conexão", 
                     "Conexão com a base", JOptionPane.ERROR_MESSAGE);
         }
+    }
+    
+    public static boolean fncRegistroExiste(String cpf){
+        ArrayList<Cliente> listFinal;
+        listFinal = new ArrayList<>();
+        Connection conexao;
+        try {
+            // passo 1 carregar o driver
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            //passso 2 abrir a conexao 
+            String url = "jdbc:mysql://localhost:3308/supplyStore";
+            
+            conexao = DriverManager.getConnection(url, "root", "");
+            
+            PreparedStatement comandoSQL = conexao.prepareStatement(
+                    "SELECT nome_cli, cpf, endereco, telefone, email, "
+                  + "sexo, estado_civil, data_nascimento FROM clientes WHERE cpf = ?");
+            
+            comandoSQL.setString(1, cpf);
+
+            //passo 4 executar o comando SQL 
+            ResultSet listCliente = comandoSQL.executeQuery();
+            if (listCliente != null) {
+
+                while (listCliente.next()) {
+                    Cliente entidade = new Cliente();
+
+                    entidade.setNome(listCliente.getString("nome_cli"));
+                    entidade.setCpf(listCliente.getString("cpf"));
+                    entidade.setEndereco(listCliente.getString("endereco"));
+                    entidade.setTelefone(listCliente.getInt("telefone"));
+                    entidade.setEmail(listCliente.getString("email"));
+                    entidade.setSexo(listCliente.getString("sexo"));
+                    entidade.setEstadoCivil(listCliente.getString("estado_civil"));
+                    entidade.setDataNascimento(listCliente.getInt("data_nascimento"));
+                    listFinal.add(entidade);
+                }
+            }
+            
+        } catch (ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(null, 
+                    "Erro ao carregar o Driver", 
+                    "Conexão com a base", JOptionPane.ERROR_MESSAGE);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, 
+                    "Erro ao abrir conexão", 
+                    "Conexão com a base", JOptionPane.ERROR_MESSAGE);
+        }
+        JOptionPane.showMessageDialog(null, 
+                "Consulta realizada com sucesso!", 
+                "Consulta", 
+                JOptionPane.INFORMATION_MESSAGE);
+        return !listFinal.isEmpty();
     }
 }

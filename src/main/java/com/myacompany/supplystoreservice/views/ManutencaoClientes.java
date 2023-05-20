@@ -22,12 +22,39 @@ import javax.swing.table.DefaultTableModel;
  * @author lucas.boni
  */
 public final class ManutencaoClientes extends javax.swing.JPanel {
+    
+    private String acao;
 
     /**
      * Creates new form ManutencaoClientes
      */
     public ManutencaoClientes() {
         initComponents();
+    }
+    
+    private void exibirStatus(String tipoAcao){
+        switch (tipoAcao) {
+            case "INSERT":
+                JOptionPane.showMessageDialog(null,
+                        "Registro cadastrado com sucesso!",
+                        "Cadastrar registro",
+                        JOptionPane.INFORMATION_MESSAGE);
+                break;
+            case "UPDATE":
+                JOptionPane.showMessageDialog(null,
+                        "Registro alterado com sucesso!",
+                        "Alterar registro",
+                        JOptionPane.INFORMATION_MESSAGE);
+                break;
+            case "DELETE":
+                JOptionPane.showMessageDialog(null,
+                        "Registro excluído com sucesso!",
+                        "Excluir registro",
+                        JOptionPane.INFORMATION_MESSAGE);
+                break;
+            default:
+                break;
+        }
     }
     
     private void cadastrar() {
@@ -50,7 +77,18 @@ public final class ManutencaoClientes extends javax.swing.JPanel {
         cliente.setTelefone(Integer.valueOf(camposMascara.get(1)));
         cliente.setDataNascimento(Integer.valueOf(camposMascara.get(2)));
         
-        ManutencaoClientesDAO.salvar(cliente);
+        boolean registroExiste = ManutencaoClientesDAO.fncRegistroExiste(cliente.getCpf());
+        
+        if(registroExiste){
+            JOptionPane.showMessageDialog(null,
+                    "Registro já inserido na base de dados!", 
+                    "Cadastrar registro", 
+                    JOptionPane.INFORMATION_MESSAGE);
+        }else{
+            ManutencaoClientesDAO.salvar(cliente);
+            acao = "INSERT";
+            buscarValores();
+        }
     }
     
     private void buscarValores(){
@@ -63,9 +101,34 @@ public final class ManutencaoClientes extends javax.swing.JPanel {
                 String.valueOf(item.getTelefone()), item.getEmail(), item.getSexo(),
                 item.getEstadoCivil(), String.valueOf(item.getDataNascimento())});
         }
+        exibirStatus(acao);
+        if(listaClientes.isEmpty()){
+            JOptionPane.showMessageDialog(null, 
+                    "Nenhum registro encontrado!", 
+                    "Consultar registros", 
+                    JOptionPane.INFORMATION_MESSAGE);
+        }
+    }
+    
+    private void carregarValoresFiltrados(List<Cliente> listaFiltrada){
+        DefaultTableModel modelo = (DefaultTableModel) tblClientes.getModel();
+        modelo.setRowCount(0);
+        for (Cliente item : listaFiltrada) {
+            modelo.addRow(new String[]{String.valueOf(item.getNome()),
+                item.getCpf(), item.getEndereco(),
+                String.valueOf(item.getTelefone()), item.getEmail(), item.getSexo(),
+                item.getEstadoCivil(), String.valueOf(item.getDataNascimento())});
+        }
+        if(listaFiltrada.isEmpty()){
+            JOptionPane.showMessageDialog(null, 
+                    "Nenhum registro encontrado!", 
+                    "Filtrar registros", 
+                    JOptionPane.INFORMATION_MESSAGE);
+        }
     }
     
     private void limparCampos(){
+        acao = "";
         txtNome.setText("");
         ftfCpf.setText("");
         ftfCpf.setValue(null);
@@ -475,13 +538,16 @@ public final class ManutencaoClientes extends javax.swing.JPanel {
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        acao = "";
         buscarValores();
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         if (tblClientes.getSelectedRow() != -1) {
             ManutencaoClientesDAO.excluir(tblClientes);
+            acao = "DELETE";
             limparCampos();
+            buscarValores();
         }else{
             JOptionPane.showMessageDialog(null, 
                    "Selecione uma linha para efetuar a exclusão!", 
@@ -507,6 +573,8 @@ public final class ManutencaoClientes extends javax.swing.JPanel {
                 entidade = passarValores(entidade, model, linhaSelecionada);
                 
                 ManutencaoClientesDAO.alterar(entidade, tblClientes);
+                acao = "UPDATE";
+                buscarValores();
             }
         }else{
             JOptionPane.showMessageDialog(null, 
@@ -545,7 +613,8 @@ public final class ManutencaoClientes extends javax.swing.JPanel {
             
             entidade.setNome(txtNome.getText());
             
-            ManutencaoClientesDAO.filtrar(entidade, tblClientes);
+            List<Cliente> listaFiltrada = ManutencaoClientesDAO.filtrar(entidade);
+            carregarValoresFiltrados(listaFiltrada);
         }else if(ftfCpf.getValue() != null && txtNome.getText().equals("")){
             
             ftfCpf.setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -555,7 +624,8 @@ public final class ManutencaoClientes extends javax.swing.JPanel {
             campoMascara = toolCrud.removerMascarasCliente(campoMascara);
             entidade.setCpf(campoMascara.get(0));
             
-            ManutencaoClientesDAO.filtrar(entidade, tblClientes);
+            List<Cliente> listaFiltrada = ManutencaoClientesDAO.filtrar(entidade);
+            carregarValoresFiltrados(listaFiltrada);
         }else if(!txtNome.getText().equals("") && ftfCpf.getValue() != null){
             
             txtNome.setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -566,7 +636,8 @@ public final class ManutencaoClientes extends javax.swing.JPanel {
             campoMascara = toolCrud.removerMascarasCliente(campoMascara);
             entidade.setCpf(campoMascara.get(0));
             
-            ManutencaoClientesDAO.filtrar(entidade, tblClientes);
+           List<Cliente> listaFiltrada = ManutencaoClientesDAO.filtrar(entidade);
+           carregarValoresFiltrados(listaFiltrada);
         }else{
             JOptionPane.showMessageDialog(null, 
                     "Preencha pelo menos um dos campos", 
