@@ -2,9 +2,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package com.mycompany.supplystoreservice.menu;
+package com.myacompany.supplystoreservice.views;
 
-import com.myacompany.supplystoreservice.views.ManutencaoProdutos;
 import com.formdev.flatlaf.intellijthemes.FlatMaterialDesignDarkIJTheme;
 import com.myacompany.supplystoreservice.views.ManutencaoClientes;
 import com.myacompany.supplystoreservice.views.MenuSobreNos;
@@ -96,11 +95,9 @@ public class Menu extends javax.swing.JFrame {
 
         btnHome.setBackground(new java.awt.Color(255, 215, 0));
         btnHome.setText("Home");
-        btnHome.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 13, 1, 1, new java.awt.Color(0, 0, 0)));
         btnHome.setBorderPainted(false);
         btnHome.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnHome.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnHome.setIconTextGap(13);
         btnHome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnHomeActionPerformed(evt);
@@ -109,7 +106,6 @@ public class Menu extends javax.swing.JFrame {
 
         btnCliente.setBackground(new java.awt.Color(255, 215, 0));
         btnCliente.setText("Manutenção de clientes");
-        btnCliente.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 13, 1, 1, new java.awt.Color(0, 0, 0)));
         btnCliente.setBorderPainted(false);
         btnCliente.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnCliente.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -122,7 +118,6 @@ public class Menu extends javax.swing.JFrame {
 
         btnProduto.setBackground(new java.awt.Color(255, 215, 0));
         btnProduto.setText("Manutenção de produtos");
-        btnProduto.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 13, 1, 1, new java.awt.Color(0, 0, 0)));
         btnProduto.setBorderPainted(false);
         btnProduto.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnProduto.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);

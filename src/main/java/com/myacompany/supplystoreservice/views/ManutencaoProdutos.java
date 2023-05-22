@@ -5,8 +5,7 @@
 package com.myacompany.supplystoreservice.views;
 
 import com.mycompany.supplystoreservice.utils.Validador;
-import com.mycompany.supplystoreservice.menu.Produto;
-import com.mycompany.supplystoreservice.utils.ToolTables;
+import com.mycompany.supplystoreservice.model.Produto;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
