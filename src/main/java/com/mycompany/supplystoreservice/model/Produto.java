@@ -14,13 +14,21 @@ public class Produto {
     private String nome;
     private int quantidade;
     private double valor;
+    private String cpf;
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
     
     public Produto() {
        
     }
 
-    public Produto(int id, String nome, int quantidade, double valor) {
-        this.id = id;
+    public Produto(String nome, int quantidade, double valor) {
         this.nome = nome;
         this.quantidade = quantidade;
         this.valor = valor;

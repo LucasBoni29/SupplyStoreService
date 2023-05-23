@@ -25,7 +25,7 @@ public class Menu extends javax.swing.JFrame {
      */
     public Menu() {
         initComponents();
-        initSystelesComponents();
+        //initSystelesComponents();
         setDate();
         initHome();
     }
@@ -273,10 +273,6 @@ public class Menu extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /**
-         * Colocando design da dependência FlatLight
-         */
-        FlatMaterialDesignDarkIJTheme.setup();
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
