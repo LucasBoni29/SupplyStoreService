@@ -28,9 +28,9 @@ public class ManutencaoProdutosDAO {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             
-            String url = "jdbc:mysql://127.0.0.1:3306/supplyStore";
+            String url = "jdbc:mysql://localhost:3306/supplyStore";
             
-            conexao = DriverManager.getConnection(url, "root", "root");
+            conexao = DriverManager.getConnection(url, "root", "");
             
             PreparedStatement comandoSQL = 
                     conexao.prepareStatement("SELECT * FROM produtos");
@@ -72,9 +72,9 @@ public class ManutencaoProdutosDAO {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             
-            String url = "jdbc:mysql://127.0.0.1:3306/supplyStore";
+            String url = "jdbc:mysql://localhost:3306/supplyStore";
             
-            conexao = DriverManager.getConnection(url, "root", "root");
+            conexao = DriverManager.getConnection(url, "root", "");
             
             PreparedStatement comandoSQL = conexao.prepareStatement ("INSERT INTO produtos "
                     + "(nome_produto, quantidade, valor )VALUES (? , ?, ?)");
@@ -109,9 +109,9 @@ public class ManutencaoProdutosDAO {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             
-            String url = "jdbc:mysql://127.0.0.1:3306/supplyStore";
+            String url = "jdbc:mysql://localhost:3306/supplyStore";
             
-            conexao = DriverManager.getConnection(url, "root", "root");
+            conexao = DriverManager.getConnection(url, "root", "");
             
             PreparedStatement comandoSQL = conexao.prepareStatement ("UPDATE produtos\n" +
         "SET nome_produto = ?, quantidade = ?, valor = ?\n" +
@@ -148,9 +148,9 @@ public class ManutencaoProdutosDAO {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             
-            String url = "jdbc:mysql://127.0.0.1:3306/supplyStore";
+           String url = "jdbc:mysql://localhost:3306/supplyStore";
             
-            conexao = DriverManager.getConnection(url, "root", "root");
+            conexao = DriverManager.getConnection(url, "root", "");
             
             PreparedStatement comandoSQL = conexao.prepareStatement ("delete from produtos where id_produto = ?");
            
@@ -180,9 +180,9 @@ public class ManutencaoProdutosDAO {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             
-            String url = "jdbc:mysql://127.0.0.1:3306/supplyStore";
+            String url = "jdbc:mysql://localhost:3306/supplyStore";
             
-            conexao = DriverManager.getConnection(url, "root", "root");
+            conexao = DriverManager.getConnection(url, "root", "");
             
             PreparedStatement comandoSQL = conexao.prepareStatement ("select * from clientes where cpf = ?");
            
@@ -213,9 +213,9 @@ public class ManutencaoProdutosDAO {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             
-            String url = "jdbc:mysql://127.0.0.1:3306/supplyStore";
+            String url = "jdbc:mysql://localhost:3306/supplyStore";
             
-            conexao = DriverManager.getConnection(url, "root", "root");
+            conexao = DriverManager.getConnection(url, "root", "");
             
             PreparedStatement comandoSQL = 
                     conexao.prepareStatement("SELECT cpf FROM clientes");
@@ -266,9 +266,9 @@ public class ManutencaoProdutosDAO {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             
-            String url = "jdbc:mysql://127.0.0.1:3306/supplyStore";
+            String url = "jdbc:mysql://localhost:3306/supplyStore";
             
-            conexao = DriverManager.getConnection(url, "root", "root");
+            conexao = DriverManager.getConnection(url, "root", "");
             
             PreparedStatement comandoSQL = 
                     conexao.prepareStatement("SELECT nome_produto FROM produtos");
@@ -320,12 +320,12 @@ public class ManutencaoProdutosDAO {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             
-            String url = "jdbc:mysql://127.0.0.1:3306/supplyStore";
+           String url = "jdbc:mysql://localhost:3306/supplyStore";
             
-            conexao = DriverManager.getConnection(url, "root", "root");
+            conexao = DriverManager.getConnection(url, "root", "");
             
             PreparedStatement comandoSQL = 
-                    conexao.prepareStatement("SELECT * FROM carrinho");
+                    conexao.prepareStatement("SELECT id_carrinho,nome_carrinho,qtd_carrinho, qtd_carrinho * valor_carrinho AS valor_carrinho FROM carrinho ");
               
            
             ResultSet rs = comandoSQL.executeQuery();
@@ -336,7 +336,7 @@ public class ManutencaoProdutosDAO {
                     Produto obj = new Produto();
                     
                     obj.setId(rs.getInt("id_carrinho"));
-                    obj.setNome(rs.getString("produto_carrinho"));
+                    obj.setNome(rs.getString("nome_carrinho"));
                     obj.setQuantidade(rs.getInt("qtd_carrinho"));
                     obj.setValor(rs.getDouble("valor_carrinho"));
         
@@ -364,12 +364,12 @@ public class ManutencaoProdutosDAO {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             
-            String url = "jdbc:mysql://127.0.0.1:3306/supplyStore";
+           String url = "jdbc:mysql://localhost:3306/supplyStore";
             
-            conexao = DriverManager.getConnection(url, "root", "root");
+            conexao = DriverManager.getConnection(url, "root", "");
             
             PreparedStatement comandoSQL = conexao.prepareStatement ("INSERT INTO carrinho "
-                    + "(produto_carrinho,qtd_carrinho,valor_carrinho )VALUES (? , ?, ?)");
+                    + "(nome_carrinho,qtd_carrinho,valor_carrinho )VALUES (? , ?, ?)");
             
             comandoSQL.setString(1, obj.getNome());
             comandoSQL.setInt(2, obj.getQuantidade());
@@ -386,7 +386,7 @@ public class ManutencaoProdutosDAO {
         } catch (SQLException ex) {
             System.out.println("Erro na conexão em salvarCarrinho");
         }
-        
+
         return retorno;
     }
     

@@ -46,6 +46,8 @@ public class ManutencaoProdutos extends javax.swing.JPanel {
         attClientes();
 
         attProdutos();
+        
+        attCarrinho();
 
     }
 
@@ -84,7 +86,21 @@ public class ManutencaoProdutos extends javax.swing.JPanel {
     }
 
     private void attCarrinho() {
+ 
+        ArrayList<Produto> lista = ManutencaoProdutosDAO.buscarCarrinho();
+        
+        DefaultTableModel modelo = (DefaultTableModel) tblCarrinho.getModel();
 
+        modelo.setRowCount(0);
+
+        for (Produto item : lista) {
+            modelo.addRow(new String[]{
+                String.valueOf(item.getId()),
+                item.getNome(),
+                String.valueOf(item.getQuantidade()),
+                String.valueOf(item.getValor())
+            });
+        }
     }
 
     /**
@@ -109,6 +125,7 @@ public class ManutencaoProdutos extends javax.swing.JPanel {
         scpEstoque = new javax.swing.JScrollPane();
         tblEstoque = new javax.swing.JTable();
         btnAlterarCarrinho = new javax.swing.JButton();
+        btnSalvar = new javax.swing.JButton();
         btnComprarCarrinho = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         txtValor = new javax.swing.JTextField();
@@ -123,6 +140,20 @@ public class ManutencaoProdutos extends javax.swing.JPanel {
         jLabel6 = new javax.swing.JLabel();
         txtValorTotal = new javax.swing.JTextField();
         btnFinalizarCompra = new javax.swing.JButton();
+        btnComprarCarrinho1 = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        txtValor1 = new javax.swing.JTextField();
+        txtProdutoNome1 = new javax.swing.JTextField();
+        cbxProdutoCarrinho1 = new javax.swing.JComboBox<>();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        pinQuantidadeCarrinho1 = new javax.swing.JSpinner();
+        jLabel9 = new javax.swing.JLabel();
+        btnSalvarEstoque1 = new javax.swing.JButton();
+        cbxClientes1 = new javax.swing.JComboBox<>();
+        jLabel10 = new javax.swing.JLabel();
+        txtValorTotal1 = new javax.swing.JTextField();
+        btnFinalizarCompra1 = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(773, 434));
 
@@ -162,11 +193,6 @@ public class ManutencaoProdutos extends javax.swing.JPanel {
 
         btnAlterarEstoque.setText("Alterar");
         btnAlterarEstoque.setName("Comprar"); // NOI18N
-        btnAlterarEstoque.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAlterarEstoqueActionPerformed(evt);
-            }
-        });
 
         btnExcluirCarrinho.setText("Excluir");
         btnExcluirCarrinho.setName("Cancelar"); // NOI18N
@@ -237,6 +263,7 @@ public class ManutencaoProdutos extends javax.swing.JPanel {
             }
         });
 
+        txtValorTotal.setEditable(false);
         txtValorTotal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtValorTotalActionPerformed(evt);
@@ -244,6 +271,53 @@ public class ManutencaoProdutos extends javax.swing.JPanel {
         });
 
         btnFinalizarCompra.setText("Finalizar Compra");
+
+        btnComprarCarrinho1.setText("Aderir");
+        btnComprarCarrinho1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnComprarCarrinhoActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setText("Valor Unitário ");
+
+        txtValor1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtValorFocusLost(evt);
+            }
+        });
+        txtValor1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtValorActionPerformed(evt);
+            }
+        });
+
+        txtProdutoNome1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtProdutoNomeActionPerformed(evt);
+            }
+        });
+
+        jLabel7.setText("Produto");
+
+        jLabel8.setText("Quantidade");
+
+        jLabel9.setText("CPF");
+
+        btnSalvarEstoque1.setText("Salvar");
+        btnSalvarEstoque1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarEstoqueActionPerformed(evt);
+            }
+        });
+
+        txtValorTotal1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtValorTotalActionPerformed(evt);
+            }
+        });
+
+        btnFinalizarCompra1.setText("Finalizar Compra");
 
         javax.swing.GroupLayout panBackgroundLayout = new javax.swing.GroupLayout(panBackground);
         panBackground.setLayout(panBackgroundLayout);
@@ -411,10 +485,6 @@ public class ManutencaoProdutos extends javax.swing.JPanel {
 
     }//GEN-LAST:event_btnExcluirCarrinhoActionPerformed
 
-    private void btnAlterarEstoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarEstoqueActionPerformed
-
-    }//GEN-LAST:event_btnAlterarEstoqueActionPerformed
-
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnExcluirActionPerformed
@@ -505,30 +575,45 @@ public class ManutencaoProdutos extends javax.swing.JPanel {
     private javax.swing.JButton btnAlterarCarrinho;
     private javax.swing.JButton btnAlterarEstoque;
     private javax.swing.JButton btnComprarCarrinho;
+    private javax.swing.JButton btnComprarCarrinho1;
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnExcluirCarrinho;
     private javax.swing.JButton btnFinalizarCompra;
+    private javax.swing.JButton btnFinalizarCompra1;
+    private javax.swing.JButton btnSalvar;
     private javax.swing.JButton btnSalvarEstoque;
+    private javax.swing.JButton btnSalvarEstoque1;
     private javax.swing.JComboBox<String> cbxClientes;
+    private javax.swing.JComboBox<String> cbxClientes1;
     private javax.swing.JComboBox<String> cbxProdutoCarrinho;
+    private javax.swing.JComboBox<String> cbxProdutoCarrinho1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel lblCarrinho;
     private javax.swing.JLabel lblProduto;
     private javax.swing.JLabel lblQuantidade;
     private javax.swing.JPanel panBackground;
     private javax.swing.JSpinner pinQuantidadeCarrinho;
+    private javax.swing.JSpinner pinQuantidadeCarrinho1;
     private javax.swing.JSpinner pinQuantidadeEstoque;
     private javax.swing.JScrollPane scpCarrinho;
     private javax.swing.JScrollPane scpEstoque;
     private javax.swing.JTable tblCarrinho;
     private javax.swing.JTable tblEstoque;
     private javax.swing.JTextField txtProdutoNome;
+    private javax.swing.JTextField txtProdutoNome1;
     private javax.swing.JTextField txtValor;
+    private javax.swing.JTextField txtValor1;
     private javax.swing.JTextField txtValorTotal;
+    private javax.swing.JTextField txtValorTotal1;
     // End of variables declaration//GEN-END:variables
 
 }
