@@ -17,13 +17,15 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
+ * Classe responsável por executar as operações CRUD e conexão com a base de dados
  * @author lucas.bsantos59
  */
 public class ManutencaoClientesDAO {
     
-    //TODO TESTAR TODAS AS FUNÇÕES COM A BASE DE DADOS!
-    
+    /**
+     * Método responsável por salvar os registros na tabela 'clientes'
+     * @param entidade Entidade {@link Cliente}
+     */
     public static void salvar(Cliente entidade){
         
         boolean retorno = false;
@@ -76,8 +78,13 @@ public class ManutencaoClientesDAO {
         }
     }
     
+    /**
+     * Método responsável por filtrar os dados na tabela cliente e 
+     * retornar a lista filtrada
+     * @param entidade Entidade {@link Cliente}
+     * @return A lista de clientes filtrada
+     */
     public static List<Cliente> filtrar(Cliente entidade){
-        //TODO FAZER ESSA CONSULTA RETORNA RUMA LISTA PARA ATUALIZAR A COLUNA NA CLASSE 'ManutençãoClientes'
         List<Cliente> listCliente = new ArrayList<>();
         Connection conexao;
         
@@ -142,6 +149,11 @@ public class ManutencaoClientesDAO {
         return listCliente;
     }
     
+    /**
+     * Método responsável por consultar todos os registros na tabela cliente 
+     * e retornar a lista de clientes
+     * @return Lista de clientes da tabela toda
+     */
     public static ArrayList<Cliente> consultar() {
         ArrayList<Cliente> listFinal;
         listFinal = new ArrayList<>();
@@ -188,6 +200,10 @@ public class ManutencaoClientesDAO {
         return listFinal;
     }
     
+    /**
+     * Método responsável por excluir um cliente da tabela e atualizar o JTable
+     * @param tabela Tabela cliente do java -tabela visual.
+     */
     public static void excluir(JTable tabela) {
         Connection conexao;
         DefaultTableModel model = (DefaultTableModel) tabela.getModel();
@@ -227,6 +243,11 @@ public class ManutencaoClientesDAO {
         }
     }
     
+    /**
+     * Método responsável por atualizar as informações do cliente
+     * @param entidade Entidade {@link Cliente}
+     * @param tabel Tabela visual para o usuário. Tabela Cliente
+     */
     public static void alterar(Cliente entidade, JTable tabel) {
         boolean retorno = false;
         Connection conexao;
@@ -282,6 +303,11 @@ public class ManutencaoClientesDAO {
         }
     }
     
+    /**
+     * Método responsávl por verificar se o cliente existe na tabela
+     * @param cpf CPF do cliente
+     * @return Status se o cliente existe ou não
+     */
     public static boolean fncRegistroExiste(String cpf){
         ArrayList<Cliente> listFinal;
         listFinal = new ArrayList<>();
