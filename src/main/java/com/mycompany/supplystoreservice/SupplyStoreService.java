@@ -8,11 +8,15 @@ package com.mycompany.supplystoreservice;
 import com.myacompany.supplystoreservice.views.Menu;
 
 /**
- * Classe main
- * @author lucas.bsantos59
+ * Classe responsável por iniciar o sistema SupplyStoreService
+ * @Class SupplyStoredService
  */
 public class SupplyStoreService {
 
+    /**
+     * Método main que vai rodar a classe principal do sistema
+     * @param args Array de String com todos os argumentos do sistema
+     */
     public static void main(String[] args) {
         Menu frmCadastroClientes = new Menu();
         frmCadastroClientes.setVisible(true);
