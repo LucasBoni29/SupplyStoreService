@@ -5,6 +5,8 @@
 package com.myacompany.supplystoreservice.views;
 
 import com.formdev.flatlaf.intellijthemes.FlatMaterialDesignDarkIJTheme;
+import com.myacompany.supplystoreservice.views.ManutencaoClientes;
+import com.myacompany.supplystoreservice.views.MenuSobreNos;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.time.LocalDate;
