@@ -59,7 +59,8 @@ public class Menu extends javax.swing.JFrame {
      * Método responsável por iniciar o projeto com a tela de aprensentação na classe {@link MenuSobreNos}
      */
     private void initHome(){
-        //TODO: Fazer aparecer a tela principal ao abrir a tela, aqui!
+        showJPanel(new MenuSobreNos());
+        lblTituloMenu.setText("Tela Principal");
     }
 
     /**
