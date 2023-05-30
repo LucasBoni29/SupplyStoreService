@@ -484,7 +484,8 @@ public class ManutencaoProdutosDAO {
 
             conexao = DriverManager.getConnection(url, "root", "root");
 
-            PreparedStatement comandoSQL = conexao.prepareStatement("UPDATE carrinho SET nome_produto_carrinho = ?, qtd_carrinho = ?, valor_produto_carrinho = ? WHERE id_compra = ?);");
+            PreparedStatement comandoSQL = conexao.prepareStatement("UPDATE carrinho SET nome_produto_carrinho = ?, "
+                    + "qtd_carrinho = ?, valor_produto_carrinho = ? WHERE id_compra = ?;");
 
 
             comandoSQL.setString(1, obj.getNome());
@@ -589,4 +590,3 @@ public class ManutencaoProdutosDAO {
         }
 
     }
-
