@@ -7,6 +7,7 @@ package com.myacompany.supplystoreservice.views;
 import com.mycompany.supplystoreservice.dao.ManutencaoProdutosDAO;
 import com.mycompany.supplystoreservice.utils.Validador;
 import com.mycompany.supplystoreservice.model.Produto;
+import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import javax.swing.ComboBoxModel;
 import javax.swing.JOptionPane;
@@ -102,6 +103,24 @@ public class ManutencaoProdutos extends javax.swing.JPanel {
             });
         }
     }
+    
+    private void attEstoque() {
+ 
+        ArrayList<Produto> lista = ManutencaoProdutosDAO.buscarTudo();
+        
+        DefaultTableModel modelo = (DefaultTableModel) tblEstoque.getModel();
+
+        modelo.setRowCount(0);
+
+        for (Produto item : lista) {
+            modelo.addRow(new String[]{
+                String.valueOf(item.getId()),
+                item.getNome(),
+                String.valueOf(item.getQuantidade()),
+                String.valueOf(item.getValor())
+            });
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -125,7 +144,6 @@ public class ManutencaoProdutos extends javax.swing.JPanel {
         scpEstoque = new javax.swing.JScrollPane();
         tblEstoque = new javax.swing.JTable();
         btnAlterarCarrinho = new javax.swing.JButton();
-        btnSalvar = new javax.swing.JButton();
         btnComprarCarrinho = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         txtValor = new javax.swing.JTextField();
@@ -193,6 +211,11 @@ public class ManutencaoProdutos extends javax.swing.JPanel {
 
         btnAlterarEstoque.setText("Alterar");
         btnAlterarEstoque.setName("Comprar"); // NOI18N
+        btnAlterarEstoque.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlterarEstoqueActionPerformed(evt);
+            }
+        });
 
         btnExcluirCarrinho.setText("Excluir");
         btnExcluirCarrinho.setName("Cancelar"); // NOI18N
@@ -223,6 +246,11 @@ public class ManutencaoProdutos extends javax.swing.JPanel {
 
         btnAlterarCarrinho.setText("Alterar");
         btnAlterarCarrinho.setName("Alterar"); // NOI18N
+        btnAlterarCarrinho.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlterarActionPerformed(evt);
+            }
+        });
 
         btnComprarCarrinho.setText("Aderir");
         btnComprarCarrinho.addActionListener(new java.awt.event.ActionListener() {
@@ -271,6 +299,11 @@ public class ManutencaoProdutos extends javax.swing.JPanel {
         });
 
         btnFinalizarCompra.setText("Finalizar Compra");
+        btnFinalizarCompra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFinalizarCompraActionPerformed(evt);
+            }
+        });
 
         btnComprarCarrinho1.setText("Aderir");
         btnComprarCarrinho1.addActionListener(new java.awt.event.ActionListener() {
@@ -419,7 +452,7 @@ public class ManutencaoProdutos extends javax.swing.JPanel {
                     .addGroup(panBackgroundLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(scpCarrinho, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addComponent(lblCarrinho)
                 .addGap(14, 14, 14))
         );
@@ -487,6 +520,38 @@ public class ManutencaoProdutos extends javax.swing.JPanel {
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         // TODO add your handling code here:
+        if (obj == null) {
+
+            int selectedRow = tblCarrinho.getSelectedRow();
+
+            if (selectedRow != -1) {
+
+                int idEstoque = Integer.parseInt(tblCarrinho.getValueAt(selectedRow, 0).toString());
+
+                Produto entidade = new Produto();
+
+                entidade.setId(idEstoque);
+
+                boolean retorno = ManutencaoProdutosDAO.excluirCarrinho(entidade);
+
+                DefaultTableModel modelo = (DefaultTableModel) tblCarrinho.getModel();
+
+                if (retorno) {
+                    modelo.removeRow(selectedRow);
+                    JOptionPane.showMessageDialog(null,
+                            "Registro excluido com sucesso",
+                            "Excluir",
+                            JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(null,
+                            "Não foi possível excluir o registro!",
+                            "Excluir",
+                            JOptionPane.INFORMATION_MESSAGE);
+                }
+
+            }
+        }
+        
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void txtProdutoNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtProdutoNomeActionPerformed
@@ -501,7 +566,6 @@ public class ManutencaoProdutos extends javax.swing.JPanel {
             String nome = txtProdutoNome.getText();
             int quantidade = (int) pinQuantidadeEstoque.getValue();
             double produto = Double.parseDouble(txtValor.getText());
-            //double numeroValor = Double.parseDouble(produto);
 
             Produto obj = new Produto(nome, quantidade, produto);
 
@@ -536,39 +600,117 @@ public class ManutencaoProdutos extends javax.swing.JPanel {
 
     private void btnComprarCarrinhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprarCarrinhoActionPerformed
         // TODO add your handling code here:
-
+        
         if (obj == null) {
-
-            String nomeCarrinho = cbxProdutoCarrinho.getSelectedItem().toString();
+            //Produto obj = new Produto ();
+            String idCarrinho = cbxProdutoCarrinho.getSelectedItem().toString();
+            String nomeCarrinho = ManutencaoProdutosDAO.buscaNome(idCarrinho);
             int quantidadeCarrinho = (int) pinQuantidadeCarrinho.getValue();
-            double produtoCarrinho = Double.parseDouble(txtValor.getText());
+            String cpf = cbxClientes.getSelectedItem().toString();
+            double valorProdutoCarrinho = ManutencaoProdutosDAO.buscarValor(idCarrinho);
+           // obj1.setCpf(cpf);
+           // obj1.setQuantidade(quantidadeCarrinho);
+           // obj1.setIdCarrinho(Integer.parseInt(idCarrinho));
+           
             
-            Produto obj = new Produto(nomeCarrinho, quantidadeCarrinho, produtoCarrinho);
-
-            boolean retorno = ManutencaoProdutosDAO.SalvarfProdutoCarrinho(obj);
+            
+            Produto obj = new Produto(idCarrinho, nomeCarrinho, quantidadeCarrinho, valorProdutoCarrinho, cpf);
+            
+            
+            
+            //ManutencaoProdutosDAO.buscarIdProduto();
+            boolean retorno = ManutencaoProdutosDAO.SalvarfProdutoCarrinho(obj, idCarrinho);
 
             if (retorno) {
-                JOptionPane.showMessageDialog(panBackground, " Sucesso na alteração do produto");
+                JOptionPane.showMessageDialog(panBackground, "Sucesso, produro aderido");
             } else {
-                JOptionPane.showMessageDialog(panBackground, "Erro no alteração do produto :(");
+                JOptionPane.showMessageDialog(panBackground, "Erro, produto não aderido :(");
             }
 
         }
         
-        ArrayList<Produto> lista = ManutencaoProdutosDAO.buscarCarrinho();
-        DefaultTableModel modelo = (DefaultTableModel) tblCarrinho.getModel();
-
-        modelo.setRowCount(0);
-
-        for (Produto item : lista) {
-            modelo.addRow(new String[]{
-                String.valueOf(item.getId()),
-                item.getNome(),
-                String.valueOf(item.getQuantidade()),
-                String.valueOf(item.getValor())
-            });
-        }
+        attCarrinho();
     }//GEN-LAST:event_btnComprarCarrinhoActionPerformed
+
+    private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
+        // TODO add your handling code here:
+        
+        int selectedRow = tblCarrinho.getSelectedRow();
+
+            if (selectedRow != -1) {
+
+                int idCarrinho = Integer.parseInt(tblCarrinho.getValueAt(selectedRow, 0).toString());
+                String nomeEstoque = (tblCarrinho.getValueAt(selectedRow,1 ).toString());
+                int qtdCarrinho = Integer.parseInt(tblCarrinho.getValueAt(selectedRow, 2).toString());
+                double valorCarrinho = Double.parseDouble(tblCarrinho.getValueAt(selectedRow, 3).toString());
+
+                Produto obj = new Produto(idCarrinho,nomeEstoque,qtdCarrinho,valorCarrinho);
+
+                boolean retorno = ManutencaoProdutosDAO.alterarCarrinho(obj);
+
+                DefaultTableModel modelo = (DefaultTableModel) tblCarrinho.getModel();
+
+                if (retorno) {
+                    modelo.removeRow(selectedRow);
+                    JOptionPane.showMessageDialog(null,
+                            "Registro alterado com sucesso",
+                            "Alterar",
+                            JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(null,
+                            "Não foi possível alterar o registro!",
+                            "Alterar",
+                            JOptionPane.INFORMATION_MESSAGE);
+                }
+
+            }
+            attCarrinho();
+            attProdutos();
+            attEstoque();
+    }//GEN-LAST:event_btnAlterarActionPerformed
+
+    private void btnAlterarEstoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarEstoqueActionPerformed
+        // TODO add your handling code here:
+        
+        int selectedRow = tblEstoque.getSelectedRow();
+
+            if (selectedRow != -1) {
+
+                int idEstoque = Integer.parseInt(tblEstoque.getValueAt(selectedRow, 0).toString());
+                String nomeEstoque = (tblEstoque.getValueAt(selectedRow,1 ).toString());
+                int qtdEstoque = Integer.parseInt(tblEstoque.getValueAt(selectedRow, 2).toString());
+                double valorEstoque = Double.parseDouble(tblEstoque.getValueAt(selectedRow, 3).toString());
+                
+                Produto obj = new Produto(idEstoque,nomeEstoque,qtdEstoque,valorEstoque);            
+            
+            boolean retorno = ManutencaoProdutosDAO.alterarEstoque(obj);
+
+                DefaultTableModel modelo = (DefaultTableModel) tblEstoque.getModel();
+                 
+                if (retorno) {
+                    modelo.removeRow(selectedRow);
+                    JOptionPane.showMessageDialog(null,
+                            "Registro alterado com sucesso",
+                            "Alterar",
+                            JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(null,
+                            "Não foi possível alterar o registro!",
+                            "Alterar",
+                            JOptionPane.INFORMATION_MESSAGE);
+                }
+
+
+                attEstoque();
+                attCarrinho();
+                attProdutos();
+                
+            }
+    }//GEN-LAST:event_btnAlterarEstoqueActionPerformed
+
+    private void btnFinalizarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarCompraActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnFinalizarCompraActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -580,7 +722,6 @@ public class ManutencaoProdutos extends javax.swing.JPanel {
     private javax.swing.JButton btnExcluirCarrinho;
     private javax.swing.JButton btnFinalizarCompra;
     private javax.swing.JButton btnFinalizarCompra1;
-    private javax.swing.JButton btnSalvar;
     private javax.swing.JButton btnSalvarEstoque;
     private javax.swing.JButton btnSalvarEstoque1;
     private javax.swing.JComboBox<String> cbxClientes;
