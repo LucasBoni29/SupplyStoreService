@@ -7,6 +7,7 @@ package com.myacompany.supplystoreservice.views;
 import com.formdev.flatlaf.intellijthemes.FlatMaterialDesignDarkIJTheme;
 import com.myacompany.supplystoreservice.views.ManutencaoClientes;
 import com.myacompany.supplystoreservice.views.MenuSobreNos;
+import com.myacompany.supplystoreservice.views.TelaSintetica;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.time.LocalDate;
@@ -77,6 +78,7 @@ public class Menu extends javax.swing.JFrame {
         btnHome = new javax.swing.JButton();
         btnCliente = new javax.swing.JButton();
         btnProduto = new javax.swing.JButton();
+        btnSintetico = new javax.swing.JButton();
         panTituloMenu = new javax.swing.JPanel();
         lblTituloMenu = new javax.swing.JLabel();
         lblData = new javax.swing.JLabel();
@@ -128,6 +130,18 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
+        btnSintetico.setBackground(new java.awt.Color(255, 215, 0));
+        btnSintetico.setText("Relatório Sintético");
+        btnSintetico.setBorderPainted(false);
+        btnSintetico.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnSintetico.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnSintetico.setIconTextGap(13);
+        btnSintetico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSinteticoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panMenusLayout = new javax.swing.GroupLayout(panMenus);
         panMenus.setLayout(panMenusLayout);
         panMenusLayout.setHorizontalGroup(
@@ -141,6 +155,7 @@ public class Menu extends javax.swing.JFrame {
             .addComponent(btnCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addComponent(btnHome, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addComponent(btnProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(btnSintetico, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         panMenusLayout.setVerticalGroup(
             panMenusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -157,7 +172,10 @@ public class Menu extends javax.swing.JFrame {
                     .addComponent(btnHome, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(panMenusLayout.createSequentialGroup()
                         .addGap(96, 96, 96)
-                        .addComponent(btnProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(btnProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnSintetico, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         panTituloMenu.setBackground(new java.awt.Color(169, 169, 169));
@@ -269,6 +287,12 @@ public class Menu extends javax.swing.JFrame {
         lblTituloMenu.setText("Manutenção de Produtos");
     }//GEN-LAST:event_btnProdutoActionPerformed
 
+    private void btnSinteticoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSinteticoActionPerformed
+        // TODO add your handling code here:
+        showJPanel(new TelaSintetica());
+        lblTituloMenu.setText("Tela Sintética");
+    }//GEN-LAST:event_btnSinteticoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -290,6 +314,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JButton btnCliente;
     private javax.swing.JButton btnHome;
     private javax.swing.JButton btnProduto;
+    private javax.swing.JButton btnSintetico;
     private javax.swing.JLabel lblData;
     private javax.swing.JLabel lblMensagem;
     private javax.swing.JLabel lblNomeLoja;
