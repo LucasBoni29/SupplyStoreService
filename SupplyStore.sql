@@ -39,12 +39,13 @@ CREATE TABLE vendas (
 );
 
 create table carrinho (
-	id_carrinho int primary key auto_increment,
-    cpf_carrinho varchar(11),
-    foreign key (cpf_carrinho) references clientes (cpf),
-    nome_carrinho varchar(40),
-    qtd_carrinho int,
-    valor_carrinho decimal(10,2)
-    
+  id_compra int primary key auto_increment,
+  fk_cpf_cliente varchar(11) NOT NULL,
+  fk_id_produto INT NOT NULL,
+  nome_produto_carrinho varchar(40) NOT NULL,
+  qtd_carrinho int NOT NULL,
+  valor_produto_carrinho decimal(10,2) NOT NULL,
+  FOREIGN KEY (fk_cpf_cliente) REFERENCES clientes (cpf),
+  FOREIGN KEY (fk_id_produto) REFERENCES produtos (id_produto)
 );
 
