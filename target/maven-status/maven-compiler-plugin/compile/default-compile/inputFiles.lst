@@ -1,10 +1,14 @@
-C:\Users\lucas.bsantos59\OneDrive - SENAC - SP\Segundo semestre\PI - Projeto integrador\SupplyStoreService\src\main\java\com\myacompany\supplystoreservice\views\ManutencaoClientes.java
-C:\Users\lucas.bsantos59\OneDrive - SENAC - SP\Segundo semestre\PI - Projeto integrador\SupplyStoreService\src\main\java\com\myacompany\supplystoreservice\views\ManutencaoProdutos.java
-C:\Users\lucas.bsantos59\OneDrive - SENAC - SP\Segundo semestre\PI - Projeto integrador\SupplyStoreService\src\main\java\com\mycompany\supplystoreservice\model\Cliente.java
-C:\Users\lucas.bsantos59\OneDrive - SENAC - SP\Segundo semestre\PI - Projeto integrador\SupplyStoreService\src\main\java\com\mycompany\supplystoreservice\model\Produto.java
-C:\Users\lucas.bsantos59\OneDrive - SENAC - SP\Segundo semestre\PI - Projeto integrador\SupplyStoreService\src\main\java\com\mycompany\supplystoreservice\dao\ManutencaoClientesDAO.java
-C:\Users\lucas.bsantos59\OneDrive - SENAC - SP\Segundo semestre\PI - Projeto integrador\SupplyStoreService\src\main\java\com\mycompany\supplystoreservice\utils\Validador.java
-C:\Users\lucas.bsantos59\OneDrive - SENAC - SP\Segundo semestre\PI - Projeto integrador\SupplyStoreService\src\main\java\com\mycompany\supplystoreservice\utils\ToolCrud.java
-C:\Users\lucas.bsantos59\OneDrive - SENAC - SP\Segundo semestre\PI - Projeto integrador\SupplyStoreService\src\main\java\com\myacompany\supplystoreservice\views\Menu.java
-C:\Users\lucas.bsantos59\OneDrive - SENAC - SP\Segundo semestre\PI - Projeto integrador\SupplyStoreService\src\main\java\com\mycompany\supplystoreservice\utils\ToolTables.java
-C:\Users\lucas.bsantos59\OneDrive - SENAC - SP\Segundo semestre\PI - Projeto integrador\SupplyStoreService\src\main\java\com\mycompany\supplystoreservice\SupplyStoreService.java
+E:\dev\projects\ws-college\SupplyStoreService\src\main\java\com\myacompany\supplystoreservice\views\Menu.java
+E:\dev\projects\ws-college\SupplyStoreService\src\main\java\com\mycompany\supplystoreservice\model\Cliente.java
+E:\dev\projects\ws-college\SupplyStoreService\src\main\java\com\myacompany\supplystoreservice\views\TelaAnalitica.java
+E:\dev\projects\ws-college\SupplyStoreService\src\main\java\com\mycompany\supplystoreservice\utils\Validador.java
+E:\dev\projects\ws-college\SupplyStoreService\src\main\java\com\mycompany\supplystoreservice\dao\TelaAnaliticaDAO.java
+E:\dev\projects\ws-college\SupplyStoreService\src\main\java\com\mycompany\supplystoreservice\utils\TablesCriteria.java
+E:\dev\projects\ws-college\SupplyStoreService\src\main\java\com\myacompany\supplystoreservice\views\MenuSobreNos.java
+E:\dev\projects\ws-college\SupplyStoreService\src\main\java\com\mycompany\supplystoreservice\dao\ManutencaoClientesDAO.java
+E:\dev\projects\ws-college\SupplyStoreService\src\main\java\com\mycompany\supplystoreservice\utils\ToolCrud.java
+E:\dev\projects\ws-college\SupplyStoreService\src\main\java\com\myacompany\supplystoreservice\views\ManutencaoProdutos.java
+E:\dev\projects\ws-college\SupplyStoreService\src\main\java\com\mycompany\supplystoreservice\model\Produto.java
+E:\dev\projects\ws-college\SupplyStoreService\src\main\java\com\mycompany\supplystoreservice\model\Venda.java
+E:\dev\projects\ws-college\SupplyStoreService\src\main\java\com\mycompany\supplystoreservice\SupplyStoreService.java
+E:\dev\projects\ws-college\SupplyStoreService\src\main\java\com\myacompany\supplystoreservice\views\ManutencaoClientes.java

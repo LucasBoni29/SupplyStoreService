@@ -354,9 +354,9 @@ public class ManutencaoProdutos extends javax.swing.JPanel {
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         // TODO add your handling code here:
-        ToolTables toolTables = new ToolTables();
+        //ToolTables toolTables = new ToolTables();
         
-        toolTables.proExcluirRegistro(tblCarrinho);
+        //toolTables.proExcluirRegistro(tblCarrinho);
     }//GEN-LAST:event_btnExcluirActionPerformed
 
 

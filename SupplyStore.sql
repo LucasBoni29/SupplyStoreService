@@ -3,7 +3,6 @@ drop database supplyStore;
 CREATE DATABASE supplyStore;
 use supplyStore;
 
-
 CREATE TABLE clientes (
   nome_cli VARCHAR(100) NOT NULL,
   cpf VARCHAR(11) NOT NULL,
@@ -16,7 +15,6 @@ CREATE TABLE clientes (
   PRIMARY KEY (cpf, email)
 );
 
-
 CREATE TABLE produtos (
   id_produto INT NOT NULL AUTO_INCREMENT,
   nome_produto VARCHAR(100) NOT NULL,
@@ -24,7 +22,6 @@ CREATE TABLE produtos (
   valor DECIMAL(10,2) NOT NULL,
   PRIMARY KEY (id_produto)
 );
-
 
 CREATE TABLE vendas (
   id_venda INT NOT NULL AUTO_INCREMENT,
@@ -37,4 +34,3 @@ CREATE TABLE vendas (
   FOREIGN KEY (id_produto) REFERENCES produtos(id_produto)
   
 );
-
