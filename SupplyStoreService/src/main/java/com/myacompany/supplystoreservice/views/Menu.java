@@ -21,7 +21,7 @@ import javax.swing.JPanel;
 public class Menu extends javax.swing.JFrame {
 
     /**
-     * Creates new form CadastroClientes
+     * Método construtor da classe {@link Menu}
      */
     public Menu() {
         initComponents();
@@ -29,7 +29,12 @@ public class Menu extends javax.swing.JFrame {
         setDate();
         initHome();
     }
-    
+
+    /**
+     * Método responsável por iniciar os componentes da tela com o disponível na dependência 'flatlaf' e
+     * 'flatlaf-intellij-themes' no arquivo pom.xml
+     * @arquivo pom.xml - Onde estão as dependências
+     */
     private void initSystelesComponents() {
         lblMensagem.putClientProperty( "FlatLaf.style" , "fonte: 14 $light.font" );
         lblMensagem.setForeground(Color.black);
@@ -40,17 +45,28 @@ public class Menu extends javax.swing.JFrame {
         lblNomeLoja.putClientProperty("FlatLaf.style", "fonte: 24 $h1.regular.font");
         lblNomeLoja.setForeground(Color.white);
     }
-    
+
+    /**
+     * Método responsável por colocar a data de hoje nas telas
+     */
     private void setDate() {
         LocalDate hoje = LocalDate.now();
         Locale localidadeBrasileira = new  Locale("pt", "BR");
         lblData.setText(hoje.format(DateTimeFormatter.ofPattern("'Data de hoje: ' EEEE dd 'de' MMMM 'de' yyyy", localidadeBrasileira)));
     }
-    
+
+    /**
+     * Método responsável por iniciar o projeto com a tela de aprensentação na classe {@link MenuSobreNos}
+     */
     private void initHome(){
-        //TODO: Fazer aparecer a tela principal ao abrir a tela, aqui!
+        showJPanel(new MenuSobreNos());
+        lblTituloMenu.setText("Tela Principal");
     }
-    
+
+    /**
+     * Método responsável por abrir os JPanels -telas- na posição, tamanho e bordar já predefinidos
+     * @param panManutencaoClientes JPanel da sua tela que será exibida
+     */
     private void showJPanel(JPanel panManutencaoClientes){
         panManutencaoClientes.setSize(773, 434);
         panManutencaoClientes.setLocation(0,0);
@@ -251,18 +267,30 @@ public class Menu extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Botão 'Home' responsável por mostrar a tela de apresentação do sistema na classe {@link MenuSobreNos}
+     * @param evt Ação do evento
+     */
     private void btnHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeActionPerformed
         // TODO add your handling code here:
         showJPanel(new MenuSobreNos());
         lblTituloMenu.setText("Tela Principal");
     }//GEN-LAST:event_btnHomeActionPerformed
 
+    /**
+     * Método responsável por abrir a tela de {@link ManutencaoClientes}
+     * @param evt Ação do evento
+     */
     private void btnClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClienteActionPerformed
         // TODO add your handling code here:
         showJPanel(new ManutencaoClientes());
         lblTituloMenu.setText("Manutenção de Clientes");
     }//GEN-LAST:event_btnClienteActionPerformed
 
+    /**
+     * Método responsável por abrir a tela de {@link ManutencaoProdutos}
+     * @param evt Ação do evento
+     */
     private void btnProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProdutoActionPerformed
         // TODO add your handling code here:
         showJPanel(new ManutencaoProdutos());
@@ -270,6 +298,7 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnProdutoActionPerformed
 
     /**
+     * Método main da classe {@link Menu}
      * @param args the command line arguments
      */
     public static void main(String args[]) {

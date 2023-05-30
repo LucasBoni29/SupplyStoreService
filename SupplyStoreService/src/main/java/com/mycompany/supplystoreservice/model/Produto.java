@@ -11,19 +11,72 @@ package com.mycompany.supplystoreservice.model;
 public class Produto {
     
     private int id;
+    private int idCarrinho;
+    private String idBusca;
     private String nome;
     private int quantidade;
     private double valor;
+    private String cpf;
     
-    public Produto() {
-       
+    public Produto(String nome, int quantidade, double valor) {
+        this.nome = nome;
+        this.quantidade = quantidade;
+        this.valor = valor;
+    }
+    
+    public Produto(String nome, int quantidade, double valor, String cpf, int id) {
+        this.nome = nome;
+        this.quantidade = quantidade;
+        this.valor = valor;
+        this.cpf = cpf;
+        this.id = id;
     }
 
-    public Produto(int id, String nome, int quantidade, double valor) {
+    public Produto(int id, int idCarrinho, String nome, int quantidade, double valor, String cpf) {
+        this.id = id;
+        this.idCarrinho = idCarrinho;
+        this.nome = nome;
+        this.quantidade = quantidade;
+        this.valor = valor;
+        this.cpf = cpf;
+    }
+    
+    public Produto (int id, String nome, int quantidade, double valor){
         this.id = id;
         this.nome = nome;
         this.quantidade = quantidade;
         this.valor = valor;
+    }
+
+    public Produto(String idBusca, String nomeCarrinho, int quantidadeCarrinho, double valorProdutoCarrinho, String cpf) {
+        
+       this.idBusca=idBusca;
+       this.nome=nomeCarrinho;
+       this.quantidade = quantidadeCarrinho;
+       this.valor=valorProdutoCarrinho;
+       this.cpf =cpf;
+    }
+            
+
+    
+    public int getIdCarrinho() {
+        return idCarrinho;
+    }
+
+    public void setIdCarrinho(int idCarrinho) {
+        this.idCarrinho = idCarrinho;
+    }
+    
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+    
+    public Produto() {
+       
     }
      
     public int getId() {

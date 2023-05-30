@@ -23,7 +23,7 @@ import javax.swing.JSpinner;
 import javax.swing.JTextField;
 
 /**
- *
+ * Classe utilitária responsável por validar todas as telas que contenham campos
  * @author lucas.bsantos59
  */
 public class Validador {
@@ -34,6 +34,9 @@ public class Validador {
     private final ArrayList<JSpinner> pinFields;
     public static ArrayList<String> logs;
     
+    /**
+     * Método construtor da classe {@link Validador}
+     */
     public Validador(){
         this.txtFields = new ArrayList<>();
         this.cbxFields = new ArrayList<>();
@@ -42,6 +45,10 @@ public class Validador {
         this.logs = new ArrayList<>();
     }
     
+    /**
+     * Método responsável por pegar todos os logs
+     * @return Uma lista de String contendo todos os logs
+     */
     public static ArrayList<String> getLogs() {
         return logs;
     }
@@ -49,7 +56,7 @@ public class Validador {
     /**
      * Essa função pega todos os components dentro do JPanel específicado e guarda
      * dentro dos ArrayLists da classe Validador.
-     * @param panPanel 
+     * @param panPanel JPanel da tela que contém todos os campos
      */
     public void preechendoArrayList(JPanel panPanel){
         
@@ -66,6 +73,11 @@ public class Validador {
         }
     }
     
+    /**
+     * Essa função pega todos os components dentro do JFrame específicado e guarda
+     * dentro dos ArrayLists da classe Validador.
+     * @param frmFrame JFrame da tela que contém todos os campos
+     */
     public void preechendoArrayList(JFrame frmFrame){
         
         for (Component component : frmFrame.getComponents()) {
@@ -81,8 +93,10 @@ public class Validador {
         }
     }
     
+    /**
+     * Método responsável por validar todos os campos obrigatórios da tela
+     */
     public void proValidarCamposObrigatorios(){
-        //TODO Fazer a verificação utilizando as variáveis globais em vez de passar por parâmetro
         if(!txtFields.isEmpty()){
             for(JTextField obj : txtFields){
                 if(obj.getText().equals("")){
@@ -128,6 +142,10 @@ public class Validador {
         }
     }
     
+    /**
+     * Método responsável por validar campos de e-mail
+     * @param txtEmail Campo de texto que guarda o e-mail
+     */
     public void proValidarEmail(JTextField txtEmail){
         String regex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
         Pattern pattern = Pattern.compile(regex);
@@ -144,6 +162,12 @@ public class Validador {
         }
     }
     
+    /**
+     * Método responsável por validar os campos Nome e CPF ao tentar utilizar a busca
+     * por filtro da tela {@link ManutencaoClientes}
+     * @param txtNome Campo que contenha o Nome
+     * @param ftfCpf Campo que contenha o CPF
+     */
     public void proValidarCamposNomeCpfAoBuscar(JTextField txtNome, JFormattedTextField ftfCpf){
         if(txtNome.getText().equals("") && ftfCpf.getValue() == null){
             logs.add("Preencha corretamente os campos Nome ou Cpf para a devida busca!");
@@ -155,6 +179,10 @@ public class Validador {
         }
     }
     
+    /**
+     * Método responsável por validar um campo que tenha data no formato 'dd/MM/yyyy'
+     * @param data Camnpo que contenha a data
+     */
     public void proValidarData(JFormattedTextField data) {
         SimpleDateFormat sdfData = new SimpleDateFormat("dd/MM/yyyy");
         sdfData.setLenient(false); // não permite datas inválidas como 31/02/2023
@@ -201,10 +229,17 @@ public class Validador {
         }
     }
     
+    /**
+     * Método responsável por verificar se foi gerado alguma mensagem de validação
+     * @return Status se tem ou não tem mensagem de validação gerada
+     */
     public boolean fncTemMensagem(){
         return !logs.isEmpty();
     }
     
+    /**
+     * Método responsável por mostrar todas as mensagens de validação geradas
+     */
     public void proMostrarLog(){
         StringBuilder mensagemFinal = new StringBuilder();
         for(String mensagem : logs){

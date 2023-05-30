@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package com.mycompany.supplystoreservice.dao;
 
 import com.mycompany.supplystoreservice.model.Venda;
@@ -15,10 +12,11 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author thiago.cperrud
+ * @author Manzano
  */
-public class TelaAnaliticaDAO {
-    public static ArrayList<Venda> consultarVendas() {
+public class TelaSinteticaDAO {
+    
+     public static ArrayList<Venda> consultarTodasVendas() {
         ArrayList<Venda> listFinal;
         listFinal = new ArrayList<>();
         Connection conexao;
@@ -31,7 +29,7 @@ public class TelaAnaliticaDAO {
             conexao = DriverManager.getConnection(url, "root", "");
             
             PreparedStatement comandoSQL = conexao.prepareStatement(
-                    "SELECT id_venda, id_produto, quantidade FROM vendas;");
+                    "SELECT * FROM vendas WHERE data_venda BETWEEN DATE_SUB(CURDATE(), INTERVAL 1 MONTH) AND CURDATE();");
 
             //passo 4 executar o comando SQL 
             ResultSet listVendas = comandoSQL.executeQuery();
@@ -40,9 +38,11 @@ public class TelaAnaliticaDAO {
                     Venda entidade = new Venda();
 
                     entidade.setId(listVendas.getString("id"));
+                    entidade.setNomeCliente(listVendas.getString("nomeCliente"));
                     entidade.setProduto(listVendas.getString("produto"));
                     entidade.setQuantidade(listVendas.getString("quantidade"));
-                    
+                    entidade.setData(listVendas.getString("Data"));
+
                     listFinal.add(entidade);
                 }
             }

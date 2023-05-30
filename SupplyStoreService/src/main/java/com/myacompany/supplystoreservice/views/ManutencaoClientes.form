@@ -293,6 +293,9 @@
           <Properties>
             <Property name="name" type="java.lang.String" value="Nome" noResource="true"/>
           </Properties>
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtNomeKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lblCpf">
           <Properties>
@@ -310,6 +313,7 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtEnderecoActionPerformed"/>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtEnderecoKeyTyped"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lblTelefone">
@@ -326,6 +330,9 @@
           <Properties>
             <Property name="name" type="java.lang.String" value="E-mail" noResource="true"/>
           </Properties>
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtEmailKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lblDataNascimento">
           <Properties>
@@ -458,9 +465,6 @@
             </Property>
             <Property name="name" type="java.lang.String" value="CPF" noResource="true"/>
           </Properties>
-          <Events>
-            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="ftfCpfKeyTyped"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnFiltrar">
           <Properties>

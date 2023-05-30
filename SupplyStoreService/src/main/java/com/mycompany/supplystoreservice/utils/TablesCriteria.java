@@ -20,8 +20,8 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 
 /**
- *
- * @author lucas.boni
+ * Classe utilitária -ferramenta- para operações do componente JTable
+ * @author lucas.bsantos59
  */
 public class TablesCriteria {
     

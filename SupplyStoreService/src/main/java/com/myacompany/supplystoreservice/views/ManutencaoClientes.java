@@ -31,7 +31,11 @@ public final class ManutencaoClientes extends javax.swing.JPanel {
     public ManutencaoClientes() {
         initComponents();
     }
-    
+
+    /**
+     * Exibe mensagens do status do CRUD realizado!
+     * @param tipoAcao Tipo da ação do CRUD realizada
+     */
     private void exibirStatus(String tipoAcao){
         switch (tipoAcao) {
             case "INSERT":
@@ -56,7 +60,10 @@ public final class ManutencaoClientes extends javax.swing.JPanel {
                 break;
         }
     }
-    
+
+    /**
+     * Método responsável passar as informações e cadastrar os clientes
+     */
     private void cadastrar() {
         Cliente cliente = new Cliente();
         ToolCrud toolCrud = new ToolCrud();
@@ -90,7 +97,10 @@ public final class ManutencaoClientes extends javax.swing.JPanel {
             buscarValores();
         }
     }
-    
+
+    /**
+     * Método responsável por buscar todos os registros da tabela e adicionar no JTable
+     */
     private void buscarValores(){
         ArrayList<Cliente> listaClientes = ManutencaoClientesDAO.consultar();
         DefaultTableModel modelo = (DefaultTableModel) tblClientes.getModel();
@@ -109,7 +119,11 @@ public final class ManutencaoClientes extends javax.swing.JPanel {
                     JOptionPane.INFORMATION_MESSAGE);
         }
     }
-    
+
+    /**
+     * Método responsável por consultar os clientes através de filtros
+     * @param listaFiltrada Lista com os parâmetros para o filtro
+     */
     private void carregarValoresFiltrados(List<Cliente> listaFiltrada){
         DefaultTableModel modelo = (DefaultTableModel) tblClientes.getModel();
         modelo.setRowCount(0);
@@ -126,7 +140,10 @@ public final class ManutencaoClientes extends javax.swing.JPanel {
                     JOptionPane.INFORMATION_MESSAGE);
         }
     }
-    
+
+    /**
+     * Método responsável por limpar os campos da tela
+     */
     private void limparCampos(){
         acao = "";
         txtNome.setText("");
@@ -141,7 +158,14 @@ public final class ManutencaoClientes extends javax.swing.JPanel {
         cbxSexo.setSelectedIndex(0);
         cbxEstadoCivil.setSelectedIndex(0);
     }
-    
+
+    /**
+     * Método responsável por passar os valores para a entidade Clientes
+     * @param entidade Entidade cliente
+     * @param model Model da tabela que está sendo feita a operação
+     * @param linhaSelecionada Linha do grid selecionada
+     * @return entidade {@link Cliente}
+     */
     private Cliente passarValores(Cliente entidade, DefaultTableModel model, int linhaSelecionada) {
         ToolCrud toolCrud = new ToolCrud();
         List<String> camposMascara = new ArrayList<>();
@@ -253,6 +277,11 @@ public final class ManutencaoClientes extends javax.swing.JPanel {
         lblNome.setText("Nome");
 
         txtNome.setName("Nome"); // NOI18N
+        txtNome.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNomeKeyTyped(evt);
+            }
+        });
 
         lblCpf.setText("CPF");
 
@@ -264,12 +293,22 @@ public final class ManutencaoClientes extends javax.swing.JPanel {
                 txtEnderecoActionPerformed(evt);
             }
         });
+        txtEndereco.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtEnderecoKeyTyped(evt);
+            }
+        });
 
         lblTelefone.setText("Telefone");
 
         lblEmail.setText("E-mail");
 
         txtEmail.setName("E-mail"); // NOI18N
+        txtEmail.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtEmailKeyTyped(evt);
+            }
+        });
 
         lblDataNascimento.setText("Data de nascimento");
 
@@ -349,11 +388,6 @@ public final class ManutencaoClientes extends javax.swing.JPanel {
             ex.printStackTrace();
         }
         ftfCpf.setName("CPF"); // NOI18N
-        ftfCpf.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                ftfCpfKeyTyped(evt);
-            }
-        });
 
         btnFiltrar.setBackground(new java.awt.Color(255, 215, 0));
         btnFiltrar.setText("Filtrar");
@@ -522,6 +556,10 @@ public final class ManutencaoClientes extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_ftfDataNascimentoActionPerformed
 
+    /**
+     * Método responsável por executar a ação do botão 'Cadastrar' ao ser clicado
+     * @param evt Ação do evento
+     */
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         Validador validador = new Validador();
         validador.preechendoArrayList(panBackground);
@@ -537,11 +575,19 @@ public final class ManutencaoClientes extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
+    /**
+     * Método responsável por executar a ação do botão 'Buscar' ao ser clicado
+     * @param evt Ação do evento
+     */
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         acao = "";
         buscarValores();
     }//GEN-LAST:event_btnBuscarActionPerformed
 
+    /**
+     * Método responsável por executar a ação do botão 'Excluir' ao ser clicado
+     * @param evt Ação do evento
+     */
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         if (tblClientes.getSelectedRow() != -1) {
             ManutencaoClientesDAO.excluir(tblClientes);
@@ -555,6 +601,10 @@ public final class ManutencaoClientes extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnExcluirActionPerformed
 
+    /**
+     * Método responsável por executar a ação do botão 'Atualizar' ao ser clicado
+     * @param evt Ação do evento
+     */
     private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
         Validador validador = new Validador();
         validador.preechendoArrayList(panBackground);
@@ -583,6 +633,10 @@ public final class ManutencaoClientes extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnAtualizarActionPerformed
 
+    /**
+     * Método responsável por capturar a ação do botõa do teclado no JTable clientes
+     * @param evt Ação do evento
+     */
     private void tblClientesKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblClientesKeyReleased
         TablesCriteria toolTables = new TablesCriteria();
         
@@ -590,6 +644,10 @@ public final class ManutencaoClientes extends javax.swing.JPanel {
         toolTables.proSelecionarItensTabelaCliente(tblClientes);
     }//GEN-LAST:event_tblClientesKeyReleased
 
+    /**
+     * Método responsável por capturar a ação do clique do mouse no JTable clientes
+     * @param evt
+     */
     private void tblClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblClientesMouseClicked
         TablesCriteria toolTables = new TablesCriteria();
         
@@ -601,6 +659,10 @@ public final class ManutencaoClientes extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_ftfTelefoneActionPerformed
 
+    /**
+     * Método responsável por executar a ação do botão 'Filtrar' ao ser clicado
+     * @param evt Ação do evento
+     */
     private void btnFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltrarActionPerformed
         // TODO add your handling code here:
         Cliente entidade = new Cliente();
@@ -648,17 +710,68 @@ public final class ManutencaoClientes extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnFiltrarActionPerformed
 
+    /**
+     * Método responsável por executar a ação do botão 'Cancelar' ao ser clicado
+     * @param evt Ação do evento
+     */
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         limparCampos();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
-    private void ftfCpfKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ftfCpfKeyTyped
+    /**
+     * Método responsável validar o tamanho máximo do campo 'Nome'
+     * @param evt Ação do evento
+     */
+    private void txtNomeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNomeKeyTyped
         // TODO add your handling code here:
-        char tecla = evt.getKeyChar();
-        if(tecla == KeyEvent.VK_BACK_SPACE || tecla == KeyEvent.VK_DELETE){
+        
+        if(txtNome.getText().length() >= 100){
             evt.consume();
+            JOptionPane.showMessageDialog(null,
+                    "Máximo de 100 caracteres atingido!",
+                    "Validação tamanho!", 
+                    JOptionPane.INFORMATION_MESSAGE);
+            txtNome.setBorder(BorderFactory.createLineBorder(Color.RED));
+        }else{
+            txtNome.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         }
-    }//GEN-LAST:event_ftfCpfKeyTyped
+    }//GEN-LAST:event_txtNomeKeyTyped
+
+    /**
+     * Método responsável validar o tamanho máximo do campo 'Endereço'
+     * @param evt Ação do evento
+     */
+    private void txtEnderecoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEnderecoKeyTyped
+        // TODO add your handling code here:
+        if(txtEndereco.getText().length() >= 200){
+            evt.consume();
+            JOptionPane.showMessageDialog(null,
+                    "Máximo de 200 caracteres atingido!",
+                    "Validação tamanho!", 
+                    JOptionPane.INFORMATION_MESSAGE);
+            txtEndereco.setBorder(BorderFactory.createLineBorder(Color.RED));
+        }else{
+            txtNome.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        }
+    }//GEN-LAST:event_txtEnderecoKeyTyped
+
+    /**
+     * Método responsável validar o tamanho máximo do campo 'E-mail'
+     * @param evt Ação do evento
+     */
+    private void txtEmailKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEmailKeyTyped
+        // TODO add your handling code here:
+        if(txtEmail.getText().length() >= 200){
+            evt.consume();
+            JOptionPane.showMessageDialog(null,
+                    "Máximo de 100 caracteres atingido!",
+                    "Validação tamanho!", 
+                    JOptionPane.INFORMATION_MESSAGE);
+            txtEmail.setBorder(BorderFactory.createLineBorder(Color.RED));
+        }else{
+            txtEmail.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        }
+    }//GEN-LAST:event_txtEmailKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

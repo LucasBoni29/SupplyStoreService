@@ -11,17 +11,17 @@ package com.mycompany.supplystoreservice.model;
  */
 public class Venda {
   
-    private int id;
+    private String id;
     private String nomeCliente;
     private String produto;
-    private int quantidade;
-    private int data;
+    private String quantidade;
+    private String data;
     
     public Venda(){
         
     }
 
-    public Venda(int id, int quantidade, int data, String nomeCliente, String produto) {
+    public Venda(String id, String quantidade, String data, String nomeCliente, String produto) {
         this.id = id;
         this.nomeCliente = nomeCliente;
         this.quantidade = quantidade;
@@ -29,28 +29,12 @@ public class Venda {
         this.produto = produto;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
-    }
-
-    public int getQuantidade() {
-        return quantidade;
-    }
-
-    public void setQuantidade(int quantidade) {
-        this.quantidade = quantidade;
-    }
-
-    public int getData() {
-        return data;
-    }
-
-    public void setData(int data) {
-        this.data = data;
     }
 
     public String getNomeCliente() {
@@ -68,6 +52,23 @@ public class Venda {
     public void setProduto(String produto) {
         this.produto = produto;
     }
-    
+
+    public String getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(String quantidade) {
+        this.quantidade = quantidade;
+    }
+
+    public String getData() {
+        return data;
+    }
+
+    public void setData(String data) {
+        this.data = data;
+    }
+
+   
     
 }
