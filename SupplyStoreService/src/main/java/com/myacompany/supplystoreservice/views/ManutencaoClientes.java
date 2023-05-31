@@ -277,6 +277,11 @@ public final class ManutencaoClientes extends javax.swing.JPanel {
         lblNome.setText("Nome");
 
         txtNome.setName("Nome"); // NOI18N
+        txtNome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNomeActionPerformed(evt);
+            }
+        });
         txtNome.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtNomeKeyTyped(evt);
@@ -772,6 +777,10 @@ public final class ManutencaoClientes extends javax.swing.JPanel {
             txtEmail.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         }
     }//GEN-LAST:event_txtEmailKeyTyped
+
+    private void txtNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNomeActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

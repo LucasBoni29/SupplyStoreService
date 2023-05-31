@@ -73,6 +73,11 @@ public class TelaSintetica extends javax.swing.JPanel {
                 campoDataActionPerformed(evt);
             }
         });
+        campoData.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                campoDataKeyTyped(evt);
+            }
+        });
 
         btnPesquisar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnPesquisar.setText("Pesquisar");
@@ -159,6 +164,20 @@ public class TelaSintetica extends javax.swing.JPanel {
             buscarTodasVendas();
         }
     }//GEN-LAST:event_btnPesquisarActionPerformed
+
+    private void campoDataKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoDataKeyTyped
+        // TODO add your handling code here:
+        if(campoData.getText().length() >= 8){
+            evt.consume();
+            JOptionPane.showMessageDialog(null,
+                    "Máximo de 8 caracteres atingido!",
+                    "Validação tamanho!", 
+                    JOptionPane.INFORMATION_MESSAGE);
+            campoData.setBorder(BorderFactory.createLineBorder(Color.RED));
+        }else{
+            campoData.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        }
+    }//GEN-LAST:event_campoDataKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

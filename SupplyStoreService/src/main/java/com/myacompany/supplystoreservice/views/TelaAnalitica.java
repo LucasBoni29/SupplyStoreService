@@ -58,6 +58,11 @@ public class TelaAnalitica extends javax.swing.JPanel {
                 txtIdVendaActionPerformed(evt);
             }
         });
+        txtIdVenda.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtIdVendaKeyTyped(evt);
+            }
+        });
 
         btnPesquisar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnPesquisar.setText("Pesquisar");
@@ -127,7 +132,7 @@ public class TelaAnalitica extends javax.swing.JPanel {
 
     private void txtIdVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdVendaActionPerformed
 
-
+        
     }//GEN-LAST:event_txtIdVendaActionPerformed
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
@@ -158,6 +163,20 @@ public class TelaAnalitica extends javax.swing.JPanel {
             }
         }
     }//GEN-LAST:event_btnPesquisarActionPerformed
+
+    private void txtIdVendaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIdVendaKeyTyped
+        // TODO add your handling code here:
+        if(txtIdVenda.getText().length() >= 3){
+            evt.consume();
+            JOptionPane.showMessageDialog(null,
+                    "Máximo de 3 caracteres atingido!",
+                    "Validação tamanho!", 
+                    JOptionPane.INFORMATION_MESSAGE);
+            txtIdVenda.setBorder(BorderFactory.createLineBorder(Color.RED));
+        }else{
+            txtIdVenda.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        }
+    }//GEN-LAST:event_txtIdVendaKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
