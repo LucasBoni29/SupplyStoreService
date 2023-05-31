@@ -60,7 +60,7 @@ public class Menu extends javax.swing.JFrame {
      */
     private void initHome(){
         showJPanel(new MenuSobreNos());
-        lblTituloMenu.setText("Tela Principal");
+        lblTituloMenu.setText("Sobre Nós");
     }
 
     /**
@@ -93,6 +93,8 @@ public class Menu extends javax.swing.JFrame {
         btnHome = new javax.swing.JButton();
         btnCliente = new javax.swing.JButton();
         btnProduto = new javax.swing.JButton();
+        btnRelatorioAnalitico = new javax.swing.JButton();
+        btnRelatorioSintetico = new javax.swing.JButton();
         panTituloMenu = new javax.swing.JPanel();
         lblTituloMenu = new javax.swing.JLabel();
         lblData = new javax.swing.JLabel();
@@ -144,6 +146,30 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
+        btnRelatorioAnalitico.setBackground(new java.awt.Color(255, 215, 0));
+        btnRelatorioAnalitico.setText("Relatório Analítico");
+        btnRelatorioAnalitico.setBorderPainted(false);
+        btnRelatorioAnalitico.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnRelatorioAnalitico.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnRelatorioAnalitico.setIconTextGap(13);
+        btnRelatorioAnalitico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRelatorioAnaliticoActionPerformed(evt);
+            }
+        });
+
+        btnRelatorioSintetico.setBackground(new java.awt.Color(255, 215, 0));
+        btnRelatorioSintetico.setText("Relatório Sintético");
+        btnRelatorioSintetico.setBorderPainted(false);
+        btnRelatorioSintetico.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnRelatorioSintetico.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnRelatorioSintetico.setIconTextGap(13);
+        btnRelatorioSintetico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRelatorioSinteticoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panMenusLayout = new javax.swing.GroupLayout(panMenus);
         panMenus.setLayout(panMenusLayout);
         panMenusLayout.setHorizontalGroup(
@@ -154,9 +180,11 @@ public class Menu extends javax.swing.JFrame {
             .addGroup(panMenusLayout.createSequentialGroup()
                 .addGap(33, 33, 33)
                 .addComponent(spLinha, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(btnRelatorioAnalitico, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addComponent(btnCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(btnHome, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(btnRelatorioSintetico, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addComponent(btnProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(btnHome, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         panMenusLayout.setVerticalGroup(
             panMenusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -168,12 +196,18 @@ public class Menu extends javax.swing.JFrame {
                 .addGap(28, 28, 28)
                 .addGroup(panMenusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panMenusLayout.createSequentialGroup()
+                        .addGap(146, 146, 146)
+                        .addComponent(btnRelatorioAnalitico, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panMenusLayout.createSequentialGroup()
                         .addGap(46, 46, 46)
                         .addComponent(btnCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btnHome, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panMenusLayout.createSequentialGroup()
+                        .addGap(196, 196, 196)
+                        .addComponent(btnRelatorioSintetico, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panMenusLayout.createSequentialGroup()
                         .addGap(96, 96, 96)
-                        .addComponent(btnProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(btnProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnHome, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         panTituloMenu.setBackground(new java.awt.Color(169, 169, 169));
@@ -297,6 +331,18 @@ public class Menu extends javax.swing.JFrame {
         lblTituloMenu.setText("Manutenção de Produtos");
     }//GEN-LAST:event_btnProdutoActionPerformed
 
+    private void btnRelatorioAnaliticoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRelatorioAnaliticoActionPerformed
+        // TODO add your handling code here:
+        showJPanel(new TelaAnalitica());
+        lblTituloMenu.setText("Relatório Analítico");
+    }//GEN-LAST:event_btnRelatorioAnaliticoActionPerformed
+
+    private void btnRelatorioSinteticoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRelatorioSinteticoActionPerformed
+        // TODO add your handling code here:
+        showJPanel(new TelaSintetica());
+        lblTituloMenu.setText("Relatório Sintético");
+    }//GEN-LAST:event_btnRelatorioSinteticoActionPerformed
+
     /**
      * Método main da classe {@link Menu}
      * @param args the command line arguments
@@ -319,6 +365,8 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JButton btnCliente;
     private javax.swing.JButton btnHome;
     private javax.swing.JButton btnProduto;
+    private javax.swing.JButton btnRelatorioAnalitico;
+    private javax.swing.JButton btnRelatorioSintetico;
     private javax.swing.JLabel lblData;
     private javax.swing.JLabel lblMensagem;
     private javax.swing.JLabel lblNomeLoja;

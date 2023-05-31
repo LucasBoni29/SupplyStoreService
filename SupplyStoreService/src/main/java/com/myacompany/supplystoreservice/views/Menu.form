@@ -101,9 +101,11 @@
                       <EmptySpace min="33" pref="33" max="-2" attributes="0"/>
                       <Component id="spLinha" min="-2" pref="206" max="-2" attributes="0"/>
                   </Group>
+                  <Component id="btnRelatorioAnalitico" min="-2" pref="270" max="-2" attributes="0"/>
                   <Component id="btnCliente" min="-2" pref="270" max="-2" attributes="0"/>
-                  <Component id="btnHome" min="-2" pref="270" max="-2" attributes="0"/>
+                  <Component id="btnRelatorioSintetico" min="-2" pref="270" max="-2" attributes="0"/>
                   <Component id="btnProduto" min="-2" pref="270" max="-2" attributes="0"/>
+                  <Component id="btnHome" min="-2" pref="270" max="-2" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
@@ -116,14 +118,22 @@
                       <EmptySpace min="28" pref="28" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
+                              <EmptySpace min="146" pref="146" max="-2" attributes="0"/>
+                              <Component id="btnRelatorioAnalitico" min="-2" pref="52" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
                               <EmptySpace min="46" pref="46" max="-2" attributes="0"/>
                               <Component id="btnCliente" min="-2" pref="52" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="btnHome" min="-2" pref="52" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="196" pref="196" max="-2" attributes="0"/>
+                              <Component id="btnRelatorioSintetico" min="-2" pref="52" max="-2" attributes="0"/>
+                          </Group>
                           <Group type="102" attributes="0">
                               <EmptySpace min="96" pref="96" max="-2" attributes="0"/>
                               <Component id="btnProduto" min="-2" pref="52" max="-2" attributes="0"/>
                           </Group>
+                          <Component id="btnHome" min="-2" pref="52" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -186,6 +196,40 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnProdutoActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="btnRelatorioAnalitico">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="0" green="d7" red="ff" type="rgb"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Relat&#xf3;rio Anal&#xed;tico"/>
+                <Property name="borderPainted" type="boolean" value="false"/>
+                <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                  <Color id="Cursor Padr&#xe3;o"/>
+                </Property>
+                <Property name="horizontalAlignment" type="int" value="2"/>
+                <Property name="iconTextGap" type="int" value="13"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRelatorioAnaliticoActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="btnRelatorioSintetico">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="0" green="d7" red="ff" type="rgb"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Relat&#xf3;rio Sint&#xe9;tico"/>
+                <Property name="borderPainted" type="boolean" value="false"/>
+                <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                  <Color id="Cursor Padr&#xe3;o"/>
+                </Property>
+                <Property name="horizontalAlignment" type="int" value="2"/>
+                <Property name="iconTextGap" type="int" value="13"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRelatorioSinteticoActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>

@@ -47,7 +47,7 @@ public class ManutencaoProdutos extends javax.swing.JPanel {
         attClientes();
 
         attProdutos();
-        
+
         attCarrinho();
 
     }
@@ -87,9 +87,9 @@ public class ManutencaoProdutos extends javax.swing.JPanel {
     }
 
     private void attCarrinho() {
- 
+
         ArrayList<Produto> lista = ManutencaoProdutosDAO.buscarCarrinho();
-        
+
         DefaultTableModel modelo = (DefaultTableModel) tblCarrinho.getModel();
 
         modelo.setRowCount(0);
@@ -103,11 +103,11 @@ public class ManutencaoProdutos extends javax.swing.JPanel {
             });
         }
     }
-    
+
     private void attEstoque() {
- 
+
         ArrayList<Produto> lista = ManutencaoProdutosDAO.buscarTudo();
-        
+
         DefaultTableModel modelo = (DefaultTableModel) tblEstoque.getModel();
 
         modelo.setRowCount(0);
@@ -261,6 +261,7 @@ public class ManutencaoProdutos extends javax.swing.JPanel {
 
         jLabel1.setText("Valor Unitário ");
 
+        txtValor.setName("Valor unitário"); // NOI18N
         txtValor.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtValorFocusLost(evt);
@@ -272,6 +273,7 @@ public class ManutencaoProdutos extends javax.swing.JPanel {
             }
         });
 
+        txtProdutoNome.setName("Produto"); // NOI18N
         txtProdutoNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtProdutoNomeActionPerformed(evt);
@@ -551,7 +553,7 @@ public class ManutencaoProdutos extends javax.swing.JPanel {
 
             }
         }
-        
+
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void txtProdutoNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtProdutoNomeActionPerformed
@@ -560,38 +562,45 @@ public class ManutencaoProdutos extends javax.swing.JPanel {
 
     private void btnSalvarEstoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarEstoqueActionPerformed
         // TODO add your handling code here:
+        Validador validador = new Validador();
+        validador.preechendoArrayList(panBackground);
+        validador.proValidarCamposObrigatorios();
 
-        if (obj == null) {
+        if (validador.fncTemMensagem()) {
+            validador.proMostrarLog();
+        } else {
+            if (obj == null) {
 
-            String nome = txtProdutoNome.getText();
-            int quantidade = (int) pinQuantidadeEstoque.getValue();
-            double produto = Double.parseDouble(txtValor.getText());
+                String nome = txtProdutoNome.getText();
+                int quantidade = (int) pinQuantidadeEstoque.getValue();
+                double produto = Double.parseDouble(txtValor.getText());
 
-            Produto obj = new Produto(nome, quantidade, produto);
+                Produto obj = new Produto(nome, quantidade, produto);
 
-            boolean retorno = ManutencaoProdutosDAO.salvarEstoque(obj);
+                boolean retorno = ManutencaoProdutosDAO.salvarEstoque(obj);
 
-            if (retorno) {
-                JOptionPane.showMessageDialog(panBackground, " Sucesso na alteração do produto");
-            } else {
-                JOptionPane.showMessageDialog(panBackground, "Erro no alteração do produto :(");
+                if (retorno) {
+                    JOptionPane.showMessageDialog(panBackground, " Sucesso na alteração do produto");
+                } else {
+                    JOptionPane.showMessageDialog(panBackground, "Erro no alteração do produto :(");
+                }
             }
+
+            ArrayList<Produto> lista = ManutencaoProdutosDAO.buscarTudo();
+            DefaultTableModel modelo = (DefaultTableModel) tblEstoque.getModel();
+
+            modelo.setRowCount(0);
+
+            for (Produto item : lista) {
+                modelo.addRow(new String[]{
+                    String.valueOf(item.getId()),
+                    item.getNome(),
+                    String.valueOf(item.getQuantidade()),
+                    String.valueOf(item.getValor())
+                });
+            }
+            attProdutos();
         }
-
-        ArrayList<Produto> lista = ManutencaoProdutosDAO.buscarTudo();
-        DefaultTableModel modelo = (DefaultTableModel) tblEstoque.getModel();
-
-        modelo.setRowCount(0);
-
-        for (Produto item : lista) {
-            modelo.addRow(new String[]{
-                String.valueOf(item.getId()),
-                item.getNome(),
-                String.valueOf(item.getQuantidade()),
-                String.valueOf(item.getValor())
-            });
-        }
-        attProdutos();
     }//GEN-LAST:event_btnSalvarEstoqueActionPerformed
 
     private void txtValorTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtValorTotalActionPerformed
@@ -600,7 +609,7 @@ public class ManutencaoProdutos extends javax.swing.JPanel {
 
     private void btnComprarCarrinhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprarCarrinhoActionPerformed
         // TODO add your handling code here:
-        
+
         if (obj == null) {
             //Produto obj = new Produto ();
             String idCarrinho = cbxProdutoCarrinho.getSelectedItem().toString();
@@ -608,16 +617,12 @@ public class ManutencaoProdutos extends javax.swing.JPanel {
             int quantidadeCarrinho = (int) pinQuantidadeCarrinho.getValue();
             String cpf = cbxClientes.getSelectedItem().toString();
             double valorProdutoCarrinho = ManutencaoProdutosDAO.buscarValor(idCarrinho);
-           // obj1.setCpf(cpf);
-           // obj1.setQuantidade(quantidadeCarrinho);
-           // obj1.setIdCarrinho(Integer.parseInt(idCarrinho));
-           
-            
-            
+            // obj1.setCpf(cpf);
+            // obj1.setQuantidade(quantidadeCarrinho);
+            // obj1.setIdCarrinho(Integer.parseInt(idCarrinho));
+
             Produto obj = new Produto(idCarrinho, nomeCarrinho, quantidadeCarrinho, valorProdutoCarrinho, cpf);
-            
-            
-            
+
             //ManutencaoProdutosDAO.buscarIdProduto();
             boolean retorno = ManutencaoProdutosDAO.SalvarfProdutoCarrinho(obj, idCarrinho);
 
@@ -628,84 +633,83 @@ public class ManutencaoProdutos extends javax.swing.JPanel {
             }
 
         }
-        
+
         attCarrinho();
     }//GEN-LAST:event_btnComprarCarrinhoActionPerformed
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
         // TODO add your handling code here:
-        
+
         int selectedRow = tblCarrinho.getSelectedRow();
 
-            if (selectedRow != -1) {
+        if (selectedRow != -1) {
 
-                int idCarrinho = Integer.parseInt(tblCarrinho.getValueAt(selectedRow, 0).toString());
-                String nomeEstoque = (tblCarrinho.getValueAt(selectedRow,1 ).toString());
-                int qtdCarrinho = Integer.parseInt(tblCarrinho.getValueAt(selectedRow, 2).toString());
-                double valorCarrinho = Double.parseDouble(tblCarrinho.getValueAt(selectedRow, 3).toString());
+            int idCarrinho = Integer.parseInt(tblCarrinho.getValueAt(selectedRow, 0).toString());
+            String nomeEstoque = (tblCarrinho.getValueAt(selectedRow, 1).toString());
+            int qtdCarrinho = Integer.parseInt(tblCarrinho.getValueAt(selectedRow, 2).toString());
+            double valorCarrinho = Double.parseDouble(tblCarrinho.getValueAt(selectedRow, 3).toString());
 
-                Produto obj = new Produto(idCarrinho,nomeEstoque,qtdCarrinho,valorCarrinho);
+            Produto obj = new Produto(idCarrinho, nomeEstoque, qtdCarrinho, valorCarrinho);
 
-                boolean retorno = ManutencaoProdutosDAO.alterarCarrinho(obj);
+            boolean retorno = ManutencaoProdutosDAO.alterarCarrinho(obj);
 
-                DefaultTableModel modelo = (DefaultTableModel) tblCarrinho.getModel();
+            DefaultTableModel modelo = (DefaultTableModel) tblCarrinho.getModel();
 
-                if (retorno) {
-                    modelo.removeRow(selectedRow);
-                    JOptionPane.showMessageDialog(null,
-                            "Registro alterado com sucesso",
-                            "Alterar",
-                            JOptionPane.INFORMATION_MESSAGE);
-                } else {
-                    JOptionPane.showMessageDialog(null,
-                            "Não foi possível alterar o registro!",
-                            "Alterar",
-                            JOptionPane.INFORMATION_MESSAGE);
-                }
-
+            if (retorno) {
+                modelo.removeRow(selectedRow);
+                JOptionPane.showMessageDialog(null,
+                        "Registro alterado com sucesso",
+                        "Alterar",
+                        JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null,
+                        "Não foi possível alterar o registro!",
+                        "Alterar",
+                        JOptionPane.INFORMATION_MESSAGE);
             }
-            attCarrinho();
-            attProdutos();
-            attEstoque();
+
+        }
+        attCarrinho();
+        attProdutos();
+        attEstoque();
     }//GEN-LAST:event_btnAlterarActionPerformed
 
     private void btnAlterarEstoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarEstoqueActionPerformed
         // TODO add your handling code here:
-        
+
         int selectedRow = tblEstoque.getSelectedRow();
 
-            if (selectedRow != -1) {
+        if (selectedRow != -1) {
 
-                int idEstoque = Integer.parseInt(tblEstoque.getValueAt(selectedRow, 0).toString());
-                String nomeEstoque = (tblEstoque.getValueAt(selectedRow,1 ).toString());
-                int qtdEstoque = Integer.parseInt(tblEstoque.getValueAt(selectedRow, 2).toString());
-                double valorEstoque = Double.parseDouble(tblEstoque.getValueAt(selectedRow, 3).toString());
-                
-                Produto obj = new Produto(idEstoque,nomeEstoque,qtdEstoque,valorEstoque);            
-            
+            int idEstoque = Integer.parseInt(tblEstoque.getValueAt(selectedRow, 0).toString());
+            String nomeEstoque = (tblEstoque.getValueAt(selectedRow, 1).toString());
+            int qtdEstoque = Integer.parseInt(tblEstoque.getValueAt(selectedRow, 2).toString());
+            double valorEstoque = Double.parseDouble(tblEstoque.getValueAt(selectedRow, 3).toString());
+
+            Produto obj = new Produto(idEstoque, nomeEstoque, qtdEstoque, valorEstoque);
+
             boolean retorno = ManutencaoProdutosDAO.alterarEstoque(obj);
 
-                DefaultTableModel modelo = (DefaultTableModel) tblEstoque.getModel();
-                 
-                if (retorno) {
-                    modelo.removeRow(selectedRow);
-                    JOptionPane.showMessageDialog(null,
-                            "Registro alterado com sucesso",
-                            "Alterar",
-                            JOptionPane.INFORMATION_MESSAGE);
-                } else {
-                    JOptionPane.showMessageDialog(null,
-                            "Não foi possível alterar o registro!",
-                            "Alterar",
-                            JOptionPane.INFORMATION_MESSAGE);
-                }
+            DefaultTableModel modelo = (DefaultTableModel) tblEstoque.getModel();
 
-
-                attEstoque();
-                attCarrinho();
-                attProdutos();
-                
+            if (retorno) {
+                modelo.removeRow(selectedRow);
+                JOptionPane.showMessageDialog(null,
+                        "Registro alterado com sucesso",
+                        "Alterar",
+                        JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null,
+                        "Não foi possível alterar o registro!",
+                        "Alterar",
+                        JOptionPane.INFORMATION_MESSAGE);
             }
+
+            attEstoque();
+            attCarrinho();
+            attProdutos();
+
+        }
     }//GEN-LAST:event_btnAlterarEstoqueActionPerformed
 
     private void btnFinalizarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarCompraActionPerformed
