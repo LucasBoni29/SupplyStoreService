@@ -27,7 +27,7 @@ public class TelaSintetica extends javax.swing.JPanel {
     }
 
     private void buscarTodasVendas(){
-        ArrayList<Venda> listaVendas = TelaSinteticaDAO.consultarTodasVendas();
+        ArrayList<Venda> listaVendas = TelaSinteticaDAO.consultarTodasVendas(campoData.getText());
         DefaultTableModel modelo = (DefaultTableModel) tblVendas.getModel();
         modelo.setRowCount(0);
         for (Venda item : listaVendas) {

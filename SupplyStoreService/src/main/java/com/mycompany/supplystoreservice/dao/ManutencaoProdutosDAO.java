@@ -30,7 +30,7 @@ public class ManutencaoProdutosDAO {
 
             String url = "jdbc:mysql://localhost:3306/supplyStore";
 
-            conexao = DriverManager.getConnection(url, "root", "root");
+            conexao = DriverManager.getConnection(url, "root", "");
 
             PreparedStatement comandoSQL
                     = conexao.prepareStatement("SELECT * FROM produtos");
@@ -73,7 +73,7 @@ public class ManutencaoProdutosDAO {
 
             String url = "jdbc:mysql://localhost:3306/supplyStore";
 
-            conexao = DriverManager.getConnection(url, "root", "root");
+            conexao = DriverManager.getConnection(url, "root", "");
 
             PreparedStatement comandoSQL = conexao.prepareStatement("INSERT INTO produtos "
                     + "(nome_produto, quantidade, valor )VALUES (? , ?, ?)");
@@ -109,7 +109,7 @@ public class ManutencaoProdutosDAO {
 
             String url = "jdbc:mysql://localhost:3306/supplyStore";
 
-            conexao = DriverManager.getConnection(url, "root", "root");
+            conexao = DriverManager.getConnection(url, "root", "");
 
             PreparedStatement comandoSQL = conexao.prepareStatement("UPDATE produtos\n"
                     + "SET nome_produto = ?, quantidade = ?, valor = ?\n"
@@ -146,7 +146,7 @@ public class ManutencaoProdutosDAO {
 
             String url = "jdbc:mysql://localhost:3306/supplyStore";
 
-            conexao = DriverManager.getConnection(url, "root", "root");
+            conexao = DriverManager.getConnection(url, "root", "");
 
             PreparedStatement comandoSQL = conexao.prepareStatement("delete from produtos where id_produto = ?");
 
@@ -178,7 +178,7 @@ public class ManutencaoProdutosDAO {
 
             String url = "jdbc:mysql://localhost:3306/supplyStore";
 
-            conexao = DriverManager.getConnection(url, "root", "root");
+            conexao = DriverManager.getConnection(url, "root", "");
 
             PreparedStatement comandoSQL = conexao.prepareStatement("select * from clientes where cpf = ?");
 
@@ -210,7 +210,7 @@ public class ManutencaoProdutosDAO {
 
             String url = "jdbc:mysql://localhost:3306/supplyStore";
 
-            conexao = DriverManager.getConnection(url, "root", "root");
+            conexao = DriverManager.getConnection(url, "root", "");
 
             PreparedStatement comandoSQL
                     = conexao.prepareStatement("SELECT cpf FROM clientes");
@@ -263,7 +263,7 @@ public class ManutencaoProdutosDAO {
 
             String url = "jdbc:mysql://localhost:3306/supplyStore";
 
-            conexao = DriverManager.getConnection(url, "root", "root");
+            conexao = DriverManager.getConnection(url, "root", "");
 
             PreparedStatement comandoSQL
                     = conexao.prepareStatement("SELECT id_produto FROM produtos");
@@ -316,7 +316,7 @@ public class ManutencaoProdutosDAO {
 
             String url = "jdbc:mysql://localhost:3306/supplyStore";
 
-            conexao = DriverManager.getConnection(url, "root", "root");
+            conexao = DriverManager.getConnection(url, "root", "");
 
             PreparedStatement comandoSQL
                     = conexao.prepareStatement(""
@@ -367,7 +367,7 @@ public class ManutencaoProdutosDAO {
 
             String url = "jdbc:mysql://localhost:3306/supplyStore";
 
-            conexao = DriverManager.getConnection(url, "root", "root");
+            conexao = DriverManager.getConnection(url, "root", "");
 
             PreparedStatement comandoSQL = conexao.prepareStatement("INSERT INTO carrinho "
                     + "(fk_cpf_cliente, fk_id_produto, nome_produto_carrinho, qtd_carrinho, valor_produto_carrinho) "
@@ -407,7 +407,7 @@ public class ManutencaoProdutosDAO {
 
             String url = "jdbc:mysql://localhost:3306/supplyStore";
 
-            conexao = DriverManager.getConnection(url, "root", "root");
+            conexao = DriverManager.getConnection(url, "root", "");
 
             PreparedStatement comandoSQL = conexao.prepareStatement(
                                         
@@ -450,7 +450,7 @@ public class ManutencaoProdutosDAO {
 
             String url = "jdbc:mysql://localhost:3306/supplyStore";
 
-            conexao = DriverManager.getConnection(url, "root", "root");
+            conexao = DriverManager.getConnection(url, "root", "");
 
             PreparedStatement comandoSQL = conexao.prepareStatement("delete from carrinho where id_compra = ?");
 
@@ -482,7 +482,7 @@ public class ManutencaoProdutosDAO {
 
             String url = "jdbc:mysql://localhost:3306/supplyStore";
 
-            conexao = DriverManager.getConnection(url, "root", "root");
+            conexao = DriverManager.getConnection(url, "root", "");
 
             PreparedStatement comandoSQL = conexao.prepareStatement("UPDATE carrinho SET nome_produto_carrinho = ?, "
                     + "qtd_carrinho = ?, valor_produto_carrinho = ? WHERE id_compra = ?;");
@@ -521,7 +521,7 @@ public class ManutencaoProdutosDAO {
 
             String url = "jdbc:mysql://localhost:3306/supplyStore";
 
-            conexao = DriverManager.getConnection(url, "root", "root");
+            conexao = DriverManager.getConnection(url, "root", "");
 
             PreparedStatement comandoSQL = conexao.prepareStatement("UPDATE produtos SET nome_produto = ?,"
                     + "quantidade = ?,valor = ? WHERE id_produto = ?");
@@ -557,7 +557,7 @@ public class ManutencaoProdutosDAO {
 
             String url = "jdbc:mysql://localhost:3306/supplyStore";
 
-            conexao = DriverManager.getConnection(url, "root", "root");
+            conexao = DriverManager.getConnection(url, "root", "");
 
             PreparedStatement comandoSQL = conexao.prepareStatement("SELECT nome_produto FROM produtos where id_produto = ?;");
 

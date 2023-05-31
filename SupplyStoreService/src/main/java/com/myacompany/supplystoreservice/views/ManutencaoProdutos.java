@@ -562,45 +562,37 @@ public class ManutencaoProdutos extends javax.swing.JPanel {
 
     private void btnSalvarEstoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarEstoqueActionPerformed
         // TODO add your handling code here:
-        Validador validador = new Validador();
-        validador.preechendoArrayList(panBackground);
-        validador.proValidarCamposObrigatorios();
+        if (obj == null) {
 
-        if (validador.fncTemMensagem()) {
-            validador.proMostrarLog();
-        } else {
-            if (obj == null) {
+            String nome = txtProdutoNome.getText();
+            int quantidade = (int) pinQuantidadeEstoque.getValue();
+            double produto = Double.parseDouble(txtValor.getText());
 
-                String nome = txtProdutoNome.getText();
-                int quantidade = (int) pinQuantidadeEstoque.getValue();
-                double produto = Double.parseDouble(txtValor.getText());
+            Produto obj = new Produto(nome, quantidade, produto);
 
-                Produto obj = new Produto(nome, quantidade, produto);
+            boolean retorno = ManutencaoProdutosDAO.salvarEstoque(obj);
 
-                boolean retorno = ManutencaoProdutosDAO.salvarEstoque(obj);
-
-                if (retorno) {
-                    JOptionPane.showMessageDialog(panBackground, " Sucesso na alteração do produto");
-                } else {
-                    JOptionPane.showMessageDialog(panBackground, "Erro no alteração do produto :(");
-                }
+            if (retorno) {
+                JOptionPane.showMessageDialog(panBackground, " Sucesso na alteração do produto");
+            } else {
+                JOptionPane.showMessageDialog(panBackground, "Erro no alteração do produto :(");
             }
-
-            ArrayList<Produto> lista = ManutencaoProdutosDAO.buscarTudo();
-            DefaultTableModel modelo = (DefaultTableModel) tblEstoque.getModel();
-
-            modelo.setRowCount(0);
-
-            for (Produto item : lista) {
-                modelo.addRow(new String[]{
-                    String.valueOf(item.getId()),
-                    item.getNome(),
-                    String.valueOf(item.getQuantidade()),
-                    String.valueOf(item.getValor())
-                });
-            }
-            attProdutos();
         }
+
+        ArrayList<Produto> lista = ManutencaoProdutosDAO.buscarTudo();
+        DefaultTableModel modelo = (DefaultTableModel) tblEstoque.getModel();
+
+        modelo.setRowCount(0);
+
+        for (Produto item : lista) {
+            modelo.addRow(new String[]{
+                String.valueOf(item.getId()),
+                item.getNome(),
+                String.valueOf(item.getQuantidade()),
+                String.valueOf(item.getValor())
+            });
+        }
+        attProdutos();
     }//GEN-LAST:event_btnSalvarEstoqueActionPerformed
 
     private void txtValorTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtValorTotalActionPerformed

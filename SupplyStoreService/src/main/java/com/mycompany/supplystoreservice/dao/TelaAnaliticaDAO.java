@@ -18,7 +18,7 @@ import javax.swing.JOptionPane;
  * @author thiago.cperrud
  */
 public class TelaAnaliticaDAO {
-    public static ArrayList<Venda> consultarVendas() {
+    public static ArrayList<Venda> consultarVendas(int id_venda) {
         ArrayList<Venda> listFinal;
         listFinal = new ArrayList<>();
         Connection conexao;
@@ -26,12 +26,14 @@ public class TelaAnaliticaDAO {
             // passo 1 carregar o driver
             Class.forName("com.mysql.cj.jdbc.Driver");
             //passso 2 abrir a conexao 
-            String url = "jdbc:mysql://localhost:3308/supplyStore";
+            String url = "jdbc:mysql://localhost:3306/supplyStore";
             
             conexao = DriverManager.getConnection(url, "root", "");
             
             PreparedStatement comandoSQL = conexao.prepareStatement(
-                    "SELECT id_venda, id_produto, quantidade FROM vendas;");
+                    "SELECT id_venda, id_produto, quantidade FROM vendas WHERE id_venda = ?");
+            
+            comandoSQL.setInt(1, id_venda);
 
             //passo 4 executar o comando SQL 
             ResultSet listVendas = comandoSQL.executeQuery();
@@ -39,8 +41,7 @@ public class TelaAnaliticaDAO {
                 while (listVendas.next()) {
                     Venda entidade = new Venda();
 
-                    entidade.setId(listVendas.getString("id"));
-                    entidade.setProduto(listVendas.getString("produto"));
+                    entidade.setId(listVendas.getString("id_produto"));
                     entidade.setQuantidade(listVendas.getString("quantidade"));
                     
                     listFinal.add(entidade);

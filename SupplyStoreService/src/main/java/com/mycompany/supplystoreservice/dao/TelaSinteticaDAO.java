@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
  */
 public class TelaSinteticaDAO {
     
-     public static ArrayList<Venda> consultarTodasVendas() {
+     public static ArrayList<Venda> consultarTodasVendas(String data) {
         ArrayList<Venda> listFinal;
         listFinal = new ArrayList<>();
         Connection conexao;
@@ -24,12 +24,14 @@ public class TelaSinteticaDAO {
             // passo 1 carregar o driver
             Class.forName("com.mysql.cj.jdbc.Driver");
             //passso 2 abrir a conexao 
-            String url = "jdbc:mysql://localhost:3308/supplyStore";
+            String url = "jdbc:mysql://localhost:3306/supplyStore";
             
             conexao = DriverManager.getConnection(url, "root", "");
             
             PreparedStatement comandoSQL = conexao.prepareStatement(
-                    "SELECT * FROM vendas WHERE data_venda BETWEEN DATE_SUB(CURDATE(), INTERVAL 1 MONTH) AND CURDATE();");
+                    "SELECT * FROM vendas WHERE data_venda = ?");
+            
+            comandoSQL.setString(1, data);
 
             //passo 4 executar o comando SQL 
             ResultSet listVendas = comandoSQL.executeQuery();
@@ -37,11 +39,11 @@ public class TelaSinteticaDAO {
                 while (listVendas.next()) {
                     Venda entidade = new Venda();
 
-                    entidade.setId(listVendas.getString("id"));
-                    entidade.setNomeCliente(listVendas.getString("nomeCliente"));
-                    entidade.setProduto(listVendas.getString("produto"));
+                    entidade.setId(listVendas.getString("id_venda"));
+                    entidade.setNomeCliente(listVendas.getString("id_cliente"));
+                    entidade.setProduto(listVendas.getString("id_produto"));
                     entidade.setQuantidade(listVendas.getString("quantidade"));
-                    entidade.setData(listVendas.getString("Data"));
+                    entidade.setData(listVendas.getString("data_venda"));
 
                     listFinal.add(entidade);
                 }

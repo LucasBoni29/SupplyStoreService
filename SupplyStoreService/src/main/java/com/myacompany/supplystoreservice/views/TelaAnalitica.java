@@ -5,10 +5,14 @@
 package com.myacompany.supplystoreservice.views;
 
 import static com.mycompany.supplystoreservice.dao.TelaAnaliticaDAO.consultarVendas;
+import com.mycompany.supplystoreservice.model.Cliente;
+import com.mycompany.supplystoreservice.model.Venda;
 import com.mycompany.supplystoreservice.utils.Validador;
 import java.awt.Color;
+import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -37,7 +41,7 @@ public class TelaAnalitica extends javax.swing.JPanel {
         btnPesquisar = new javax.swing.JButton();
         jTextField2 = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblVendas = new javax.swing.JTable();
 
         setPreferredSize(new java.awt.Dimension(773, 434));
 
@@ -73,7 +77,7 @@ public class TelaAnalitica extends javax.swing.JPanel {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblVendas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -84,7 +88,7 @@ public class TelaAnalitica extends javax.swing.JPanel {
                 "Produto", "Quantidade"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblVendas);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -123,7 +127,7 @@ public class TelaAnalitica extends javax.swing.JPanel {
 
     private void txtIdVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdVendaActionPerformed
 
-        consultarVendas();
+
     }//GEN-LAST:event_txtIdVendaActionPerformed
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
@@ -132,12 +136,25 @@ public class TelaAnalitica extends javax.swing.JPanel {
 
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
         // TODO add your handling code here:
-        if(txtIdVenda.getText().equals("") || txtIdVenda.getText() == null){
+        if (txtIdVenda.getText().equals("") || txtIdVenda.getText() == null) {
             JOptionPane.showMessageDialog(null, "Data: Campo obrigatório", "Validação!", JOptionPane.WARNING_MESSAGE);
             txtIdVenda.setBorder(BorderFactory.createLineBorder(Color.RED));
-        }else{
+        } else {
             txtIdVenda.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-            consultarVendas();
+            ArrayList<Venda> lista = consultarVendas(Integer.parseInt(txtIdVenda.getText()));
+            DefaultTableModel modelo = (DefaultTableModel) tblVendas.getModel();
+            modelo.setRowCount(0);
+            for (Venda item : lista) {
+                modelo.addRow(new String[]{
+                    String.valueOf(item.getId()),
+                    item.getQuantidade()});
+            }
+            if (lista.isEmpty()) {
+                JOptionPane.showMessageDialog(null,
+                        "Nenhum registro encontrado!",
+                        "Consultar registros",
+                        JOptionPane.INFORMATION_MESSAGE);
+            }
         }
     }//GEN-LAST:event_btnPesquisarActionPerformed
 
@@ -145,9 +162,9 @@ public class TelaAnalitica extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnPesquisar;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
+    private javax.swing.JTable tblVendas;
     private javax.swing.JTextField txtIdVenda;
     // End of variables declaration//GEN-END:variables
 }
