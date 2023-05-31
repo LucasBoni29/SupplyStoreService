@@ -79,13 +79,13 @@ public class TelaAnalitica extends javax.swing.JPanel {
 
         tblVendas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Produto", "Quantidade"
+                "Produto", "Nome produto", "Quantidade"
             }
         ));
         jScrollPane1.setViewportView(tblVendas);
@@ -147,6 +147,7 @@ public class TelaAnalitica extends javax.swing.JPanel {
             for (Venda item : lista) {
                 modelo.addRow(new String[]{
                     String.valueOf(item.getId()),
+                    String.valueOf(item.getProduto()),
                     item.getQuantidade()});
             }
             if (lista.isEmpty()) {

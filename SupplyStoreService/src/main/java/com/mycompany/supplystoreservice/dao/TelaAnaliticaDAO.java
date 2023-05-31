@@ -31,7 +31,7 @@ public class TelaAnaliticaDAO {
             conexao = DriverManager.getConnection(url, "root", "");
             
             PreparedStatement comandoSQL = conexao.prepareStatement(
-                    "SELECT id_venda, id_produto, quantidade FROM vendas WHERE id_venda = ?");
+                    "SELECT produtos.id_produto, produtos.nome_produto, vendas.quantidade FROM vendas LEFT JOIN produtos ON(vendas.id_produto = produtos.id_produto) WHERE id_venda = ?");
             
             comandoSQL.setInt(1, id_venda);
 
@@ -42,6 +42,7 @@ public class TelaAnaliticaDAO {
                     Venda entidade = new Venda();
 
                     entidade.setId(listVendas.getString("id_produto"));
+                    entidade.setProduto(listVendas.getString("nome_produto"));
                     entidade.setQuantidade(listVendas.getString("quantidade"));
                     
                     listFinal.add(entidade);
